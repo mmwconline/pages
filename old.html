@@ -33,7 +33,7 @@
     <link href="assets/css/header-1.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/color_scheme/red.css" rel="stylesheet" type="text/css" id="color_scheme" />
 </head>
-<body class="enable-animation">
+<body class="enable-animation has-video-bg" data-background="assets/images/backgrounds/default.jpg">
 
 <!-- SLIDE TOP -->
 <div id="slidetop">
@@ -105,11 +105,11 @@
 
         Example Usage:  class="clearfix sticky header-sm transparent noborder"
     -->
-    <div id="header" class="sticky transparent noborder clearfix">
+    <div id="header" class="sticky clearfix">
 
         <!-- TOP NAV -->
         <header id="topNav">
-            <div class="full-container">
+            <div class="container">
 
                 <!-- Mobile Menu Button -->
                 <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
@@ -142,7 +142,6 @@
 
                 <!-- Logo -->
                 <a class="logo pull-left" href="/">
-                    <img src="assets/images/logo4-dark-dark.png" alt="" />
                     <img src="assets/images/logo4.png" alt="" />
                 </a>
 
@@ -152,7 +151,7 @@
                     AVAILABLE CLASSES:
                     submenu-dark = dark sub menu
                 -->
-                <div class="navbar-collapse pull-right nav-main-collapse collapse submenu-dark">
+                <div class="navbar-collapse pull-right nav-main-collapse collapse">
                     <nav class="nav-main">
 
                         <!--
@@ -209,141 +208,39 @@
 
     </div>
 
-    <!-- REVOLUTION SLIDER -->
-    <section id="slider" class="fullwidthbanner-container roundedcorners">
+    <!-- SLIDER -->
+    <section id="slider" class="height-700 parallax parallax-2 transparent">
+
         <!--
-            Navigation Styles:
-
-                data-navigationStyle="" theme default navigation
-
-                data-navigationStyle="preview1"
-                data-navigationStyle="preview2"
-                data-navigationStyle="preview3"
-                data-navigationStyle="preview4"
-
-            Bottom Shadows
-                data-shadow="1"
-                data-shadow="2"
-                data-shadow="3"
-
-            Slider Height (do not use on fullscreen mode)
-                data-height="300"
-                data-height="350"
-                data-height="400"
-                data-height="450"
-                data-height="500"
-                data-height="550"
-                data-height="600"
-                data-height="650"
-                data-height="700"
-                data-height="750"
-                data-height="800"
+            video audio icon
+            .fa-volume-up 	= volume on
+            .fa-volume-down = volume off
+            Also, change for id="YTPlayer": mute:false OR mute:true
         -->
-        <div class="fullscreenbanner" data-navigationStyle="preview4">
-            <ul class="hide">
-                <!-- SLIDE -->
-                <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title="Slide title 2" data-thumb="assets/images/demo/video/neuron_thumb.jpg">
+        <a href="#" id="video-volume"><i class="fa fa-volume-down"></i></a>
 
-                    <img src="assets/images/1x1.png" data-lazyload="assets/images/demo/video/neuron.jpg" alt="video" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+        <!-- Video Background - replace videoURL with your youtube video URL -->
+        <a id="YTPlayer" class="player" data-property="{videoURL:'https://www.youtube.com/watch?v=IvdfStezl8g',containment:'body',autoPlay:true, mute:true, startAt:10, opacity:1}">youtube</a>
+        <!--/Video Background -->
 
-                    <div class="tp-caption tp-fade fadeout fullscreenvideo"
-                         data-x="0"
-                         data-y="0"
-                         data-speed="1000"
-                         data-start="1100"
-                         data-easing="Power4.easeOut"
-                         data-elementdelay="0.01"
-                         data-endelementdelay="0.1"
-                         data-endspeed="1500"
-                         data-endeasing="Power4.easeIn"
-                         data-autoplay="true"
-                         data-autoplayonlyfirsttime="false"
-                         data-nextslideatend="true"
-                         data-volume="mute"
-                         data-forceCover="1"
-                         data-aspectratio="16:9"
-                         data-forcerewind="on" style="z-index: 2;">
+        <div class="display-table">
+            <div class="display-table-cell vertical-align-middle">
+                <div class="container">
 
-                        <div class="overlay dark-4"><!-- dark overlay [1 to 9 opacity] --></div>
-
-                        <video class="fullvideo" preload="none" poster="assets/images/demo/video/neuron.jpg">
-                            <source src="assets/images/demo/video/neuron.webm" type="video/webm" />
-                            <source src="assets/images/demo/video/neuron.mp4" type="video/mp4" />
-                        </video>
-
+                    <div class="slider-featured-text text-center">
+                        <h1 class="text-white wow fadeInUp" data-wow-delay="0.4s">
+                            Welcome to MMWC
+                        </h1>
+                        <h2 class="weight-300 text-white wow fadeInUp" data-wow-delay="0.8s">Advocacy, Education, Outreach</h2>
+                        <a class="btn btn-primary btn-lg wow fadeInUp" data-wow-delay="1s" href="#">DONATE NOW</a>
                     </div>
 
-                    <div class="tp-caption customin ltl tp-resizeme text_white"
-                         data-x="center"
-                         data-y="180"
-                         data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                         data-speed="800"
-                         data-start="1000"
-                         data-easing="easeOutQuad"
-                         data-splitin="none"
-                         data-splitout="none"
-                         data-elementdelay="0.01"
-                         data-endelementdelay="0.1"
-                         data-endspeed="1000"
-                         data-endeasing="Power4.easeIn" style="z-index: 3;">
-                        <span class="weight-300">MILWAUKEE MUSLIM WOMEN'S COALITION</span>
-                    </div>
-
-                    <div class="tp-caption customin ltl tp-resizeme large_bold_white"
-                         data-x="center"
-                         data-y="230"
-                         data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                         data-speed="800"
-                         data-start="1200"
-                         data-easing="easeOutQuad"
-                         data-splitin="none"
-                         data-splitout="none"
-                         data-elementdelay="0.01"
-                         data-endelementdelay="0.1"
-                         data-endspeed="1000"
-                         data-endeasing="Power4.easeIn" style="z-index: 3;">
-                        WELCOME TO MMWC
-                    </div>
-
-                    <div class="tp-caption customin ltl tp-resizeme small_light_white"
-                         data-x="center"
-                         data-y="350"
-                         data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                         data-speed="800"
-                         data-start="1400"
-                         data-easing="easeOutQuad"
-                         data-splitin="none"
-                         data-splitout="none"
-                         data-elementdelay="0.01"
-                         data-endelementdelay="0.1"
-                         data-endspeed="1000"
-                         data-endeasing="Power4.easeIn" style="z-index: 3; width: 750px; max-width: 750px; white-space: normal; text-align:center;">
-                        Tremendous work in outreach, advocating for social justice, promoting civil rights and building relationships and coalitions has made us the most recognizable Muslim Women’s organization in Wisconsin.
-                        <!--Fabulas definitiones ei pri per recteque hendrerit scriptorem in errem scribentur mel fastidii propriae philosophia cu mea.-->
-                    </div>
-
-                    <div class="tp-caption customin ltl tp-resizeme"
-                         data-x="center"
-                         data-y="438"
-                         data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"
-                         data-speed="800"
-                         data-start="1550"
-                         data-easing="easeOutQuad"
-                         data-splitin="none"
-                         data-splitout="none"
-                         data-elementdelay="0.01"
-                         data-endelementdelay="0.1"
-                         data-endspeed="1000"
-                         data-endeasing="Power4.easeIn" style="z-index: 3;">
-                        <a href="#" class="btn btn-default btn-lg">
-                            <span>Donate Now</span>
-                        </a>
-                    </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
+
     </section>
-    <!-- /REVOLUTION SLIDER -->
+    <!-- /SLIDER -->
 
     <!-- Welcome -->
     <section>
@@ -435,7 +332,7 @@
     </section>
 
     <!-- Events -->
-    <section id="events" style="padding-bottom: 50px;">
+    <section id="news">
         <div class="container">
 
             <div class="row">
@@ -756,11 +653,11 @@
 
                 <div class="col-md-3">
                     <!-- Footer Logo -->
-                    <img class="footer-logo" src="assets/images/logo-footer.png" alt="" />
+                    <img class="footer-logo" src="assets/images/footer-logo.png" alt="" />
 
                     <!-- Short Description -->
                     <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
-                    
+
                     <!-- Contact Address -->
                     <address>
                         <ul class="list-unstyled">
@@ -861,7 +758,7 @@
                     <li>&bull;</li>
                     <li><a href="#">Privacy</a></li>
                 </ul>
-                Copyright &copy; 2016. MMWC. All Rights Reserved.
+                &copy; All Rights Reserved, Company LTD
             </div>
         </div>
     </footer>
