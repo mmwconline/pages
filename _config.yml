@@ -8,6 +8,14 @@ keywords: >
   Milwaukee Muslims, United States Muslims, Islam in the United States, Interfaith, Community, muslim, islam, women,
   nonprofit, islamaphobia, islamic answers
 author: Aziz Javed
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://yourdomain.com" # the base hostname & protocol for your site
+url: "http://mmwconline.org" # the base hostname & protocol for your site
 
+gems: [jekyll-sitemap]
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
+      isMainPage: "false"
