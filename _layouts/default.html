@@ -6,12 +6,7 @@
 <body class="enable-animation">
 {% include slide-top.html %}
 <div id="wrapper">
-    {% if page.isMainPage %}
-        {% include main-page-header.html %}
-    {% else %}
-        {% include header.html %}
-    {% endif %}
-
+    {% include header.html %}
     {{ content }}
     {% include footer.html %}
 </div>

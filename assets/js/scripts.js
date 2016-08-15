@@ -1,8 +1,4 @@
 /** ********************************************** **
-	@Author			Dorin Grigoras
-	@Website		www.stepofweb.com
-	@Last Update	Friday, August 21, 2015
-
 	NOTE! 	Do not change anything here if you want to
 			be able to update in the future! Please use
 			your custom script (eg. custom.js).
@@ -2185,7 +2181,7 @@
 		_toastr("My Message here","top-right","error",false);
 		
 	NOTE:
-		_onclick = url to redirect (example: http://www.stepofweb.com)
+		_onclick = url to redirect (example: http://www.azizj.com)
  **************************************************************** **/
 	function _toastr(_message,_position,_notifyType,_onclick) {
 		var _btn 	= jQuery(".toastr-notify");
@@ -3348,7 +3344,7 @@
 
 
 /** Facebook Widget
-	<div class="fb-like" data-href="http://www.stepofweb.com" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
+	<div class="fb-like" data-href="http://www.azizj.com" data-layout="button" data-action="like" data-show-faces="false" data-share="false"></div>
  **************************************************************** **/
 	function _widget_facebook() {
 
