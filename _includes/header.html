@@ -1,5 +1,5 @@
 <!--Add two more classes to header if main page, to make it dark-->
-<div id="header" class="sticky clearfix {% if page.hasFullDarkRevSlider %}transparent noborder{% endif %}">
+<div id="header" class="{% if include.isError %}header-sm dark{% else %}sticky{% endif %} clearfix {% if page.hasFullDarkRevSlider %}transparent noborder{% endif %}">
 
     <!-- TOP NAV -->
     <header id="topNav">
@@ -37,10 +37,12 @@
 
             <!-- Logo -->
             <a class="logo pull-left" href="/">
-                {% if page.hasFullDarkRevSlider %}
+                {% if page.hasFullDarkRevSlider or include.isError %}
                 <img src="{{ page.baseurl }}assets/images/logo-light.png" alt="" />
                 {% endif %}
+                {% if include.isError == null %}
                 <img src="{{ page.baseurl }}assets/images/logo.png" alt="" />
+                {% endif %}
             </a>
 
             <!--
@@ -49,7 +51,7 @@
                 AVAILABLE CLASSES:
                 submenu-dark = dark sub menu
             -->
-            <div class="navbar-collapse pull-right nav-main-collapse collapse {% if page.hasFullDarkRevSlider %}submenu-dark{% endif %}">
+            <div class="navbar-collapse pull-right nav-main-collapse collapse {% if page.hasFullDarkRevSlider or include.isError %}submenu-dark{% endif %}">
                 <nav class="nav-main">
 
                     <!--
@@ -70,7 +72,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="#">WHO WE ARE</a></li>
                                 <li><a href="{{ page.baseurl }}team/">TEAM</a></li>
-                                <li><a href="#">HISTORY</a></li>
+                                <li><a href="{{ page.baseurl }}history/">HISTORY</a></li>
                                 <li><a href="#">RESOURCES</a></li>
                             </ul>
                         </li>
