@@ -6,7 +6,14 @@
 <body class="enable-animation">
 {% include slide-top.html %}
 <div id="wrapper">
-    {% include header.html %}
+    {% if page.hasFullDarkRevSlider %}
+        {% include headers/home.html %}
+    {% elsif page.isTeamMember %}
+        {% include headers/team-member.html %}
+    {% else %}
+        {% include headers/default.html %}
+    {% endif %}
+
     {{ content }}
     {% include footer.html %}
 </div>

@@ -1,4 +1,3 @@
-<!--Add two more classes to header if main page, to make it dark-->
 <div id="header" class="{% if include.isError %}header-sm dark{% else %}sticky{% endif %} clearfix {% if page.hasFullDarkRevSlider %}transparent noborder{% endif %}">
 
     <!-- TOP NAV -->
@@ -6,34 +5,7 @@
         <!--full-container class for full page rev slider with dark bg-->
         <div class="{% if page.hasFullDarkRevSlider %}full-container{% else %}container{% endif %}">
 
-            <!-- Mobile Menu Button -->
-            <button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
-                <i class="fa fa-bars"></i>
-            </button>
-
-            <!-- BUTTONS -->
-            <ul class="pull-right nav nav-pills nav-second-main">
-
-                <!-- SEARCH -->
-                <li class="search">
-                    <a href="javascript:;">
-                        <i class="fa fa-search"></i>
-                    </a>
-                    <div class="search-box">
-                        <form action="#" method="get">
-                            <div class="input-group">
-                                <input type="text" name="src" placeholder="Search" class="form-control" />
-                                <span class="input-group-btn">
-                                                <button class="btn btn-primary" type="submit">Search</button>
-                                            </span>
-                            </div>
-                        </form>
-                    </div>
-                </li>
-                <!-- /SEARCH -->
-            </ul>
-            <!-- /BUTTONS -->
-
+            {% include headers/buttons.html %}
 
             <!-- Logo -->
             <a class="logo pull-left" href="/">
@@ -44,65 +16,8 @@
                 <img src="{{ page.baseurl }}assets/images/logo.png" alt="" />
                 {% endif %}
             </a>
-
-            <!--
-                Top Nav
-
-                AVAILABLE CLASSES:
-                submenu-dark = dark sub menu
-            -->
             <div class="navbar-collapse pull-right nav-main-collapse collapse {% if page.hasFullDarkRevSlider or include.isError %}submenu-dark{% endif %}">
-                <nav class="nav-main">
-
-                    <!--
-                        NOTE
-
-                        For a regular link, remove "dropdown" class from LI tag and "dropdown-toggle" class from the href.
-                        Direct Link Example:
-
-                        <li>
-                            <a href="#">HOME</a>
-                        </li>
-                    -->
-                    <ul id="topMain" class="nav nav-pills nav-main">
-                        <li class="dropdown active"><!-- ABOUT -->
-                            <a class="dropdown-toggle" href="#">
-                                ABOUT
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">WHO WE ARE</a></li>
-                                <li><a href="{{ page.baseurl }}team/">TEAM</a></li>
-                                <li><a href="{{ page.baseurl }}history/">HISTORY</a></li>
-                                <li><a href="#">RESOURCES</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown"><!-- IRC LIBRARY -->
-                            <a class="dropdown-toggle" href="#">
-                                IRC LIBRARY
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a target="_blank"
-                                       href="http://opac.libraryworld.com/opac/signin?libraryname=ISLAMIC%20RESOURCE%20CENTER">
-                                    CATALOG
-                                </a></li>
-                                <li><a href="#">POLICIES</a></li>
-                            </ul>
-                        </li>
-                        <li><!-- EVENTS -->
-                            <a href="#">EVENTS</a>
-                        </li>
-                        <li><!-- BLOG -->
-                            <a href="#">BLOG</a>
-                        </li>
-                        <li><!-- DONATE -->
-                            <a href="#">DONATE</a>
-                        </li>
-                        <li><!-- CONTACT -->
-                            <a href="#">CONTACT</a>
-                        </li>
-                    </ul>
-
-                </nav>
+                {% include headers/nav.html %}
             </div>
 
         </div>

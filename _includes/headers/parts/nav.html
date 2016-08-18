@@ -1,0 +1,51 @@
+<nav class="nav-main">
+
+    <!--
+        NOTE
+
+        For a regular link, remove "dropdown" class from LI tag and "dropdown-toggle" class from the href.
+        Direct Link Example:
+
+        <li>
+            <a href="#">HOME</a>
+        </li>
+    -->
+    <ul id="topMain" class="nav nav-pills nav-main">
+        <li class="dropdown active"><!-- ABOUT -->
+            <a class="dropdown-toggle" href="#">
+                ABOUT
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#">WHO WE ARE</a></li>
+                <li><a href="{{ page.baseurl }}team/">TEAM</a></li>
+                <li><a href="{{ page.baseurl }}history/">HISTORY</a></li>
+                <li><a href="{{ page.baseurl }}resources/">RESOURCES</a></li>
+            </ul>
+        </li>
+        <li class="dropdown"><!-- IRC LIBRARY -->
+            <a class="dropdown-toggle" href="#">
+                IRC LIBRARY
+            </a>
+            <ul class="dropdown-menu">
+                <li><a target="_blank"
+                       href="http://opac.libraryworld.com/opac/signin?libraryname=ISLAMIC%20RESOURCE%20CENTER">
+                    CATALOG
+                </a></li>
+                <li><a href="#">POLICIES</a></li>
+            </ul>
+        </li>
+        <li><!-- EVENTS -->
+            <a href="#">EVENTS</a>
+        </li>
+        <li><!-- BLOG -->
+            <a href="#">BLOG</a>
+        </li>
+        <li><!-- DONATE -->
+            <a href="#">DONATE</a>
+        </li>
+        <li><!-- CONTACT -->
+            <a href="#">CONTACT</a>
+        </li>
+    </ul>
+
+</nav>
