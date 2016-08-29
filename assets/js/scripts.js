@@ -35,22 +35,7 @@
 	/* Init */
 	jQuery(window).ready(function () {
 		jQuery.browserDetect();
-
-		// Load Bootstrap JS
-		loadScript(plugin_path + 'bootstrap/js/bootstrap.min.js', function() {
-
-			Init(false);
-
-		});
-
-
-		/* --- */
-		if(jQuery("html").hasClass("chrome") && jQuery("body").hasClass("smoothscroll")) {
-			loadScript(plugin_path + 'smoothscroll.js', function() {
-				jQuery.smoothScroll();
-			});
-		}
-		/* --- */
+		Init(false);
 	});
 
 
@@ -60,7 +45,7 @@
 	function Init(is_ajax) {
 
 		// First Load Only
-		if(is_ajax != true) {
+		if(is_ajax !== true) {
 		
 			_afterResize();
 			_slider_full();
@@ -78,7 +63,7 @@
 		_lightbox();
 		_mixitup();
 		_animate();
-		_onepageNav();
+		// _onepageNav();
 		_scrollTo(false, 0);
 		_parallax();
 		_video();
@@ -216,7 +201,7 @@
 
 		}
 
-	};
+	}
 
 
  
@@ -309,7 +294,7 @@
 		}); 
 
 		// close search box on body click
-		if(jQuery('#header li.search i.fa').size() != 0) {
+		if(jQuery('#header li.search i.fa').size() !== 0) {
 			jQuery('#header .search-box, #header li.search i.fa').on('click', function(e){
 				e.stopPropagation();
 			});
@@ -361,7 +346,7 @@
 			}
 		});
 		// close quick cart on body click
-		if(jQuery('li.quick-cart>a').size() != 0) {
+		if(jQuery('li.quick-cart>a').size() !== 0) {
 			jQuery('li.quick-cart').on('click', function(e){
 				e.stopPropagation();
 			});
@@ -580,7 +565,7 @@
 		if(jQuery("#menu_overlay_open").length > 0) {
 			var is_ie9 = jQuery('html').hasClass('ie9') ? true : false;
 
-			if(is_ie9 == true) {
+			if(is_ie9 === true) {
 				jQuery("#topMain").hide();
 			}
 
@@ -590,7 +575,7 @@
 				
 				jQuery('body').addClass('show-menu');
 
-				if(is_ie9 == true) {
+				if(is_ie9 === true) {
 					jQuery("#topMain").show();
 				}
 			});
@@ -603,7 +588,7 @@
 					jQuery('body').removeClass('show-menu');
 				}
 
-				if(is_ie9 == true) {
+				if(is_ie9 === true) {
 					jQuery("#topMain").hide();
 				}
 			});
@@ -615,7 +600,7 @@
 						jQuery('body').removeClass('show-menu');
 					}
 
-					if(is_ie9 == true) {
+					if(is_ie9 === true) {
 						jQuery("#topMain").hide();
 					}
 				}
@@ -633,16 +618,15 @@
 				_paddingStatusL = jQuery("#mainMenu.sidebar-vertical").css('left');
 				_paddingStatusR = jQuery("#mainMenu.sidebar-vertical").css('right');
 
+				var _pos;
 				if(parseInt(_paddingStatusL) < 0) {
-					var _pos = "left";
-				} else
-
-				if(parseInt(_paddingStatusR) < 0) {
-					var _pos = "right";
+					_pos = "left";
 				}
-
+				else if(parseInt(_paddingStatusR) < 0) {
+					_pos = "right";
+				}
 				else {
-					var _pos = "left";
+					_pos = "left";
 				}
 
 				// Show|Hide Vertical Menu
@@ -775,27 +759,27 @@
 
 /** Onepage Nav
  **************************************************************** **/
-	function _onepageNav() {
-		var _container = jQuery("#topMain.nav-onepage");
-
-		if(_container.length > 0) {
-
-			loadScript(plugin_path + 'jquery.nav.min.js', function() {
-
-				jQuery(_container).onePageNav({
-					currentClass: 		'active',
-					changeHash: 		false,
-					scrollSpeed: 		750,
-					scrollThreshold: 	0.5,
-					filter: 			':not(.external)',
-					easing: 			'easeInOutExpo'
-				});
-
-			});
-		
-		}
-
-	}
+	// function _onepageNav() {
+	// 	var _container = jQuery("#topMain.nav-onepage");
+	//
+	// 	if(_container.length > 0) {
+	//
+	// 		loadScript(plugin_path + 'jquery.nav.min.js', function() {
+	//
+	// 			jQuery(_container).onePageNav({
+	// 				currentClass: 		'active',
+	// 				changeHash: 		false,
+	// 				scrollSpeed: 		750,
+	// 				scrollThreshold: 	0.5,
+	// 				filter: 			':not(.external)',
+	// 				easing: 			'easeInOutExpo'
+	// 			});
+	//
+	// 		});
+	//
+	// 	}
+	//
+	// }
 
 
 
@@ -806,151 +790,147 @@
 
 		if(_container.length > 0) {
 
-			loadScript(plugin_path + 'owl-carousel/owl.carousel.min.js', function() {
+			_container.each(function() {
 
-				_container.each(function() {
+				var slider 		= jQuery(this);
+				var options 	= slider.attr('data-plugin-options');
 
-					var slider 		= jQuery(this);
-					var options 	= slider.attr('data-plugin-options');
+				// Progress Bar
+				var $opt = eval('(' + options + ')');  // convert text to json
 
-					// Progress Bar
-					var $opt = eval('(' + options + ')');  // convert text to json
+				if($opt.progressBar == 'true') {
+					var afterInit = progressBar;
+				} else {
+					var afterInit = false;
+				}
 
-					if($opt.progressBar == 'true') {
-						var afterInit = progressBar;
-					} else {
-						var afterInit = false;
-					}
+				var defaults = {
+					items: 					5,
+					itemsCustom: 			false,
+					itemsDesktop: 			[1199,4],
+					itemsDesktopSmall: 		[980,3],
+					itemsTablet: 			[768,2],
+					itemsTabletSmall: 		false,
+					itemsMobile: 			[479,1],
+					singleItem: 			true,
+					itemsScaleUp: 			false,
 
-					var defaults = {
-						items: 					5,
-						itemsCustom: 			false,
-						itemsDesktop: 			[1199,4],
-						itemsDesktopSmall: 		[980,3],
-						itemsTablet: 			[768,2],
-						itemsTabletSmall: 		false,
-						itemsMobile: 			[479,1],
-						singleItem: 			true,
-						itemsScaleUp: 			false,
+					slideSpeed: 			200,
+					paginationSpeed: 		800,
+					rewindSpeed: 			1000,
 
-						slideSpeed: 			200,
-						paginationSpeed: 		800,
-						rewindSpeed: 			1000,
+					autoPlay: 				false,
+					stopOnHover: 			false,
 
-						autoPlay: 				false,
-						stopOnHover: 			false,
+					navigation: 			false,
+					navigationText: [
+						'<i class="fa fa-angle-left"></i>',
+						'<i class="fa fa-angle-right"></i>'
+					],
+					rewindNav: 				true,
+					scrollPerPage: 			false,
 
-						navigation: 			false,
-						navigationText: [
-											'<i class="fa fa-angle-left"></i>',
-											'<i class="fa fa-angle-right"></i>'
-										],
-						rewindNav: 				true,
-						scrollPerPage: 			false,
+					pagination: 			true,
+					paginationNumbers: 		false,
 
-						pagination: 			true,
-						paginationNumbers: 		false,
+					responsive: 			true,
+					responsiveRefreshRate: 	200,
+					responsiveBaseWidth: 	window,
 
-						responsive: 			true,
-						responsiveRefreshRate: 	200,
-						responsiveBaseWidth: 	window,
+					baseClass: 				"owl-carousel",
+					theme: 					"owl-theme",
 
-						baseClass: 				"owl-carousel",
-						theme: 					"owl-theme",
+					lazyLoad: 				false,
+					lazyFollow: 			true,
+					lazyEffect: 			"fade",
 
-						lazyLoad: 				false,
-						lazyFollow: 			true,
-						lazyEffect: 			"fade",
+					autoHeight: 			false,
 
-						autoHeight: 			false,
+					jsonPath: 				false,
+					jsonSuccess: 			false,
 
-						jsonPath: 				false,
-						jsonSuccess: 			false,
+					dragBeforeAnimFinish: 	true,
+					mouseDrag: 				true,
+					touchDrag: 				true,
 
-						dragBeforeAnimFinish: 	true,
-						mouseDrag: 				true,
-						touchDrag: 				true,
+					transitionStyle: 		false,
 
-						transitionStyle: 		false,
+					addClassActive: 		false,
 
-						addClassActive: 		false,
+					beforeUpdate: 			false,
+					afterUpdate: 			false,
+					beforeInit: 			false,
+					afterInit: 				afterInit,
+					beforeMove: 			false,
+					afterMove: 				(afterInit == false) ? false : moved,
+					afterAction: 			false,
+					startDragging: 			false,
+					afterLazyLoad: 			false
+				}
 
-						beforeUpdate: 			false,
-						afterUpdate: 			false,
-						beforeInit: 			false,
-						afterInit: 				afterInit,
-						beforeMove: 			false,
-						afterMove: 				(afterInit == false) ? false : moved,
-						afterAction: 			false,
-						startDragging: 			false,
-						afterLazyLoad: 			false
-					}
+				var config = jQuery.extend({}, defaults, options, slider.data("plugin-options"));
+				slider.owlCarousel(config).addClass("owl-carousel-init");
 
-					var config = jQuery.extend({}, defaults, options, slider.data("plugin-options"));
-					slider.owlCarousel(config).addClass("owl-carousel-init");
-					
 
-					// Progress Bar
-					var elem = jQuery(this);
+				// Progress Bar
+				var elem = jQuery(this);
 
-					//Init progressBar where elem is $("#owl-demo")
-					function progressBar(elem){
-					  $elem = elem;
-					  //build progress bar elements
-					  buildProgressBar();
-					  //start counting
-					  start();
-					}
-				 
-					//create div#progressBar and div#bar then prepend to $("#owl-demo")
-					function buildProgressBar(){
-					  $progressBar = jQuery("<div>",{
+				//Init progressBar where elem is $("#owl-demo")
+				function progressBar(elem){
+					$elem = elem;
+					//build progress bar elements
+					buildProgressBar();
+					//start counting
+					start();
+				}
+
+				//create div#progressBar and div#bar then prepend to $("#owl-demo")
+				function buildProgressBar(){
+					$progressBar = jQuery("<div>",{
 						id:"progressBar"
-					  });
-					  $bar = jQuery("<div>",{
+					});
+					$bar = jQuery("<div>",{
 						id:"bar"
-					  });
-					  $progressBar.append($bar).prependTo($elem);
-					}
+					});
+					$progressBar.append($bar).prependTo($elem);
+				}
 
-					function start() {
-					  //reset timer
-					  percentTime = 0;
-					  isPause = false;
-					  //run interval every 0.01 second
-					  tick = setInterval(interval, 10);
-					};
+				function start() {
+					//reset timer
+					percentTime = 0;
+					isPause = false;
+					//run interval every 0.01 second
+					tick = setInterval(interval, 10);
+				};
 
-			 
-					var time = 7; // time in seconds
-					function interval() {
-					  if(isPause === false){
+
+				var time = 7; // time in seconds
+				function interval() {
+					if(isPause === false){
 						percentTime += 1 / time;
 						$bar.css({
-						   width: percentTime+"%"
-						 });
+							width: percentTime+"%"
+						});
 						//if percentTime is equal or greater than 100
 						if(percentTime >= 100){
-						  //slide to next item 
-						  $elem.trigger('owl.next')
+							//slide to next item
+							$elem.trigger('owl.next')
 						}
-					  }
 					}
-				 
-					//pause while dragging 
-					function pauseOnDragging(){
-					  isPause = true;
-					}
-				 
-					//moved callback
-					function moved(){
-					  //clear interval
-					  clearTimeout(tick);
-					  //start again
-					  start();
-					}
+				}
 
-				});
+				//pause while dragging
+				function pauseOnDragging(){
+					isPause = true;
+				}
+
+				//moved callback
+				function moved(){
+					//clear interval
+					clearTimeout(tick);
+					//start again
+					start();
+				}
 
 			});
 		}
@@ -961,60 +941,60 @@
 /** 04. Flexslider
  **************************************************************** **/
 	function _flexslider() {
-		var _container = jQuery(".flexslider");
-		
-		if(_container.length > 0) {
-
-			loadScript(plugin_path + 'slider.flexslider/jquery.flexslider-min.js', function() {
-
-				if(jQuery().flexslider) {
-					var	_controlNav 	= _container.attr('data-controlNav'),
-						_slideshowSpeed = _container.attr('data-slideshowSpeed') || 7000,
-						_pauseOnHover	= _container.attr('data-pauseOnHover') || false;
-
-					if(_pauseOnHover == "true") {
-						_pauseOnHover = true;
-					} else{
-						_pauseOnHover = false;
-					}
-
-					if(_controlNav == 'thumbnails') {
-						_controlNav = 'thumbnails';
-					} else
-					if(_controlNav == 'true') {
-						_controlNav = true;
-					} else
-					if(_controlNav == 'false') {
-						_controlNav = false;
-					} else {
-						_controlNav = true;
-					}
-					
-					if(_controlNav == 'thumbnails' || _controlNav == false) {
-						_directionNav = false;
-					} else {
-						_directionNav = true;
-					}
-
-					jQuery(_container).flexslider({
-						animation		: "slide",
-						controlNav		: _controlNav,
-						slideshowSpeed	: parseInt(_slideshowSpeed) || 7000,
-						directionNav 	: _directionNav,
-						pauseOnHover	: _pauseOnHover,
-						start: function(slider){
-							jQuery('.flex-prev').html('<i class="fa fa-angle-left"></i>');
-							jQuery('.flex-next').html('<i class="fa fa-angle-right"></i>');
-						}
-					});
-
-					// Resize Flex Slider if exists!
-					_container.resize();
-
-				}
-
-			});
-		}
+		// var _container = jQuery(".flexslider");
+		//
+		// if(_container.length > 0) {
+		//
+		// 	loadScript(plugin_path + 'slider.flexslider/jquery.flexslider-min.js', function() {
+		//
+		// 		if(jQuery().flexslider) {
+		// 			var	_controlNav 	= _container.attr('data-controlNav'),
+		// 				_slideshowSpeed = _container.attr('data-slideshowSpeed') || 7000,
+		// 				_pauseOnHover	= _container.attr('data-pauseOnHover') || false;
+		//
+		// 			if(_pauseOnHover == "true") {
+		// 				_pauseOnHover = true;
+		// 			} else{
+		// 				_pauseOnHover = false;
+		// 			}
+		//
+		// 			if(_controlNav == 'thumbnails') {
+		// 				_controlNav = 'thumbnails';
+		// 			} else
+		// 			if(_controlNav == 'true') {
+		// 				_controlNav = true;
+		// 			} else
+		// 			if(_controlNav == 'false') {
+		// 				_controlNav = false;
+		// 			} else {
+		// 				_controlNav = true;
+		// 			}
+		//
+		// 			if(_controlNav == 'thumbnails' || _controlNav == false) {
+		// 				_directionNav = false;
+		// 			} else {
+		// 				_directionNav = true;
+		// 			}
+		//
+		// 			jQuery(_container).flexslider({
+		// 				animation		: "slide",
+		// 				controlNav		: _controlNav,
+		// 				slideshowSpeed	: parseInt(_slideshowSpeed) || 7000,
+		// 				directionNav 	: _directionNav,
+		// 				pauseOnHover	: _pauseOnHover,
+		// 				start: function(slider){
+		// 					jQuery('.flex-prev').html('<i class="fa fa-angle-left"></i>');
+		// 					jQuery('.flex-next').html('<i class="fa fa-angle-right"></i>');
+		// 				}
+		// 			});
+		//
+		// 			// Resize Flex Slider if exists!
+		// 			_container.resize();
+		//
+		// 		}
+		//
+		// 	});
+		// }
 	}
 	
 	

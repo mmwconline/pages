@@ -1,2 +1,12 @@
 _site/
+node_modules/
+
+# Webstorm IDE
+# User-specific stuff:
 .idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+**/.idea/tasks.xml
+**/.idea/dictionaries
