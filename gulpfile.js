@@ -68,9 +68,9 @@ var config = {
 	}
 };
 
+gulp.task('default', ['jshint', 'shared-js', 'shared-css', 'page-asset-config', 'others', 'html', 'jekyll']);
+gulp.task('default-with-watch', ['jshint', 'shared-js', 'shared-css', 'page-asset-config', 'others', 'html', 'jekyll', 'watch']);
 
-
-gulp.task('default', ['jshint', 'shared-js', 'shared-css', 'page-asset-config', 'others', 'html', 'jekyll', 'watch']);
 
 gulp.task('watch', function() {
 	gulp.watch(config.src.js, ['jshint', 'page-asset-config']);

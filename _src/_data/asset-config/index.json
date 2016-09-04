@@ -4,9 +4,10 @@
     "_src/assets/plugins/slider.revolution/js/jquery.themepunch.tools.min.js",
     "_src/assets/plugins/slider.revolution/js/jquery.themepunch.revolution.min.js",
     "_src/assets/js/view/demo.revolution_slider.js",
+    "_src/assets/plugins/isotope/isotope.pkgd.min.js",
     "_src/assets/plugins/owl-carousel/owl.carousel.min.js",
     "_src/assets/plugins/magnific-popup/jquery.magnific-popup.min.js",
-    "_src/assets/plugins/isotope/isotope.pkgd.min.js"
+    "_src/assets/js/pages/index.js"
   ],
   "css": [
     "_src/assets/plugins/slider.revolution/css/extralayers.css",

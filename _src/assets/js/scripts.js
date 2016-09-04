@@ -2106,33 +2106,22 @@
 		//
 		//
 		// 		// Set Big Image
-     //            if(parseInt(_bigImageNo) > 0) {
+     //    if(parseInt(_bigImageNo) > 0) {
 		//
 		// 			_bigImageNo 	= Number(_bigImageNo) - 1;
 		// 			_container.find('a:eq('+_bigImageNo+')').css({ width: _firstElemWidth*2 + 'px'});
 		//
-		// 			loadScript(/*plugin_path*/ "" + 'isotope/isotope.pkgd.min.js', function() {
-		//
-		// 				setTimeout( function() {
-		// 					_container.isotope({
-		// 						masonry: {
-		// 							columnWidth: _firstElemWidth
-		// 						}
-		// 					});
-		//
-		// 					_container.isotope('layout');
-		//
-		// 				}, 1000);
-		//
-		// 			});
-		//
-     //            }
-		//
+     //      setTimeout( function() {
+     //        _container.isotope({
+     //          masonry: {
+     //            columnWidth: _firstElemWidth
+     //          }
+     //        });
+     //        _container.isotope('layout');
+     //      }, 1000);
+     //    }
 		// 	});
-		//
-		//
 		// }
-
 	}
 
 
