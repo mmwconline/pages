@@ -1,14 +1,1 @@
-<!DOCTYPE html>
-<!--[if IE 8]>			<html class="ie ie8"> <![endif]-->
-<!--[if IE 9]>			<html class="ie ie9"> <![endif]-->
-<!--[if gt IE 9]><!-->	<html> <!--<![endif]-->
-{% include head.html %}
-<body class="enable-animation">
-<div id="wrapper">
-    {% include headers/error.html %}
-    {{ content }}
-    {% include error-footer.html %}
-</div>
-{% include scripts.html %}
-</body>
-</html>
+<!DOCTYPE html><!--[if IE 8]>			<html class="ie ie8"> <![endif]--><!--[if IE 9]>			<html class="ie ie9"> <![endif]--><!--[if gt IE 9]><!--><html><!--<![endif]--> {% include head.html %}<body class="enable-animation"><div id="wrapper">{% include headers/error.html %} {{ content }} {% include error-footer.html %}</div><a href="#" id="toTop"></a> {% include scripts.html %}</body></html>

@@ -1,0 +1,47 @@
+<head>
+    <meta charset="utf-8" />
+    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <meta name="keywords" content="{{ site.keywords }}" />
+    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines }}{% else %}{{ site.description }}{% endif %}" />
+    <meta name="Author" content="{{ site.author }}" />
+
+    <!-- mobile settings -->
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0" />
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet" type="text/css" />
+    <!--If explicitly specified under the "assetConfig" variable, use that-->
+    {% if page.assetConfig %}
+        {% assign config = site.data.asset-config[page.assetConfig] %}
+    {% else %}
+        {% capture urlEle %}{{ page.url | split: '/' }}{% endcapture %}
+        <!--if urlEle has a size of 0, it means it's the main page -->
+        {% if urlEle.size == 0 %}
+            {% assign config = site.data.asset-config.index %}
+        {% endif %}
+
+        {% for ele in urlEle %}
+            {% if forloop.index0 == 0 %}
+                <!--For some reason the 0th element, and not first (page.url | split: '/' | first) is the folder's name-->
+                {% assign config = site.data.asset-config[ele] %}
+                <!--if config is null, it means that the page doesn't have any specific css or html, and so just use only-shared-assets.json-->
+                {% if config == nil %}
+                    {% assign config = site.data.asset-config.only-shared-assets %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {% if config and config.cssLinks %}
+        {% for cssLink in config.cssLinks %}
+    <link rel="stylesheet" type="text/css" href="{{ cssLink }}" />
+        {% endfor %}
+    {% endif %}
+
+    {% if config and config.css %}
+        {% for css in config.css %}
+    <link rel="stylesheet" type="text/css" href="{{ page.baseurl }}{{ css }}" />
+        {% endfor %}
+    {% endif %}
+</head>

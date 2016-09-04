@@ -1,0 +1,144 @@
+---
+title: Contact Us - MMWC
+excerpt: Contact us about anything using our form below, or visit us. You can contact our Library (IRC) or MMWC staff
+scripts: scripts/contact.html
+---
+
+<div id="map2" class="height-400"></div>
+
+<section class="page-header page-header-xs">
+    <div class="container text-right">
+
+        <!-- breadcrumbs -->
+        <ol class="breadcrumb  breadcrumb-inverse">
+            <li><a href="#">Home</a></li>
+            <li class="active">Contact</li>
+        </ol><!-- /breadcrumbs -->
+
+    </div>
+</section>
+<!-- /PAGE HEADER -->
+
+<!-- -->
+<section>
+    <div class="container">
+
+        <div class="row">
+
+            <!-- FORM -->
+            <div class="col-md-9 col-sm-9">
+
+                <h3>Drop us a line or just say <strong><em>Hello!</em></strong></h3>
+
+                <!-- Alert Success -->
+                <div id="alert_success" class="alert alert-success margin-bottom-30">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Thank You!</strong> Your message successfully sent!
+                </div><!-- /Alert Success -->
+
+
+                <!-- Alert Failed -->
+                <div id="alert_failed" class="alert alert-danger margin-bottom-30">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>[SMTP] Error!</strong> Internal server error!
+                </div><!-- /Alert Failed -->
+
+
+                <!-- Alert Mandatory -->
+                <div id="alert_mandatory" class="alert alert-danger margin-bottom-30">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <strong>Sorry!</strong> You need to complete all mandatory (*) fields!
+                </div><!-- /Alert Mandatory -->
+
+
+                <form action="#" method="post" enctype="multipart/form-data">
+                    <fieldset>
+                        <input type="hidden" name="action" value="contact_send" />
+
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-4">
+                                    <label for="contactName">Full Name *</label>
+                                    <input required type="text" value="" class="form-control" name="contactName" id="contactName">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="contactEmail">E-mail Address *</label>
+                                    <input required type="email" value="" class="form-control" name="contactEmail" id="contactEmail">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="contactPhone">Phone</label>
+                                    <input type="text" value="" class="form-control" name="contactPhone" id="contactPhone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-8">
+                                    <label for="contactSubject">Subject *</label>
+                                    <input required type="text" value="" class="form-control" name="contactSubject" id="contactSubject">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="contactDept">Department *</label>
+                                    <select required class="form-control pointer" name="contactDept" id="contactDept">
+                                        <option value="">--- Select ---</option>
+                                        <option value="MMWC Staff">MMWC Staff</option>
+                                        <option value="Librarian">Librarian</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label for="contact:message">Message *</label>
+                                    <textarea required maxlength="10000" rows="8" class="form-control" name="contact[message]" id="contact:message"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> SEND MESSAGE</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <!-- /FORM -->
+
+
+            <!-- INFO -->
+            <div class="col-md-3 col-sm-3">
+
+                <h2>Visit Us</h2>
+
+                <p>
+                    Lid est laborum dolo rumes fugats untras. Etharums ser quidem rerum facilis dolores nemis omnis fugats vitaes nemo minima rerums unsers sadips amets.
+                </p>
+
+                <hr />
+
+                <p>
+                    <span class="block"><strong><i class="fa fa-map-marker"></i> Address:</strong> 5235 S. 27th Street</span>
+                    <span class="block"><strong><i class="fa fa-phone"></i> Phone:</strong> <a href="tel:1800-555-1234">1414-727-4900</a></span>
+                    <span class="block"><strong><i class="fa fa-envelope"></i> Email:</strong> <a href="mailto:staff@mmwconline.org">staff@mmwconline.org</a></span>
+                </p>
+
+                <hr />
+
+                <h4 class="font300">Business Hours</h4>
+                <p>
+                    <span class="block"><strong>Monday - Friday:</strong> 10am to 7:30pm</span>
+                    <span class="block"><strong>Saturday:</strong> Closed</span>
+                    <span class="block"><strong>Sunday:</strong> 10am to 3pm</span>
+                </p>
+
+            </div>
+            <!-- /INFO -->
+
+        </div>
+
+    </div>
+</section>
+<!-- / -->

@@ -1,0 +1,43 @@
+<!--If explicitly specified under the "assetConfig" variable, use that-->
+{% if page.assetConfig %}
+    {% assign config = site.data.asset-config[page.assetConfig] %}
+{% else %}
+    {% capture urlEle %}{{ page.url | split: '/' }}{% endcapture %}
+    <!--if urlEle has a size of 0, it means it's the main page -->
+    {% if urlEle.size == 0 %}
+        {% assign config = site.data.asset-config.index %}
+    {% endif %}
+
+    {% for ele in urlEle %}
+        {% if forloop.index0 == 0 %}
+            <!--For some reason the 0th element, and not first (page.url | split: '/' | first) is the folder's name-->
+            {% assign config = site.data.asset-config[ele] %}
+            <!--if config is null, it means that the page doesn't have any specific css or html, and so just use only-shared-assets.json-->
+            {% if config == nil %}
+                {% assign config = site.data.asset-config.only-shared-assets %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% if config and config.jsLinks %}
+    {% for jsLink in config.jsLinks %}
+<script type="text/javascript" src="{{ jsLink }}"></script>
+    {% endfor %}
+{% endif %}
+
+{% if config and config.js %}
+    {% for js in config.js %}
+<script type="text/javascript" src="{{ page.baseurl }}{{ js }}"></script>
+    {% endfor %}
+{% endif %}
+
+
+<script type="text/javascript">var _mfq = _mfq || [];
+(function() {
+    var mf = document.createElement("script");
+    mf.type = "text/javascript"; mf.async = true;
+    mf.src = "//cdn.mouseflow.com/projects/23620135-6f57-4655-92ff-69535fd68d19.js";
+    document.getElementsByTagName("head")[0].appendChild(mf);
+})();</script>
+

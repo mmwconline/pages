@@ -15,14 +15,34 @@
     "url": "https://github.com/azizj1/mmwc-website/issues"
   },
   "homepage": "https://github.com/azizj1/mmwc-website#readme",
-  "dependencies": {
-    "gulp": "^3.9.1",
-    "gulp-util": "^3.0.7"
-  },
   "devDependencies": {
+    "browserify": "^13.1.0",
     "child_process": "^1.0.2",
+    "event-stream": "^3.3.4",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^2.0.12",
+    "gulp-concat": "^2.6.0",
+    "gulp-debug": "^2.1.2",
+    "gulp-htmlmin": "^2.0.0",
+    "gulp-inject-string": "^1.1.0",
     "gulp-jshint": "^2.0.1",
+    "gulp-json-transform": "^0.4.2",
+    "gulp-plumber": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
     "jshint": "^2.9.3",
-    "jshint-stylish": "^2.2.1"
+    "jshint-stylish": "^2.2.1",
+    "promise": "^7.1.1",
+    "q": "^1.4.1"
+  },
+  "browser": {
+    "jquery": "./_src/assets/plugins/jquery/jquery-2.2.3.min.js",
+    "themepunch-tools": "./_src/assets/plugins/slider.revolution/js/jquery.themepunch.tools.min.js",
+    "themepunch-revolution": "./_src/assets/plugins/slider.revolution/js/jquery.themepunch.revolution.min.js",
+    "custom-revslider": "./_src/assets/js/view/demo.revolution_slider.js",
+    "owl-carousel": "./_src/assets/plugins/owl-carousel/owl.carousel.min.js",
+    "gmaps": "./_src/assets/plugins/gmaps.js",
+    "contact": "./_src/_includes/scripts/contact.js"
   }
 }

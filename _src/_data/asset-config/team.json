@@ -1,0 +1,7 @@
+{
+  "usesShared": "true",
+  "js": [
+    "_src/assets/plugins/magnific-popup/jquery.magnific-popup.min.js"
+  ]
+}
+
