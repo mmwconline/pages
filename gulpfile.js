@@ -40,7 +40,6 @@ var config = {
 		],
 		sharedcss: [
 			'_src/assets/plugins/bootstrap/css/bootstrap.min.css',
-			'_src/assets/css/font-awesome.min.css',
 			'_src/assets/css/essentials.css',
 			'_src/assets/css/layout.css',
 			'_src/assets/css/plugin-hover-buttons.css',

@@ -10,7 +10,7 @@
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
 
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
     <!--If explicitly specified under the "assetConfig" variable, use that-->
     {% if page.assetConfig %}
         {% assign config = site.data.asset-config[page.assetConfig] %}
@@ -41,7 +41,7 @@
 
     {% if config and config.css %}
         {% for css in config.css %}
-    <link rel="stylesheet" type="text/css" href="{{ page.baseurl }}{{ css }}" />
+    <link href="{{ page.baseurl }}{{ css }}" rel="stylesheet" type="text/css" />
         {% endfor %}
     {% endif %}
 </head>
