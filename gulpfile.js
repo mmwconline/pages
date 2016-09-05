@@ -2,24 +2,37 @@
 
 var gulp      = require('gulp'),
 		jshint    = require('gulp-jshint'),
+	// outputs the file it is processing if you add .pipe(debug())
 		debug     = require('gulp-debug'),
+	// allows you to do util.log(msg), do .pipe(someCondition ? somePlugin : util.noop()),
+	// replaceExtension, etc.
 		util      = require('gulp-util'),
+	//allows you to pipe json files, then transform em and put it somewhere
+	// best plugin ever!
 		json      = require('gulp-json-transform'),
+	// find name of file given its path and extension
 		path      = require('path'),
+	// need it for gulp-json-transform, which allows you to return a Promise that'll
+	// return the transformed json
 		Promise   = require('promise'),
+	// very powerful. Allows you to transform streams, MERGE streams, which is what
+	// we care about
 		es        = require('event-stream'),
+	// when a stream errors out, the task no longer works. this solves this problem.
+	// See Error Management in OneNote
 		plumber   = require('gulp-plumber'),
 
 		// JS BUILD
+	// combine multiple js/css files into one, in the ordered they were added
 		concat    = require('gulp-concat'),
-		uglify    = require('gulp-uglify'),
+		uglify    = require('gulp-uglify'), // minify js files
 
 		// HTML
-		htmlmin   = require('gulp-htmlmin'),
-		injectStr = require('gulp-inject-string'),
+		htmlmin   = require('gulp-htmlmin'), // minify html files
+		injectStr = require('gulp-inject-string'), // add strings anywhere you want, based on conditions, etc.
 
 		// CSS
-		cssmin = require('gulp-clean-css');
+		cssmin = require('gulp-clean-css'); // minify css files
 
 var config = {
 	src: {
@@ -27,16 +40,6 @@ var config = {
 			'_src/assets/plugins/jquery/jquery-2.2.3.min.js',
 			'_src/assets/plugins/bootstrap/js/bootstrap.min.js',
 			'_src/assets/js/scripts.js'
-		],
-		js: [
-			'_src/**/*.js',
-			'!_src/assets/js/view/*.js',
-			'!_src/assets/js/scripts.js',
-			'!_src/assets/plugins/**/*.js'],
-		css: '_src/assets/css/**/*.css',
-		html: [
-			'_src/**/*.html',
-			'!_src/assets/**/*.html'
 		],
 		sharedcss: [
 			'_src/assets/plugins/bootstrap/css/bootstrap.min.css',
@@ -46,8 +49,21 @@ var config = {
 			'_src/assets/css/header-1.css',
 			'_src/assets/css/color_scheme/red.css'
 		],
+		// only for linting, and to call pageAssetConfig task
+		js: [
+			'_src/**/*.js',
+			'!_src/assets/js/view/*.js',
+			'!_src/assets/js/scripts.js',
+			'!_src/assets/plugins/**/*.js'],
+		// only used to trigger pageAssetConfig task
+		css: '_src/assets/css/**/*.css',
+		html: [
+			'_src/**/*.html',
+			'!_src/assets/**/*.html'
+		],
 		jekyll: ['_config.yml'],
 		pageAssetsConfig: '_src/_data/asset-config/**/*.json',
+		// no processing for these files, so just move em over to dest
 		others: [
 			'_src/_data/**/*.+(yaml|yml|csv)',
 			'_src/_posts/*'
@@ -67,10 +83,22 @@ var config = {
 	}
 };
 
-gulp.task('default', ['jshint', 'shared-js', 'shared-css', 'page-asset-config', 'others', 'html', 'jekyll']);
-gulp.task('default-with-watch', ['jshint', 'shared-js', 'shared-css', 'page-asset-config', 'others', 'html', 'jekyll', 'watch']);
+// runs these gulp tasks in the order they're listed, but in parallel, unless
+// one depends on another task
+gulp.task('default', [
+	'jshint',
+	'shared-js',
+	'shared-css',
+	'page-asset-config',
+	'others',
+	'html',
+	'jekyll']);
 
+gulp.task('default-with-watch', ['default', 'watch']);
 
+// page-asset-config is the meat of it. It makes the page.min.css and page.min.js
+// files, and the json files for each page
+// so jekyll knows where to get all the assets for each page.
 gulp.task('watch', function() {
 	gulp.watch(config.src.js, ['jshint', 'page-asset-config']);
 	gulp.watch(config.src.css, ['page-asset-config']);
@@ -85,7 +113,7 @@ gulp.task('jshint', function () {
 	return gulp
 		.src(config.src.js)
 		.pipe(jshint())
-		.pipe(jshint.reporter('jshint-stylish'));
+		.pipe(jshint.reporter('jshint-stylish')); // for styling the output
 });
 
 gulp.task('shared-css', function() {
@@ -96,40 +124,58 @@ gulp.task('shared-js', function() {
 	return jsMinifyStream(config.src.sharedjs, config.names.sharedjs, config.dest.sharedjs);
 });
 
+/**
+ * Gist of this gulpfile
+ * for the json pipe, we could've just done .pipe(json(function(jsonFile, file) { ... })),
+ * but this looks much cleaner. In essence, we read in all the json files located in src,
+ * make page.min.css and page.min.js files asynchronously using a Promise so gulp knows
+ * when it's done, and then return a new json file, that has locations of the minified css and js
+ *
+ * Why doesn't this depend on shared-js and shared-css? Because it'll run those tasks
+ * EVERY TIME page-asset-config wants to run. I thought dependent tasks would only
+ * run if anything changed in those dependent tasks. So if a custom js file
+ * we wrote changes, we want page-asset-config to run, not shared-js and shared-css.
+ */
 gulp.task('page-asset-config', function() {
 	return gulp
 		.src(config.src.pageAssetsConfig)
+		// only purpose of plumber() is to not crash the task when json pipe crashes, which happens whenever a new json is
+		// added to src directory (an empty json file is an invalid json file)
 		.pipe(plumber())
 		.pipe(json(transformConfigAndCreatePageAssets))
-		.pipe(gulp.dest(config.dest.pageAssetsConfig))
-		.on('error', function(e) { util.log(e); this.end(); });
+		.pipe(gulp.dest(config.dest.pageAssetsConfig));
 });
 
+// just moves the unprocessed files so it can be consumed by jekyll
 gulp.task('others', function() {
 	return gulp
 		.src(config.src.others, {base: './_src'})
 		.pipe(gulp.dest(config.dest.others));
 });
 
-
+//
 gulp.task('html', function() {
 	return gulp
 		.src(config.src.html)
 		.pipe(htmlmin({
-			collapseWhitespace: true,
+			collapseWhitespace: true, // if this is false, it keeps the newlines and all the whitespaces! Doesn't even look minified
 			removeComments: true,
-			caseSensitive: true,
+			caseSensitive: true, // needed for jekyll. {{ page }} is not the same as {{ PAGE }}
 			ignoreCustomFragments: [
-				/<%[\s\S]*?%>/,
-				/<\?[\s\S]*?\?>/,
-				/---[\s\S]*?---/
+				/<%[\s\S]*?%>/, // this is the default of ignoreCustomFragments
+				/<\?[\s\S]*?\?>/, // also the default of ignoreCustomFragments
+				/---[\s\S]*?---/ // we're telling it to ignore the liquid tags in the
+				// beginning of the file and everything within them
 			]
 		}))
+		// the last liquid tags (---) is on the same line as the minified html,
+		// and jekyll doesn't detect the tags anymore
+		// so we need to insert a new line after the second ---
 		.pipe(injectStr.after('\n---','\n'))
 		.pipe(gulp.dest('.'))
 });
 
-
+// copied and pasted from somewhere. The callback lets gulp know that the task is done.
 gulp.task('jekyll', function (gulpCallBack) {
 	var spawn = require('child_process').spawn;
 	var jekyll = spawn('jekyll', ['build'], {stdio: 'inherit'});
@@ -138,7 +184,7 @@ gulp.task('jekyll', function (gulpCallBack) {
 		gulpCallBack(code === 0 ? null : 'ERROR: Jekyll process exited with code: '+code);
 	});
 });
-
+// returns a stream for js minification.
 function jsMinifyStream(srcGlob, filename, destDir) {
 	return gulp
 		.src(srcGlob)
@@ -153,11 +199,13 @@ function cssMinifyStream(srcGlob, filename, destDir) {
 		.pipe(cssmin())
 		.pipe(gulp.dest(destDir));
 }
+
+
 function transformConfigAndCreatePageAssets(jsonConfig, fileInfo) {
 	jsonConfig.js = jsonConfig.js || [];
 	jsonConfig.css = jsonConfig.css || [];
 
-	var filename = path.posix.basename(fileInfo.path, '.json');
+	var filename = path.posix.basename(fileInfo.path, '.json'); // /dir/dir2/index.json would return index
 	var minJS = filename + '.min.js';
 	var minCSS = filename + '.min.css';
 	var newJsonFile = prepareJsonFile(jsonConfig);
@@ -170,7 +218,7 @@ function transformConfigAndCreatePageAssets(jsonConfig, fileInfo) {
 		var cssStream = cssMinifyStream(jsonConfig.css, minCSS, config.dest.pagecss);
 
 		es.merge(jsStream, cssStream)
-			.on('end', function () {
+			.on('end', function () { // will only run when both streams are done!
 				if (jsonConfig.js && jsonConfig.js.length)
 					newJsonFile.js.push(config.dest.pagejs + minJS);
 				if (jsonConfig.css && jsonConfig.css.length)
@@ -182,6 +230,8 @@ function transformConfigAndCreatePageAssets(jsonConfig, fileInfo) {
 			});
 	});
 }
+
+// puts the remote assets in jsLinks and cssLinks, respectively.
 function prepareJsonFile(data) {
 	var json = {
 		js: [],

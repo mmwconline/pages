@@ -23,6 +23,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-debug": "^2.1.2",
     "gulp-htmlmin": "^2.0.0",
+    "gulp-imagemin": "^3.0.3",
     "gulp-inject-string": "^1.1.0",
     "gulp-jshint": "^2.0.1",
     "gulp-json-transform": "^0.4.2",
