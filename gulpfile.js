@@ -32,7 +32,9 @@ var gulp      = require('gulp'),
 		injectStr = require('gulp-inject-string'), // add strings anywhere you want, based on conditions, etc.
 
 		// CSS
-		cssmin = require('gulp-clean-css'); // minify css files
+		cssmin    = require('gulp-clean-css'), // minify css files
+
+		imagemin  = require('gulp-imagemin');  // optimize images
 
 var config = {
 	src: {
@@ -67,6 +69,9 @@ var config = {
 		others: [
 			'_src/_data/**/*.+(yaml|yml|csv)',
 			'_src/_posts/*'
+		],
+		images: [
+			'_src/assets/images/**/*'
 		]
 	},
 	dest: {
@@ -75,7 +80,8 @@ var config = {
 		pageAssetsConfig: '_data/asset-config/',
 		pagejs: 'assets/js/pages/',
 		pagecss: 'assets/css/pages/',
-		others: '.'
+		others: '.',
+		images: 'assets/images/'
 	},
 	names: {
 		sharedjs: 'common.min.js',
@@ -91,6 +97,7 @@ gulp.task('default', [
 	'shared-css',
 	'page-asset-config',
 	'others',
+	'images',
 	'html',
 	'jekyll']);
 
@@ -153,6 +160,12 @@ gulp.task('others', function() {
 		.pipe(gulp.dest(config.dest.others));
 });
 
+gulp.task('images', function() {
+	return gulp
+		.src(config.src.images)
+		.pipe(imagemin())
+		.pipe(gulp.dest(config.dest.images));
+});
 //
 gulp.task('html', function() {
 	return gulp
