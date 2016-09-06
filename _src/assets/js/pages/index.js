@@ -118,7 +118,10 @@
     }
   }
   $(document).ready(function() {
-    _masonryGallery();
+    $('.masonry-gallery').imagesLoaded()
+      .always(function() {
+        _masonryGallery();
+      });
     _lightbox();
   });
 })(jQuery);
