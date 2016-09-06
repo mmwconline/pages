@@ -31,12 +31,10 @@
 
         // Set Big Image
         if(parseInt(_bigImageNo) > 0) {
-          console.log('found big image');
           _bigImageNo 	= Number(_bigImageNo) - 1;
           _container.find('a:eq('+_bigImageNo+')').css({ width: _firstElemWidth*2 + 'px'});
 
           setTimeout( function() {
-            console.log('time is up. running isotope...');
             _container.isotope({
               masonry: {
                 columnWidth: _firstElemWidth

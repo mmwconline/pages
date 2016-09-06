@@ -170,6 +170,7 @@ gulp.task('images', function() {
 gulp.task('html', function() {
 	return gulp
 		.src(config.src.html)
+		.pipe(plumber())
 		.pipe(htmlmin({
 			collapseWhitespace: true, // if this is false, it keeps the newlines and all the whitespaces! Doesn't even look minified
 			removeComments: true,
