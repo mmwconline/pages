@@ -43,7 +43,7 @@
               }
             });
             _container.isotope('layout');
-          }, 3000);
+          }, 500);
         }
       });
     }
