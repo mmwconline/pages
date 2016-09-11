@@ -1778,7 +1778,7 @@ blockquote h6 {
 }
 blockquote {
 	border-left: 5px solid rgba(0,0,0,0.1);
-	font-size: 1.3em;
+	/*font-size: 1.3em;*/
 	font-style: normal;
 	letter-spacing: -1px;
 	margin: 25px 0;
@@ -1836,7 +1836,8 @@ blockquote.pull-right {
 }
 
 blockquote p {
-	margin-bottom:20px;
+	margin-bottom: 5px;
+	font-size: 14px;
 	position:relative;
 }
 blockquote cite {
@@ -4562,6 +4563,26 @@ div.divider.double-line:before {
 	  margin-left: 20px;
 	  width: 15%;
 	}
+    div.divider.divider-center-text:after {
+        left: 64% !important;
+        right: 0;
+        margin-left: 20px;
+        top: 11px;
+    }
+    div.divider.divider-center-text:before {
+        left: 0 !important;
+        right: 64%;
+        margin-right: 20px;
+
+        content: '';
+        position: absolute;
+        top: 11px;
+        height: 0;
+        border-top: 1px solid #ddd;
+    }
+    div.divider.divider-center-text {
+        text-align:center;
+    }
 
 /* dotted */
 div.divider.divider-dotted {

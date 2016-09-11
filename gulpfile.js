@@ -113,6 +113,7 @@ gulp.task('watch', function() {
 	gulp.watch(config.src.sharedjs, ['shared-js']);
 	gulp.watch(config.src.sharedcss, ['shared-css']);
 	gulp.watch(config.src.others, ['others']);
+	gulp.watch(config.src.images, ['images']);
 	gulp.watch(config.src.html, ['html']);
 });
 

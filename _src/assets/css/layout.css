@@ -97,6 +97,11 @@ section {
 	   background-size: cover !important;
 			box-sizing: border-box !important;
 }
+
+section.noborder {
+	border-bottom: 0;
+}
+
 section:after,
 section:before {
 	content:" ";
@@ -334,8 +339,9 @@ section.dark h6.page-header {
 .font-raleway {
 	font-family:'Raleway',Arial,Helvetica,sans-serif !important;
 }
-
-
+.font-montserrat {
+	font-family:'Montserrat',sans-serif !important;
+}
 
 /* 
 	GLOBAL RADIUS
@@ -7547,6 +7553,10 @@ ul.search-history {
 	.size-30 {
 		font-size:23px !important;
 		line-height:26px !important;
+	}
+	.size-26 {
+		font-size:26px !important;
+		line-height:29px !important;
 	}
 
 }
