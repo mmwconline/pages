@@ -1,0 +1,6 @@
+{
+  "usesShared": "true",
+  "css": [
+    "_src/assets/css/custom.css"
+  ]
+}

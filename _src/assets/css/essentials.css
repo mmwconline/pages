@@ -4584,6 +4584,22 @@ div.divider.double-line:before {
         text-align:center;
     }
 
+    @media only screen and (max-width: 991px) {
+        div.divider.divider-center-text:after {
+            left: 72% !important;
+        }
+        div.divider.divider-center-text:before {
+            right: 72% !important;
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        div.divider.divider-center-text:after {
+            left: 90% !important;
+        }
+        div.divider.divider-center-text:before {
+            right: 90% !important;
+        }
+    }
 /* dotted */
 div.divider.divider-dotted {
 	height:10px;
