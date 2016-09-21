@@ -1,5 +1,6 @@
 ---
 title: Blog - MMWC
+baseurl: /
 excerpt: >
   Stay up-to-date with current Islamic issues around the world, and the growth of the MMWC with our blog posts
 ---
@@ -15,290 +16,89 @@ excerpt: >
   </div>
 </section>
 
-<!--<section>-->
-  <!--<div class="container">-->
+<section>
+  <div class="container">
+    {% for post in paginator.posts %}
+    <!-- POST ITEM -->
+    <div class="blog-post-item">
 
-    <!--&lt;!&ndash; POST ITEM &ndash;&gt;-->
-    <!--<div class="blog-post-item">-->
+      {% if post.img %}
+      <!-- IMAGE -->
+      <figure class="margin-bottom-20">
+        <img class="img-responsive" src="{{ page.baseurl }}{{ post.img }}" alt="">
+        {% if post.imgCredit %}
+        <figcaption>
+          <a href="{{ post.imgCreditLink }}" target="_blank">{{ post.imgCredit }}</a>
+        </figcaption>
+        {% endif %}
+      </figure>
 
-      <!--&lt;!&ndash; OWL SLIDER &ndash;&gt;-->
-      <!--<div class="owl-carousel buttons-autohide controlls-over" data-plugin-options='{"items": 1, "autoPlay": 3000, "autoHeight": false, "navigation": true, "pagination": true, "transitionStyle":"fadeUp", "progressBar":"false"}'>-->
-        <!--<div>-->
-          <!--<img class="img-responsive" src="assets/images/demo/content_slider/23-min.jpg" alt="">-->
-        <!--</div>-->
-        <!--<div>-->
-          <!--<img class="img-responsive" src="assets/images/demo/content_slider/21-min.jpg" alt="">-->
-        <!--</div>-->
-        <!--<div>-->
-          <!--<img class="img-responsive" src="assets/images/demo/content_slider/3-min.jpg" alt="">-->
-        <!--</div>-->
-      <!--</div>-->
-      <!--&lt;!&ndash; /OWL SLIDER &ndash;&gt;-->
+      {% elsif post.video %}
+      <!-- VIDEO -->
+      <div class="margin-bottom-20">
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="{{ post.video }}" width="800" height="450"></iframe>
+        </div>
+      </div>
+      {% endif %}
 
-      <!--<h2><a href="blog-single-default.html">BLOG CAROUSEL POST</a></h2>-->
+      <h2><a href="{{ post.url | prepend: page.baseurl | replace: '//', '/' }}">{{ post.blogTitle }}</a></h2>
 
-      <!--<ul class="blog-post-info list-inline">-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-clock-o"></i>-->
-            <!--<span class="font-lato">June 29, 2015</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-comment-o"></i>-->
-            <!--<span class="font-lato">28 Comments</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<i class="fa fa-folder-open-o"></i>-->
+      <ul class="blog-post-info list-inline">
+        <li>
+          <a href="#">
+            <i class="fa fa-clock-o"></i>
+            <span class="font-lato">{{ post.date | date: "%B %d, %Y" }}</span>
+          </a>
+        </li>
+        <li>
+          <i class="fa fa-folder-open-o"></i>
 
-          <!--<a class="category" href="#">-->
-            <!--<span class="font-lato">Design</span>-->
-          <!--</a>-->
-          <!--<a class="category" href="#">-->
-            <!--<span class="font-lato">Photography</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-user"></i>-->
-            <!--<span class="font-lato">John Doe</span>-->
-          <!--</a>-->
-        <!--</li>-->
-      <!--</ul>-->
+          <a class="category" href="#">
+            <span class="font-lato">{{ post.blogCategory }}</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa fa-user"></i>
+            <span class="font-lato">{{ post.postedBy }}</span>
+          </a>
+        </li>
+      </ul>
 
-      <!--<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>-->
+      <p>{{ post.excerpt }}</p>
 
-      <!--<a href="blog-single-default.html" class="btn btn-reveal btn-default">-->
-        <!--<i class="fa fa-plus"></i>-->
-        <!--<span>Read More</span>-->
-      <!--</a>-->
+      <a href="{{ post.url | prepend: page.baseurl | replace: '//', '/' }}" class="btn btn-reveal btn-default">
+        <i class="fa fa-plus"></i>
+        <span>Read More</span>
+      </a>
 
-    <!--</div>-->
-    <!--&lt;!&ndash; /POST ITEM &ndash;&gt;-->
+    </div>
+    <!-- /POST ITEM -->
+    {% endfor %}
+    {% if paginator.total_pages > 1 %}
+    <!-- PAGINATION -->
+    <div class="text-center">
+      <ul class="pagination nomargin">
+        {% if paginator.previous_page_path %}
+        <li><a href="{{ paginator.previous_page_path }}">&laquo;</a></li>
+        {% endif %}
+        {% for i in (1..paginator.total_pages) %}
+        {% if i == paginator.page %}
+        <li class="active"><span>{{ i }}</span></li>
+        {% elsif i == 1 %}
+        <li><a href="{{ page.baseurl }}blog/">{{ i }}</a></li>
+        {% else %}
+        <li><a href="{{ site.paginate_path | replace: ':num', i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if paginator.next_page_path %}
+        <li><a href="{{ paginator.next_page_path }}">&raquo;</a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <!-- /PAGINATION -->
+    {% endif %}
 
-
-    <!--&lt;!&ndash; POST ITEM &ndash;&gt;-->
-    <!--<div class="blog-post-item">-->
-
-      <!--&lt;!&ndash; IMAGE &ndash;&gt;-->
-      <!--<figure class="margin-bottom-20">-->
-        <!--<img class="img-responsive" src="assets/images/demo/content_slider/10-min.jpg" alt="">-->
-      <!--</figure>-->
-
-      <!--<h2><a href="blog-single-default.html">BLOG IMAGE POST</a></h2>-->
-
-      <!--<ul class="blog-post-info list-inline">-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-clock-o"></i>-->
-            <!--<span class="font-lato">June 29, 2015</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-comment-o"></i>-->
-            <!--<span class="font-lato">28 Comments</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<i class="fa fa-folder-open-o"></i>-->
-
-          <!--<a class="category" href="#">-->
-            <!--<span class="font-lato">Design</span>-->
-          <!--</a>-->
-          <!--<a class="category" href="#">-->
-            <!--<span class="font-lato">Photography</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-user"></i>-->
-            <!--<span class="font-lato">John Doe</span>-->
-          <!--</a>-->
-        <!--</li>-->
-      <!--</ul>-->
-
-      <!--<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>-->
-
-      <!--<a href="blog-single-default.html" class="btn btn-reveal btn-default">-->
-        <!--<i class="fa fa-plus"></i>-->
-        <!--<span>Read More</span>-->
-      <!--</a>-->
-
-    <!--</div>-->
-    <!--&lt;!&ndash; /POST ITEM &ndash;&gt;-->
-
-
-    <!--&lt;!&ndash; POST ITEM &ndash;&gt;-->
-    <!--<div class="blog-post-item">-->
-
-      <!--&lt;!&ndash; VIDEO &ndash;&gt;-->
-      <!--<div class="margin-bottom-20">-->
-        <!--<div class="embed-responsive embed-responsive-16by9">-->
-          <!--<iframe class="embed-responsive-item" src="http://player.vimeo.com/video/8408210" width="800" height="450"></iframe>-->
-        <!--</div>-->
-      <!--</div>-->
-
-      <!--<h2><a href="blog-single-default.html">BLOG VIDEO POST</a></h2>-->
-
-      <!--<ul class="blog-post-info list-inline">-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-clock-o"></i>-->
-            <!--<span class="font-lato">June 29, 2015</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-comment-o"></i>-->
-            <!--<span class="font-lato">28 Comments</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<i class="fa fa-folder-open-o"></i>-->
-
-          <!--<a class="category" href="#">-->
-            <!--<span class="font-lato">Design</span>-->
-          <!--</a>-->
-          <!--<a class="category" href="#">-->
-            <!--<span class="font-lato">Photography</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-user"></i>-->
-            <!--<span class="font-lato">John Doe</span>-->
-          <!--</a>-->
-        <!--</li>-->
-      <!--</ul>-->
-
-      <!--<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>-->
-
-      <!--<a href="blog-single-default.html" class="btn btn-reveal btn-default">-->
-        <!--<i class="fa fa-plus"></i>-->
-        <!--<span>Read More</span>-->
-      <!--</a>-->
-
-    <!--</div>-->
-    <!--&lt;!&ndash; /POST ITEM &ndash;&gt;-->
-
-
-    <!--&lt;!&ndash; POST ITEM &ndash;&gt;-->
-    <!--<div class="blog-post-item">-->
-
-      <!--&lt;!&ndash; VIDEO &ndash;&gt;-->
-      <!--<div class="margin-bottom-20">-->
-        <!--<iframe width="100%" height="366" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/154936822&color=a94545&auto_play=false&hide_related=false&visual=true"></iframe>-->
-      <!--</div>-->
-
-      <!--<h2><a href="blog-single-default.html">BLOG SOUND CLOUD POST</a></h2>-->
-
-      <!--<ul class="blog-post-info list-inline">-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-clock-o"></i>-->
-            <!--<span class="font-lato">June 29, 2015</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-comment-o"></i>-->
-            <!--<span class="font-lato">28 Comments</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<i class="fa fa-folder-open-o"></i>-->
-
-          <!--<a class="category" href="#">-->
-            <!--<span class="font-lato">Design</span>-->
-          <!--</a>-->
-          <!--<a class="category" href="#">-->
-            <!--<span class="font-lato">Photography</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-user"></i>-->
-            <!--<span class="font-lato">John Doe</span>-->
-          <!--</a>-->
-        <!--</li>-->
-      <!--</ul>-->
-
-      <!--<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>-->
-
-      <!--<a href="blog-single-default.html" class="btn btn-reveal btn-default">-->
-        <!--<i class="fa fa-plus"></i>-->
-        <!--<span>Read More</span>-->
-      <!--</a>-->
-
-    <!--</div>-->
-    <!--&lt;!&ndash; /POST ITEM &ndash;&gt;-->
-
-
-    <!--&lt;!&ndash; POST ITEM &ndash;&gt;-->
-    <!--<div class="blog-post-item">-->
-
-      <!--<h2><a href="blog-single-default.html">BLOG SIMPLE POST</a></h2>-->
-
-      <!--<ul class="blog-post-info list-inline">-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-clock-o"></i>-->
-            <!--<span class="font-lato">June 29, 2015</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-comment-o"></i>-->
-            <!--<span class="font-lato">28 Comments</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<i class="fa fa-folder-open-o"></i>-->
-
-          <!--<a class="category" href="#">-->
-            <!--<span class="font-lato">Design</span>-->
-          <!--</a>-->
-          <!--<a class="category" href="#">-->
-            <!--<span class="font-lato">Photography</span>-->
-          <!--</a>-->
-        <!--</li>-->
-        <!--<li>-->
-          <!--<a href="#">-->
-            <!--<i class="fa fa-user"></i>-->
-            <!--<span class="font-lato">John Doe</span>-->
-          <!--</a>-->
-        <!--</li>-->
-      <!--</ul>-->
-
-      <!--<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.</p>-->
-
-      <!--<a href="blog-single-default.html" class="btn btn-reveal btn-default">-->
-        <!--<i class="fa fa-plus"></i>-->
-        <!--<span>Read More</span>-->
-      <!--</a>-->
-
-    <!--</div>-->
-    <!--&lt;!&ndash; /POST ITEM &ndash;&gt;-->
-
-
-    <!--&lt;!&ndash; PAGINATION &ndash;&gt;-->
-    <!--<div class="text-center">-->
-      <!--&lt;!&ndash; Pagination Default &ndash;&gt;-->
-      <!--<ul class="pagination nomargin">-->
-        <!--<li><a href="#">&laquo;</a></li>-->
-        <!--<li class="active"><a href="#">1</a></li>-->
-        <!--<li><a href="#">2</a></li>-->
-        <!--<li><a href="#">3</a></li>-->
-        <!--<li><a href="#">4</a></li>-->
-        <!--<li><a href="#">5</a></li>-->
-        <!--<li><a href="#">&raquo;</a></li>-->
-      <!--</ul>-->
-      <!--&lt;!&ndash; /Pagination Default &ndash;&gt;-->
-    <!--</div>-->
-    <!--&lt;!&ndash; /PAGINATION &ndash;&gt;-->
-
-  <!--</div>-->
-<!--</section>-->
+  </div>
+</section>

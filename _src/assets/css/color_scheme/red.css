@@ -96,6 +96,8 @@
 	.btn-primary:active,
 	.btn-primary:focus,
 	.pagination>.active>a,
+	.pagination>.active>span,
+	.pagination>.active>span:hover,
 	.pagination>.active>a:hover,
 	#header li.quick-cart .quick-cart-box a.btn,
 	#header li.quick-cart .quick-cart-box a.btn:hover, /* used by dark & transparent header */
@@ -525,4 +527,9 @@ i.ico-hover:hover {
 .hvr-underline-reveal:before,
 .hvr-overline-reveal:before {
 	background-color: #A94545;
+}
+
+.pagination>.active>span,
+.pagination>.active>span:hover {
+	border-color: #A94545;
 }
