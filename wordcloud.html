@@ -1,0 +1,6 @@
+---
+baseurl: ./
+sitemap: false
+title: Sponsor List for WordCloud
+---
+ <section class="page-header"><div class="container"><h1>SPONSOR LIST FOR WORDLCOUD</h1><ol class="breadcrumb"><li><a href="#">Home</a></li><li class="active">Donate</li></ol></div></section><section class="container" id="wordcloud">{% for client in site.data.sponsors %} {% assign priorityNum = client.priority | plus: 0 %} {% for i in (1..site.data.wordcloudfreq[priorityNum].freq) %}<p>{{ client.sponsor }}</p>{% endfor %} {% endfor %}</section>
