@@ -1661,7 +1661,8 @@ ul.list-icons>li>i {
 
 /** 06. Dropcap
  **************************************************************** **/
-.dropcap:first-letter {
+.dropcap:first-letter,
+article.singleBlog p:first-child:first-letter {
 	float: left;
 	font-size: 70px;
 	line-height: 60px;
