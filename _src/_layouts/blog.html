@@ -24,7 +24,7 @@ assetConfig: blog
             <div class="col-md-3">
                 {% include blog-sidebar/search.html %}
                 <hr />
-                {% include blog-sidebar/blog-archive-2.html %}
+                {% include blog-sidebar/blog-archive-2.html id=page.id %}
                 {% include blog-sidebar/tags.html %}
             </div>
             <div class="col-md-9">
@@ -52,7 +52,7 @@ assetConfig: blog
                 </ul>
 
                 {% if page.img %}
-                <figure class="margin-bottom-20">
+                <figure class="margin-bottom-20 blog-pic">
                     <img class="img-responsive" src="{{ page.baseurl }}{{ page.img }}" alt="img" />
                     {% if page.imgCredit %}
                     <figcaption>
@@ -63,10 +63,10 @@ assetConfig: blog
 
                 {% elsif page.video %}
                 <div class="margin-bottom-20 embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="http://player.vimeo.com/video/8408210" width="800" height="450"></iframe>
+                    <iframe class="embed-responsive-item" src="{{ page.video }}" width="800" height="450"></iframe>
                 </div>
                 {% endif %}
-                <article class="singleBlog">
+                <article class="singleBlog transformQuotes">
                     {{ page.content }}
                 </article>
 

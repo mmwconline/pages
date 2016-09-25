@@ -2,6 +2,9 @@
 blogTitle: The Most Holy Night for Muslims
 blogCategory: Ramadan
 postedBy: Janan Najeeb
+img: assets/images/blog/boys-quran.jpeg
+imgCredit: The Huffington Post
+imgCreditLink: http://www.huffingtonpost.com/entry/what-is-laylat-al-qadr-the-night-of-power_us_55a3d9c9e4b0ecec71bc7069
 tags:
   - Milwaukee
   - MMWC

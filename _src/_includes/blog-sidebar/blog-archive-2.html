@@ -13,30 +13,43 @@
         {% capture next_year %}{{ post.previous.date | date: "%Y" }}{% endcapture %}
         {% capture next_month %}{{ post.previous.date | date: "%B" }}{% endcapture %}
 
+        {% if include.id == null and forloop.first %}
+            {% assign shouldExpandTreeForThisNode = true %}
+        {% elsif include.id and include.id == post.id %}
+            {% assign shouldExpandTreeForThisNode = true %}
+        {% else %}
+            {% assign shouldExpandTreeForThisNode = false %}
+        {% endif %}
+
         {% if forloop.first %}
 
 
         <li class="list-group-item">
             <a data-toggle="collapse" data-target="#{{ this_year }}-chevron,#{{ this_year }}-list">
-                <span class="size-15 text-muted pull-right">
-                    <i id="{{ this_year }}-chevron" class="blog-archive-item-arrow fa collapse in"></i>
+                <span class="size-15 text-muted pull-right collapsed">
+                    <i id="{{ this_year }}-chevron" class="blog-archive-item-arrow fa collapse"></i>
                 </span> {{ this_year }} {% include blog-sidebar/blog-archive-badge.html year=this_year %}
             </a>
-            <ul id="{{ this_year }}-list" class="list-group list-group-noicon uppercase collapse in">
+            <ul id="{{ this_year }}-list" class="list-group list-group-noicon uppercase collapse">
                 <li>
                     <a data-target="#{{ this_year }}{{ this_month }}-chevron,#{{ this_year }}{{ this_month }}-list"
                        data-toggle="collapse" class="font-raleway weight-500">
-                        <span class="size-15 text-muted pull-right">
-                            <i id="{{ this_year }}{{ this_month }}-chevron" class="blog-archive-item-arrow fa collapse in"></i>
+                        <span class="size-15 text-muted pull-right collapsed">
+                            <i id="{{ this_year }}{{ this_month }}-chevron" class="blog-archive-item-arrow fa collapse"></i>
                         </span> {{ this_month }} {% include blog-sidebar/blog-archive-badge.html year=this_year month=this_month %}
                     </a>
-                    <ul id="{{ this_year }}{{ this_month }}-list" class="list-group list-group-noicon uppercase collapse in">
+                    <ul id="{{ this_year }}{{ this_month }}-list" class="list-group list-group-noicon uppercase collapse">
 
         {% endif %}
 
                         <li>
-                            <a href="{{ post.url | prepend: page.baseurl | replace: '//', '/' }}" class="font-raleway weight-500">
+                            <a href="{{ post.url | prepend: page.baseurl | replace: '//', '/' }}"
+                               class="font-raleway weight-500{% if shouldExpandTreeForThisNode == true %} shouldExpandTreeForThisNode{% endif %}"
+                               data-post-list-id="{{ this_year }}{{ this_month }}-list"
+                               data-month-list-id="{{ this_year }}-list">
+
                                 {{ post.blogTitle }}
+
                             </a>
                         </li>
 

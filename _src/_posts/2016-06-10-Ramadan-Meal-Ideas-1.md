@@ -3,6 +3,7 @@ blogTitle: >
   Ramadan Meal Ideas #1
 blogCategory: Ramadan
 postedBy: IRC Librarian
+img: assets/images/blog/lamb-chops.jpg
 tags:
   - Milwaukee
   - IRC

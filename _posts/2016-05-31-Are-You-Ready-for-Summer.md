@@ -2,6 +2,7 @@
 blogTitle: Are You Ready for Summer?!?
 blogCategory: Books
 postedBy: IRC Librarian
+img: assets/images/blog/summer-books.jpg
 tags:
   - Milwaukee
   - IRC

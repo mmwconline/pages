@@ -3,6 +3,7 @@ blogTitle: >
   Ramadan Meal Ideas #3
 blogCategory: Ramadan
 postedBy: IRC Librarian
+img: assets/images/blog/ramadan-meals-3.jpg
 tags:
   - Milwaukee
   - IRC

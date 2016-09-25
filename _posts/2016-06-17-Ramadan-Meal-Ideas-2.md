@@ -3,6 +3,7 @@ blogTitle: >
   Ramadan Meal Ideas #2
 blogCategory: Ramadan
 postedBy: IRC Librarian
+img: assets/images/blog/ramadan-meals-2.jpg
 tags:
   - Milwaukee
   - IRC
@@ -33,16 +34,12 @@ needs.
 
 Mix the eggs and sugar and beat with a fork. Add the vanilla extract. 
 Stir in the lemon juice. Add the shredded coconut and mix well.
-
 Add the baking powder and kneed the mixture until mixture becomes smooth 
 and doughlike.
-
 Form the dough into small balls (the size of walnuts) and place them on 
 a greased baking tray. Make sure to leave about ½ - 1 inch between each.
-
 Bake in a preheated oven at 350°F / 180°C for about 10 minutes or until 
 slightly browned on top.
-
 Decorate with a little confectioner's sugar.
 
 Note: You can cool the dough in the fridge for half an hour before 

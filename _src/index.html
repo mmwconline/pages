@@ -144,7 +144,7 @@ baseurl: ./
 </section>
 <!-- /Welcome -->
 
-<!-- CLIENTS -->
+<!-- PROGRAMS -->
 <section id="services">
     <div class="container">
 
@@ -288,53 +288,63 @@ baseurl: ./
 
     </div>
 </section>
-<!-- /CLIENTS -->
+<!-- /PROGRAMS -->
 
+{% assign post = site.posts | first %}
+{% if post.img %}
+    {% assign img = post.img %}
+    {% assign imgCreditLink = post.imgCreditLink %}
+    {% assign imgCredit = post.imgCredit %}
+{% else %}
+    {% assign img = 'assets/images/blog/welcome-thumbnail.jpg' %}
+{% endif %}
 <!-- BLOG -->
 <section style="border-bottom: 0; padding-bottom: 0">
     <div class="container">
 
         <!-- POST ITEM -->
-        <div class="blog-post-item" style="margin-bottom: 0"><!-- .blog-post-item-inverse = image right side [left on RTL] -->
+        <div id="recentPost" class="blog-post-item" style="margin-bottom: 0">
 
-            <div class="blog-item-small-image">
-                <!-- OWL SLIDER -->
-                <div class="owl-carousel buttons-autohide controlls-over" data-plugin-options='{"items": 1, "autoPlay": 3000, "autoHeight": false, "navigation": true, "pagination": true, "transitionStyle":"fadeUp", "progressBar":"false"}'>
-                    <div>
-                        <img class="img-responsive" src="assets/images/demo/mockups/800x553/9-min.jpg" alt="">
-                    </div>
-                    <div>
-                        <img class="img-responsive" src="assets/images/demo/mockups/800x553/3-min.jpg" alt="">
-                    </div>
-                    <div>
-                        <img class="img-responsive" src="assets/images/demo/mockups/800x553/1-min.jpg" alt="">
-                    </div>
-                </div>
-                <!-- /OWL SLIDER -->
+            <div class="blog-item-small-image hidden-xs">
+                <figure class="margin-bottom-20 blog-pic">
+
+                    <img class="img-responsive" src="{{ page.baseurl }}{{ img }}" alt="img" />
+                    {% if imgCredit %}
+                    <figcaption>
+                        <a href="{{ imgCreditLink }}" target="_blank">{{ imgCredit }}</a>
+                    </figcaption>
+                    {% endif %}
+                </figure>
             </div>
 
             <div class="blog-item-small-content">
 
-                <h2><a href="#">BLOG CAROUSEL POST</a></h2>
+                <h2><a href="{{ post.url | prepend: page.baseurl | replace: '//', '/' }}">{{ post.blogTitle }}</a></h2>
 
                 <ul class="blog-post-info list-inline">
                     <li>
                         <a href="#">
                             <i class="fa fa-clock-o"></i>
-                            <span class="font-lato">June 29, 2015</span>
+                            <span class="font-lato">{{ post.date | date: "%B %d, %Y" }}</span>
                         </a>
                     </li>
                     <li>
                         <a href="#">
-                            <i class="fa fa-comment-o"></i>
-                            <span class="font-lato">28 Comments</span>
+                            <i class="fa fa-folder-open-o"></i>
+                            <span class="font-lato">{{ post.blogCategory }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-user"></i>
+                            <span class="font-lato">{{ post.postedBy }}</span>
                         </a>
                     </li>
                 </ul>
 
-                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable There are many variations of passages of Lorem Ipsum available, but the majority...</p>
+                <p>{{ post.excerpt }}</p>
 
-                <a href="#" class="btn btn-reveal btn-default">
+                <a href="{{ post.url | prepend: page.baseurl | replace: '//', '/' }}" class="btn btn-reveal btn-default">
                     <i class="fa fa-plus"></i>
                     <span>Read More</span>
                 </a>

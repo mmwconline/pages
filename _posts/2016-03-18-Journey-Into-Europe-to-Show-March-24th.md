@@ -2,6 +2,7 @@
 blogTitle: Journey Into Europe to Show March 24th
 blogCategory: Film Festival
 postedBy: IRC Librarian
+video: https://www.youtube.com/embed/ZleegkA-r4w
 tags:
   - Milwaukee
   - IRC

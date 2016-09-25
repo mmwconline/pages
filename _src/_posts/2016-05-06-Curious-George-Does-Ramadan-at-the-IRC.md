@@ -2,6 +2,7 @@
 blogTitle: Curious George Does Ramadan at the IRC
 blogCategory: Books
 postedBy: IRC Librarian
+img: assets/images/blog/ramadan-curious-george.jpg
 tags:
   - Milwaukee
   - IRC

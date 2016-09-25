@@ -3,6 +3,7 @@ title: Blog - MMWC
 baseurl: /
 excerpt: >
   Stay up-to-date with current Islamic issues around the world, and the growth of the MMWC with our blog posts
+assetConfig: blog
 ---
 
 <section class="page-header dark page-header-xs">
@@ -22,7 +23,8 @@ excerpt: >
       <div class="col-md-3">
         {% include blog-sidebar/search.html %}
         <hr />
-        {% include blog-sidebar/blog-archive-2.html %}
+        {% assign firstPostOnPageId = paginator.posts | first %}
+        {% include blog-sidebar/blog-archive-2.html id=firstPostOnPageId.id %}
         {% include blog-sidebar/tags.html %}
       </div>
 
@@ -33,7 +35,7 @@ excerpt: >
 
           {% if post.img %}
           <!-- IMAGE -->
-          <figure class="margin-bottom-20">
+          <figure class="margin-bottom-20 blog-pic">
             <img class="img-responsive" src="{{ page.baseurl }}{{ post.img }}" alt="">
             {% if post.imgCredit %}
             <figcaption>

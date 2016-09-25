@@ -56,3 +56,32 @@ span.blog-archive-badge {
     margin-bottom: 3px;
     background: #f4f4f4 !important;
 }
+
+article.transformQuotes blockquote {
+    border-left: 0;
+    border-right: 5px solid rgba(0,0,0,0.1);
+    margin: 25px 0;
+    padding: 0 25px 0 0;
+    text-align:right;
+}
+
+article.transformQuotes blockquote:before {
+    left:auto;
+    right:0;
+    text-align:right;
+}
+
+.blog-pic figcaption {
+    width: 100%;
+    text-align: right;
+    font-size: 11px;
+}
+#recentPost figcaption {
+    width: 100%;
+    text-align: right;
+    font-size: 11px;
+}
+.blog-pic figcaption a,
+#recentPost figcaption a {
+    color: #999;
+}
