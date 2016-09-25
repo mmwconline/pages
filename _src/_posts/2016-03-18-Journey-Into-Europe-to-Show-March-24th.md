@@ -5,7 +5,6 @@ postedBy: IRC Librarian
 tags:
   - Milwaukee
   - IRC
-  - MMWC
   - Film Festival
 ---
 We have reached that point in the event where the Milwaukee Muslim Film 

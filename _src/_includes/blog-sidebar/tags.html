@@ -1,0 +1,10 @@
+<!-- TAGS -->
+<h3 class="hidden-xs size-16 margin-bottom-20">TAGS</h3>
+<div class="hidden-xs margin-bottom-60">
+    {% for tag in site.tags %}
+    <span class="tag">
+        <span class="txt">{{ tag[0] | upcase }}</span>
+        <span class="num">{{ tag[1].size }}</span>
+    </span>
+    {% endfor %}
+</div>

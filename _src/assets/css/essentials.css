@@ -11143,7 +11143,7 @@ div.side-nav ul>li.active>a {
 button.page-side-nav-mobile {
 	display:none;
 }
-div.side-nav ul>li>ul>li>a{
+div.side-nav ul>li>ul>li>a {
 	padding:4px 0 4px 15px;
 }
 
@@ -11165,9 +11165,9 @@ div.side-nav ul>li>a.dropdown-toggle:before {
 div.side-nav ul>li.active>a.dropdown-toggle:before {
 	content: "\f147";
 }
-div.side-nav ul>li>ul {
-	display:none;
-}
+/*div.side-nav ul>li>ul {*/
+	/*display:none;*/
+/*}*/
 div.side-nav ul>li.active>ul {
 	display:block;
 }
@@ -11198,10 +11198,13 @@ div.side-nav ul.list-group-bordered>li>a {
 	border-bottom:rgba(0,0,0,0.05) 1px solid;
 	padding:6px;
 }
+
 div.side-nav ul.list-group-bordered>li>a>span.pull-left,
 div.side-nav ul.list-group-bordered>li>a>span.pull-right {
 	margin-top:3px;
 }
+
+
 div.side-nav .side-nav-head button {
 	display:none;
 	font-size:21px;

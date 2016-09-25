@@ -35,3 +35,4 @@ defaults:
     values:
       layout: "blog"
       baseurl: "../../../"
+      assetConfig: "blog"

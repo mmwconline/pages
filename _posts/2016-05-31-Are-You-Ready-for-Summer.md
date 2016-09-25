@@ -5,7 +5,6 @@ postedBy: IRC Librarian
 tags:
   - Milwaukee
   - IRC
-  - MMWC
   - Books
   - Bilingual Reading
 ---

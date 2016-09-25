@@ -1,0 +1,9 @@
+{
+  "usesShared": "true",
+  "js": [
+    "_src/assets/js/pages/blog.js"
+  ],
+  "css": [
+    "_src/assets/css/pages/blog.css"
+  ]
+}

@@ -5,7 +5,6 @@ postedBy: Janan Najeeb
 tags:
   - Milwaukee
   - MMWC
-  - IRC
   - Ramadan
 ---
 It is with great excitement and anticipation that we launch our blog on the day Muslims prepare for a very special night!  

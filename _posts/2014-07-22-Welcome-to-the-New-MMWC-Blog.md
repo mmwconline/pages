@@ -2,10 +2,12 @@
 blogTitle: Welcome to the New MMWC Blog
 blogCategory: Celebration
 postedBy: Janan Najeeb
+img: assets/images/blog/welcome.jpg
+imgCredit: Clariots care
+imgCreditLink: http://www.clarriotscarefranchise.co.uk/the-pathway/traditional-welcome-mat-with-modern-design/
 tags:
   - Milwaukee
   - MMWC
-  - IRC
 ---
 Welcome to the new MMWC blog.  This is an opportunity to connect with the 
 community, exchange ideas and answer any questions you may have related 
