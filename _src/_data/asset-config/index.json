@@ -8,7 +8,8 @@
     "_src/assets/plugins/magnific-popup/jquery.magnific-popup.min.js",
     "_src/assets/plugins/isotope/isotope.pkgd.min.js",
     "_src/assets/plugins/imagesloaded.pkgd.min.js",
-    "_src/assets/js/pages/index.js"
+    "_src/assets/js/pages/index.js",
+    "_src/assets/js/browserify-bundles/timeline.js"
   ],
   "css": [
     "_src/assets/plugins/slider.revolution/css/extralayers.css",

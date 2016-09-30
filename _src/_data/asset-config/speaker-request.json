@@ -3,6 +3,7 @@
   "js": [
     "_src/assets/plugins/form.validate/jquery.form.min.js",
     "_src/assets/plugins/form.validate/jquery.validation.min.js",
+    "_src/assets/plugins/toastr/toastr.js",
     "_src/assets/js/form-validate.js"
   ]
 }
