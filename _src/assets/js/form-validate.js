@@ -1,4 +1,3 @@
-/* eslint-disable */
 function _form() {
 
   /** Form Validate
@@ -35,8 +34,13 @@ function _form() {
               success: 	function(data) {
                 data = data.trim();
 
+                // SMTP ERROR
+                if(data == '_failed_') {
+                  _toastr("SMTP ERROR! Please, check your config file!",_Tposition,"error",false);
+                }
+
                 // CAPTCHA ERROR
-                if(data == '_captcha_') {
+                else if(data == '_captcha_') {
                   _toastr("Invalid Captcha!",_Tposition,"error",false);
 
 

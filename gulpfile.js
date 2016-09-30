@@ -1,49 +1,40 @@
 "use strict";
 
-var gulp          = require('gulp'),
-		eslint        = require('gulp-eslint'),
-		chalk         = require('chalk'),
-// outputs the file it is processing if you add .pipe(debug())
-		debug         = require('gulp-debug'),
+var gulp      = require('gulp'),
+		jshint    = require('gulp-jshint'),
+	// outputs the file it is processing if you add .pipe(debug())
+		debug     = require('gulp-debug'),
 	// allows you to do util.log(msg), do .pipe(someCondition ? somePlugin : util.noop()),
 	// replaceExtension, etc.
-		util          = require('gulp-util'),
+		util      = require('gulp-util'),
 	//allows you to pipe json files, then transform em and put it somewhere
 	// best plugin ever!
-		json          = require('gulp-json-transform'),
+		json      = require('gulp-json-transform'),
 	// find name of file given its path and extension
-		path          = require('path'),
+		path      = require('path'),
 	// need it for gulp-json-transform, which allows you to return a Promise that'll
 	// return the transformed json
-		Promise       = require('promise'),
+		Promise   = require('promise'),
 	// very powerful. Allows you to transform streams, MERGE streams, which is what
 	// we care about
-		es            = require('event-stream'),
+		es        = require('event-stream'),
 	// when a stream errors out, the task no longer works. this solves this problem.
 	// See Error Management in OneNote
-		plumber       = require('gulp-plumber'),
+		plumber   = require('gulp-plumber'),
 
 		// JS BUILD
 	// combine multiple js/css files into one, in the ordered they were added
-		concat        = require('gulp-concat'),
-		uglify        = require('gulp-uglify'), // minify js files
+		concat    = require('gulp-concat'),
+		uglify    = require('gulp-uglify'), // minify js files
 
 		// HTML
-		htmlmin       = require('gulp-htmlmin'), // minify html files
-		injectStr     = require('gulp-inject-string'), // add strings anywhere you want, based on conditions, etc.
+		htmlmin   = require('gulp-htmlmin'), // minify html files
+		injectStr = require('gulp-inject-string'), // add strings anywhere you want, based on conditions, etc.
 
 		// CSS
-		cssmin        = require('gulp-clean-css'), // minify css files
+		cssmin    = require('gulp-clean-css'), // minify css files
 
-		// IMAGES
-		imagemin  = require('gulp-imagemin'),  // optimize images
-
-		// REACT BROWSERIFY AND BABEL
-		browserify    = require('browserify'),
-		source        = require('vinyl-source-stream'),
-		buffer        = require('vinyl-buffer'),
-		watchify      = require('watchify'),
-		babelify      = require('babelify');
+		imagemin  = require('gulp-imagemin');  // optimize images
 
 var config = {
 	src: {
@@ -61,21 +52,11 @@ var config = {
 			'_src/assets/css/color_scheme/red.css'
 		],
 		// only for linting, and to call pageAssetConfig task
-		eslint: [
+		js: [
 			'_src/**/*.js',
 			'!_src/assets/js/view/*.js',
 			'!_src/assets/js/scripts.js',
-			'!_src/assets/plugins/**/*.js',
-			'!_src/assets/js/browserify-bundles/**/*.js'
-		],
-		jsPageAsset: [
-			'_src/**/*.js',
-			'!_src/assets/js/view/*.js',
-			'!_src/assets/js/scripts.js',
-			'!_src/assets/plugins/**/*.js',
-			'!_src/assets/js/timeline/*.js'
-		],
-		browserify: './_src/assets/js/timeline/entry.js',
+			'!_src/assets/plugins/**/*.js'],
 		// only used to trigger pageAssetConfig task
 		css: '_src/assets/css/**/*.css',
 		html: [
@@ -100,41 +81,33 @@ var config = {
 		pagejs: 'assets/js/pages/',
 		pagecss: 'assets/css/pages/',
 		others: '.',
-		images: 'assets/images/',
-		browserify: '_src/assets/js/browserify-bundles/'
+		images: 'assets/images/'
 	},
 	names: {
 		sharedjs: 'common.min.js',
-		sharedcss: 'common.min.css',
-		timeline: 'timeline.js'
-	},
-	browserify: {
-
+		sharedcss: 'common.min.css'
 	}
 };
 
 // runs these gulp tasks in the order they're listed, but in parallel, unless
 // one depends on another task
 gulp.task('default', [
-	'eslint',
+	'jshint',
 	'shared-js',
 	'shared-css',
 	'page-asset-config',
 	'others',
 	'images',
 	'html',
-	'jekyll',
-	'browserify'
-]);
+	'jekyll']);
 
-gulp.task('default-with-watch', ['default', 'watch', 'browserify-watchify']);
+gulp.task('default-with-watch', ['default', 'watch']);
 
 // page-asset-config is the meat of it. It makes the page.min.css and page.min.js
 // files, and the json files for each page
 // so jekyll knows where to get all the assets for each page.
 gulp.task('watch', function() {
-	gulp.watch(config.src.eslint, ['eslint']);
-	gulp.watch(config.src.jsPageAsset, ['page-asset-config']);
+	gulp.watch(config.src.js, ['jshint', 'page-asset-config']);
 	gulp.watch(config.src.css, ['page-asset-config']);
 	gulp.watch(config.src.pageAssetsConfig, ['page-asset-config', 'html']);
 	gulp.watch(config.src.sharedjs, ['shared-js']);
@@ -145,11 +118,11 @@ gulp.task('watch', function() {
 	gulp.watch(config.src.html, ['html']);
 });
 
-gulp.task('eslint', function () {
+gulp.task('jshint', function () {
 	return gulp
-		.src(config.src.eslint)
-		.pipe(eslint())
-		.pipe(eslint.format());
+		.src(config.src.js)
+		.pipe(jshint())
+		.pipe(jshint.reporter('jshint-stylish')); // for styling the output
 });
 
 gulp.task('shared-css', function() {
@@ -227,36 +200,6 @@ gulp.task('jekyll', function (gulpCallBack) {
 		gulpCallBack(code === 0 ? null : 'ERROR: Jekyll process exited with code: '+code);
 	});
 });
-
-gulp.task('browserify-watchify', function() {
-	var args = watchify.args;
-
-	var bundler = browserify(config.src.browserify, args)
-		.plugin(watchify, { ignoreWatch: true})
-		.transform(babelify, { presets: ['es2015', 'react']});
-
-	var stream = browserifyMinifyStream(bundler);
-
-	bundler.on('update', function() {
-		util.log("Starting '" + chalk.blue("browserify") + "'...");
-		return browserifyMinifyStream(bundler);
-	});
-
-	bundler.on('time', function(time) {
-		util.log("Finished '" + chalk.blue("browserify") + "' after " + chalk.magenta(time + " ms"));
-	});
-
-	return stream;
-});
-
-gulp.task('browserify', function() {
-
-	var bundler = browserify(config.src.browserify)
-		.transform(babelify, { presets: ['es2015', 'react']});
-
-	return browserifyMinifyStream(bundler);
-});
-
 // returns a stream for js minification.
 function jsMinifyStream(srcGlob, filename, destDir) {
 	return gulp
@@ -272,15 +215,7 @@ function cssMinifyStream(srcGlob, filename, destDir) {
 		.pipe(cssmin())
 		.pipe(gulp.dest(destDir));
 }
-function browserifyMinifyStream(bundler) {
 
-	return bundler
-		.bundle()
-		.pipe(source(config.names.timeline))
-		.pipe(buffer())
-		.pipe(uglify())
-		.pipe(gulp.dest(config.dest.browserify));
-}
 
 function transformConfigAndCreatePageAssets(jsonConfig, fileInfo) {
 	jsonConfig.js = jsonConfig.js || [];

@@ -1,4 +1,3 @@
-/* global GMaps */
 var mmwcLat = 42.9494792;
 var mmwcLng = -87.9492638;
 var map2 = new GMaps({
