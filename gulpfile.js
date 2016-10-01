@@ -41,6 +41,7 @@ var gulp          = require('gulp'),
 		// REACT BROWSERIFY AND BABEL
 		browserify    = require('browserify'),
 		source        = require('vinyl-source-stream'),
+		errorify      = require('errorify'),
 		buffer        = require('vinyl-buffer'),
 		watchify      = require('watchify'),
 		babelify      = require('babelify');
@@ -75,7 +76,7 @@ var config = {
 			'!_src/assets/plugins/**/*.js',
 			'!_src/assets/js/timeline/*.js'
 		],
-		browserify: './_src/assets/js/timeline/entry.js',
+		browserify: './_src/assets/js/timeline/entry.jsx',
 		// only used to trigger pageAssetConfig task
 		css: '_src/assets/css/**/*.css',
 		html: [
@@ -112,22 +113,26 @@ var config = {
 
 	}
 };
+gulp.task('default-with-watch', ['default', 'browserify-watchify', 'watch']);
+gulp.task('prod-watch', ['apply-prod-env', 'default-with-watch']);
 
 // runs these gulp tasks in the order they're listed, but in parallel, unless
 // one depends on another task
 gulp.task('default', [
 	'eslint',
+	'browserify',
 	'shared-js',
 	'shared-css',
-	'page-asset-config',
+	// 'page-asset-config', // it'll kick this off in the browserify task anyways.
 	'others',
 	'images',
 	'html',
-	'jekyll',
-	'browserify'
+	'jekyll'
 ]);
 
-gulp.task('default-with-watch', ['default', 'watch', 'browserify-watchify']);
+gulp.task('apply-prod-env', function() {
+	process.env.NODE_ENV = 'production';
+});
 
 // page-asset-config is the meat of it. It makes the page.min.css and page.min.js
 // files, and the json files for each page
@@ -233,6 +238,7 @@ gulp.task('browserify-watchify', function() {
 
 	var bundler = browserify(config.src.browserify, args)
 		.plugin(watchify, { ignoreWatch: true})
+		.plugin(errorify)
 		.transform(babelify, { presets: ['es2015', 'react']});
 
 	var stream = browserifyMinifyStream(bundler);
@@ -243,7 +249,8 @@ gulp.task('browserify-watchify', function() {
 	});
 
 	bundler.on('time', function(time) {
-		util.log("Finished '" + chalk.blue("browserify") + "' after " + chalk.magenta(time + " ms"));
+		var timeStr = (time >= 1000) ? (Math.round( time * 100.0 / 1000) / 100) + ' s' : time + ' ms';
+		util.log("Finished '" + chalk.blue("browserify") + "' after " + chalk.magenta(timeStr));
 	});
 
 	return stream;
@@ -278,7 +285,7 @@ function browserifyMinifyStream(bundler) {
 		.bundle()
 		.pipe(source(config.names.timeline))
 		.pipe(buffer())
-		.pipe(uglify())
+		// .pipe(uglify()) // already done in the jsMinifyStream
 		.pipe(gulp.dest(config.dest.browserify));
 }
 
@@ -330,3 +337,8 @@ function prepareJsonFile(data) {
 
 	return json;
 }
+
+function mapError(error) {
+	util.log(error);
+	this.end();
+};
