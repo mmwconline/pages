@@ -1,0 +1,16 @@
+.toggle-on.btn {
+  padding-right: 24px;
+  padding-top: 5px;
+  align-items: stretch;
+  display: block;
+}
+.toggle-off.btn {
+  padding-right: 24px;
+  padding-top: 4px;
+  align-items: stretch;
+  display: block;
+}
+.datepicker-inline {
+  width: 220px;
+  margin: auto;
+}

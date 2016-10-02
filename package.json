@@ -10,7 +10,6 @@
     "url": "git+https://github.com/azizj1/mmwc-website.git"
   },
   "author": "Aziz Javed",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/azizj1/mmwc-website/issues"
   },
@@ -23,6 +22,12 @@
   "browserify-shim": {
     "jQuery": "global:jQuery"
   },
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "react": "^15.3.2",
+    "react-bootstrap-toggle": "^1.2.19",
+    "react-dom": "^15.3.2"
+  },
   "devDependencies": {
     "babel-preset-es2015": "^6.16.0",
     "babel-preset-react": "^6.16.0",
@@ -31,7 +36,6 @@
     "browserify-shim": "^3.8.12",
     "chalk": "^1.1.3",
     "child_process": "^1.0.2",
-    "classnames": "^2.2.5",
     "errorify": "^0.3.1",
     "eslint-plugin-react": "^6.3.0",
     "event-stream": "^3.3.4",
@@ -48,8 +52,6 @@
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "promise": "^7.1.1",
-    "react": "^15.3.2",
-    "react-dom": "^15.3.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"

@@ -63,7 +63,7 @@ var config = {
 		],
 		// only for linting, and to call pageAssetConfig task
 		eslint: [
-			'_src/**/*.js',
+			'_src/**/*.js?', // so it matches .jsx files also
 			'!_src/assets/js/view/*.js',
 			'!_src/assets/js/scripts.js',
 			'!_src/assets/plugins/**/*.js',
