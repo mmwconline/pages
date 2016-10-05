@@ -14,3 +14,13 @@
   width: 220px;
   margin: auto;
 }
+
+.event-toggle {
+  margin-top: -15px;
+}
+.event-toggle-title {
+  color: #777;
+}
+#datepicker {
+  margin: auto;
+}

@@ -186,7 +186,7 @@ gulp.task('page-asset-config', function() {
 		// only purpose of plumber() is to not crash the task when json pipe crashes, which happens whenever a new json is
 		// added to src directory (an empty json file is an invalid json file)
 		.pipe(plumber())
-		.pipe(jsonTransform(transformConfig))
+		.pipe(jsonTransform(transformPageAssetConfig))
 		.pipe(gulp.dest(config.dest.pageAssetsConfig));
 });
 gulp.task('page-js', function () {
@@ -246,7 +246,7 @@ gulp.task('browserify-watchify', function() {
 	var bundler = browserify(config.src.browserify, args)
 		.plugin(watchify, { ignoreWatch: true})
 		.plugin(errorify)
-		.transform(babelify, { presets: ['es2015', 'react']});
+		.transform(babelify, { presets: ['es2015', 'react', 'stage-2']});
 
 	var stream = browserifyMinifyStream(bundler);
 
@@ -266,7 +266,7 @@ gulp.task('browserify-watchify', function() {
 gulp.task('browserify', function() {
 
 	var bundler = browserify(config.src.browserify)
-		.transform(babelify, { presets: ['es2015', 'react']});
+		.transform(babelify, { presets: ['es2015', 'react', 'stage-2']});
 
 	return browserifyMinifyStream(bundler);
 });
@@ -293,11 +293,11 @@ function browserifyMinifyStream(bundler) {
 		.bundle()
 		.pipe(source(config.names.timeline))
 		.pipe(buffer())
-		.pipe(uglify()) // already done in the jsMinifyStream
+		// .pipe(uglify()) // already done in the jsMinifyStream
 		.pipe(gulp.dest(config.dest.browserify));
 }
 
-function transformConfig(json, fileInfo) {
+function transformPageAssetConfig(json, fileInfo) {
 	json.js = json.js || [];
 	json.css = json.css || [];
 
@@ -316,9 +316,6 @@ function transformConfig(json, fileInfo) {
 	return newJsonFile;
 }
 
-function transformPageAssetConfig(jsonConfig, fileInfo) {
-
-}
 function createJSPageAssets(json, fileInfo) {
 	var filename = path.posix.basename(fileInfo.path, '.json'); // /dir/dir2/index.json would return index
 	var minJS = filename + '.min.js';

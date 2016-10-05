@@ -1027,7 +1027,7 @@ section.dark  .tag>span.num:after {
 	display:block;
 	position:relative;
 }
-.inline-search form input.serch-input {
+.inline-search input.search-input {
 	background: #fff;
 	border:#e3e3e3 1px solid;
 	color: #aaa;
@@ -1039,7 +1039,7 @@ section.dark  .tag>span.num:after {
 	padding: 5px 50px 5px 10px;
 	width: 100%;
 }
-.inline-search form button {
+.inline-search button {
 	background: rgba(0, 0, 0, 0);
 	border-left: #e3e3e3 1px solid;
 	font-size: 17px;
@@ -1051,7 +1051,7 @@ section.dark  .tag>span.num:after {
 	position: absolute;
 	right: 0;
 }
-section.dark .inline-search form input.serch-input {
+section.dark .inline-search input.search-input {
 	background:rgba(0,0,0,0.1);
 	border:#666 1px solid;
 	color:#aaa;
