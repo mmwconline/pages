@@ -2,24 +2,46 @@ import React from 'react';
 import Filters from './Filters.jsx'
 import Calendar from './Calendar.jsx'
 import LoadMoreButton from './LoadMoreButton.jsx'
+import CalendarService from '../services/CalendarService.js'
 
 import data from '../gcal_example.json'
 
-const calendarId = 'mmwconline.org_5klbp23b863vugjopsb617d6d0@group.calendar.google.com';
-const initShowRegularEvents = true;
-const initMaxResults = 10;
 
-export default class App extends React.Component {
-  constructor() {
-    super();
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      events: [],
+      calendarId: props.calendarId,
+      eventsRendered: [],
+      eventsNotRenderedYet: [],
       pageToken: null,
-      maxResults: initMaxResults,
+      maxResults: props.maxResults,
       startTime: new Date(),
-      showRegularEvents: initShowRegularEvents
+      showRegularEvents: props.initShowRegularEvents,
+      query: null
     };
   }
+
+  getEvents() {
+    CalendarService.getEvents({
+      calendarId: this.state.calendarId,
+      maxResults: this.state.maxResults,
+      dateLowerBound: this.state.startTime,
+      query: this.state.query,
+      showRegularEvents: this.state.showRegularEvents,
+      pageToken: this.state.pageToken
+    })
+      .done((nextPageToken, events) => {
+
+        this.setState({
+          pageToken: nextPageToken,
+          events:
+        });
+      })
+      .fail();
+  }
+
   render() {
     return (
       <div className="container">
@@ -36,3 +58,11 @@ export default class App extends React.Component {
     );
   }
 }
+
+App.propTypes = {
+  calendarId: React.PropTypes.string.isRequired,
+  maxResults: React.PropTypes.number.isRequired,
+  initShowRegularEvents: React.PropTypes.bool.isRequired
+};
+
+export default App;

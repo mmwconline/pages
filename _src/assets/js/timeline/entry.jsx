@@ -2,6 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx'
 
+const calendarId = 'mmwconline.org_5klbp23b863vugjopsb617d6d0@group.calendar.google.com';
+const initShowRegularEvents = true;
+const initMaxResults = 10;
+
 ReactDOM.render(
-  <App/>,
+  <App calendarId={calendarId} initShowRegularEvents={true} maxResults={initMaxResults}/>,
   document.getElementById('event-app'));
