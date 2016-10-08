@@ -266,6 +266,7 @@ gulp.task('browserify-watchify', function() {
 gulp.task('browserify', function() {
 
 	var bundler = browserify(config.src.browserify)
+		.plugin(errorify)
 		.transform(babelify, { presets: ['es2015', 'react', 'stage-2']});
 
 	return browserifyMinifyStream(bundler);
@@ -293,6 +294,7 @@ function browserifyMinifyStream(bundler) {
 		.bundle()
 		.pipe(source(config.names.timeline))
 		.pipe(buffer())
+		.pipe(plumber())
 		// .pipe(uglify()) // already done in the jsMinifyStream
 		.pipe(gulp.dest(config.dest.browserify));
 }

@@ -5,6 +5,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -21,39 +23,101 @@ var _LoadMoreButton = require('./LoadMoreButton.jsx');
 
 var _LoadMoreButton2 = _interopRequireDefault(_LoadMoreButton);
 
-var _gcal_example = require('../gcal_example.json');
+var _CalendarService = require('../services/CalendarService.js');
 
-var _gcal_example2 = _interopRequireDefault(_gcal_example);
+var _CalendarService2 = _interopRequireDefault(_CalendarService);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var App = function App() {
-  return _react2.default.createElement(
-    'div',
-    { className: 'container' },
-    _react2.default.createElement(
-      'div',
-      { className: 'row' },
-      _react2.default.createElement(
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var App = function (_React$Component) {
+  _inherits(App, _React$Component);
+
+  function App(props) {
+    _classCallCheck(this, App);
+
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+    _this.service = new _CalendarService2.default(props.calendarId, props.maxResults);
+    _this.state = {
+      calendarId: props.calendarId,
+      events: [],
+      maxResults: props.maxResults,
+      startTime: new Date(),
+      showRegularEvents: props.initShowRegularEvents,
+      query: null,
+      hasMore: false
+    };
+    return _this;
+  }
+
+  _createClass(App, [{
+    key: 'getEvents',
+    value: function getEvents() {
+      var _this2 = this;
+
+      this.service.getEvents({
+        startTime: this.state.startTime,
+        query: this.state.query,
+        showRegularEvents: this.state.showRegularEvents
+      }).done(function (events, hasMore) {
+        _this2.setState({
+          events: events,
+          hasMore: hasMore
+        });
+      }).fail(function (e) {
+        return console.log(e);
+      });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.getEvents();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
         'div',
-        { className: 'col-md-9 col-sm-9' },
-        _react2.default.createElement(_Calendar2.default, { events: _gcal_example2.default.items }),
-        _react2.default.createElement(_LoadMoreButton2.default, { onLoadMore: function onLoadMore() {
-            return alert('blah');
-          } })
-      ),
-      _react2.default.createElement(
-        'div',
-        { className: 'col-md-3 col-sm-3' },
-        _react2.default.createElement(_Filters2.default, null)
-      )
-    )
-  );
+        { className: 'container' },
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'col-md-9 col-sm-9' },
+            _react2.default.createElement(_Calendar2.default, { events: this.state.events }),
+            _react2.default.createElement(_LoadMoreButton2.default, { onLoadMore: function onLoadMore() {
+                return alert('blah');
+              } })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-md-3 col-sm-3' },
+            _react2.default.createElement(_Filters2.default, null)
+          )
+        )
+      );
+    }
+  }]);
+
+  return App;
+}(_react2.default.Component);
+
+App.propTypes = {
+  calendarId: _react2.default.PropTypes.string.isRequired,
+  maxResults: _react2.default.PropTypes.number.isRequired,
+  initShowRegularEvents: _react2.default.PropTypes.bool.isRequired
 };
 
 exports.default = App;
 
-},{"../gcal_example.json":7,"./Calendar.jsx":2,"./Filters.jsx":4,"./LoadMoreButton.jsx":5,"react":182}],2:[function(require,module,exports){
+},{"../services/CalendarService.js":8,"./Calendar.jsx":2,"./Filters.jsx":4,"./LoadMoreButton.jsx":5,"react":182}],2:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -84,34 +148,21 @@ var Calendar = function Calendar(props) {
     { className: 'timeline' },
     _react2.default.createElement('div', { className: 'timeline-hline' }),
     props.events.map(function (e) {
-      var _ref = new _EventModel2.default(e);
+      var id = e.id;
 
-      var id = _ref.id;
-
-      var others = _objectWithoutProperties(_ref, ['id']);
+      var others = _objectWithoutProperties(e, ['id']);
 
       return _react2.default.createElement(_Event2.default, _extends({ key: id }, others));
     })
   );
 };
 
-function eventsPropValidation(props, propName) {
-  try {
-    props[propName].map(function (e) {
-      return new _EventModel2.default(e);
-    });
-    return null;
-  } catch (err) {
-    new Error(err);
-  }
-}
-
 Calendar.propTypes = {
-  events: eventsPropValidation
+  events: _react2.default.PropTypes.arrayOf(_react2.default.PropTypes.instanceOf(_EventModel2.default)).isRequired
 };
 exports.default = Calendar;
 
-},{"../models/EventModel.js":8,"./Event.jsx":3,"react":182}],3:[function(require,module,exports){
+},{"../models/EventModel.js":7,"./Event.jsx":3,"react":182}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -476,199 +527,13 @@ var _App2 = _interopRequireDefault(_App);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_App2.default, null), document.getElementById('event-app'));
+var calendarId = 'mmwconline.org_5klbp23b863vugjopsb617d6d0@group.calendar.google.com';
+var initShowRegularEvents = true;
+var initMaxResults = 5;
+
+_reactDom2.default.render(_react2.default.createElement(_App2.default, { calendarId: calendarId, initShowRegularEvents: initShowRegularEvents, maxResults: initMaxResults }), document.getElementById('event-app'));
 
 },{"./components/App.jsx":1,"react":182,"react-dom":39}],7:[function(require,module,exports){
-module.exports=
-{
-  "kind": "calendar#events",
-  "etag": "\"1447620887034000\"",
-  "summary": "TestPublicCalendar",
-  "description": "",
-  "updated": "2015-11-15T20:54:47.034Z",
-  "timeZone": "America/Chicago",
-  "accessRole": "reader",
-  "defaultReminders": [
-  ],
-  "nextSyncToken": "CJDx9oWok8kCEAAYAQ==",
-  "items": [
-    {
-
-
-      "kind": "calendar#event",
-      "etag": "\"2894973544570000\"",
-      "id": "e0a9nhcbom32u5lt07b2rq7iq0",
-      "status": "confirmed",
-      "htmlLink": "https://www.google.com/calendar/event?eid=ZTBhOW5oY2JvbTMydTVsdDA3YjJycTdpcTAgb2thODg0M3ZmMDNmNHRzaGpvbGN1OWJuaDRAZw",
-      "created": "2015-11-14T07:39:32.000Z",
-      "updated": "2015-11-14T07:39:32.285Z",
-      "summary": "Test",
-      "description": "blahh",
-      "location": "Home",
-      "creator": {
-        "email": "azizjaved0@gmail.com",
-        "displayName": "Aziz Javed"
-      },
-      "organizer": {
-        "email": "oka8843vf03f4tshjolcu9bnh4@group.calendar.google.com",
-        "displayName": "TestPublicCalendar",
-        "self": true
-      },
-      "start": {
-        "dateTime": "2015-11-16T00:30:00-06:00"
-      },
-      "end": {
-        "dateTime": "2015-11-16T01:30:00-06:00"
-      },
-      "iCalUID": "e0a9nhcbom32u5lt07b2rq7iq0@google.com",
-      "sequence": 0
-    },
-    {
-
-
-      "kind": "calendar#event",
-      "etag": "\"2894973645788000\"",
-      "id": "lfjda1v3v7530aai5f1db8m6eo",
-      "status": "confirmed",
-      "htmlLink": "https://www.google.com/calendar/event?eid=bGZqZGExdjN2NzUzMGFhaTVmMWRiOG02ZW8gb2thODg0M3ZmMDNmNHRzaGpvbGN1OWJuaDRAZw",
-      "created": "2015-11-14T07:40:22.000Z",
-      "updated": "2015-11-14T07:40:22.894Z",
-      "summary": "AnotherTest",
-      "creator": {
-        "email": "azizjaved0@gmail.com",
-        "displayName": "Aziz Javed"
-      },
-      "organizer": {
-        "email": "oka8843vf03f4tshjolcu9bnh4@group.calendar.google.com",
-        "displayName": "TestPublicCalendar",
-        "self": true
-      },
-      "start": {
-        "dateTime": "2015-11-15T03:30:00-06:00"
-      },
-      "end": {
-        "dateTime": "2015-11-15T04:30:00-06:00"
-      },
-      "iCalUID": "lfjda1v3v7530aai5f1db8m6eo@google.com",
-      "sequence": 0
-    },
-    {
-
-
-      "kind": "calendar#event",
-      "etag": "\"2894976982634000\"",
-      "id": "i9ke7qj1bk77pd0m05t6ifmkis",
-      "status": "confirmed",
-      "htmlLink": "https://www.google.com/calendar/event?eid=aTlrZTdxajFiazc3cGQwbTA1dDZpZm1raXMgb2thODg0M3ZmMDNmNHRzaGpvbGN1OWJuaDRAZw",
-      "created": "2015-11-14T08:08:11.000Z",
-      "updated": "2015-11-14T08:08:11.317Z",
-      "summary": "Game show event!",
-      "creator": {
-        "email": "azizjaved0@gmail.com",
-        "displayName": "Aziz Javed"
-      },
-      "organizer": {
-        "email": "oka8843vf03f4tshjolcu9bnh4@group.calendar.google.com",
-        "displayName": "TestPublicCalendar",
-        "self": true
-      },
-      "start": {
-        "dateTime": "2015-11-18T02:00:00-06:00"
-      },
-      "end": {
-        "dateTime": "2015-11-18T05:00:00-06:00"
-      },
-      "iCalUID": "i9ke7qj1bk77pd0m05t6ifmkis@google.com",
-      "sequence": 0,
-      "attachments": [
-        {
-          "fileUrl": "https://drive.google.com/file/d/0B-tMrXMNgr-hRm1fSWEyY0FtUnM/view?usp=drive_web",
-          "title": "2-time-lapse-photography.jpg",
-          "iconLink": "https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png",
-          "fileId": "0B-tMrXMNgr-hRm1fSWEyY0FtUnM"
-        }
-      ]
-    },
-    {
-
-
-      "kind": "calendar#event",
-      "etag": "\"2894978516108000\"",
-      "id": "pgco6iqquepgl90ht0jdu0derg",
-      "status": "confirmed",
-      "htmlLink": "https://www.google.com/calendar/event?eid=cGdjbzZpcXF1ZXBnbDkwaHQwamR1MGRlcmcgb2thODg0M3ZmMDNmNHRzaGpvbGN1OWJuaDRAZw",
-      "created": "2015-11-14T08:20:58.000Z",
-      "updated": "2015-11-14T08:20:58.054Z",
-      "summary": "Late night event test",
-      "location": "Masjid Al-Noor/ISM West, 16670 Pheasant Dr, Brookfield, WI 53045, United States",
-      "creator": {
-        "email": "azizjaved0@gmail.com",
-        "displayName": "Aziz Javed"
-      },
-      "organizer": {
-        "email": "oka8843vf03f4tshjolcu9bnh4@group.calendar.google.com",
-        "displayName": "TestPublicCalendar",
-        "self": true
-      },
-      "start": {
-        "dateTime": "2015-11-20T02:00:00-06:00"
-      },
-      "end": {
-        "dateTime": "2015-11-20T14:00:00-06:00"
-      },
-      "iCalUID": "pgco6iqquepgl90ht0jdu0derg@google.com",
-      "sequence": 0,
-      "attachments": [
-        {
-          "fileUrl": "https://drive.google.com/file/d/0B-tMrXMNgr-hRm1fSWEyY0FtUnM/view?usp=drive_web",
-          "title": "2-time-lapse-photography.jpg",
-          "iconLink": "https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png",
-          "fileId": "0B-tMrXMNgr-hRm1fSWEyY0FtUnM"
-        }
-      ]
-    },
-    {
-
-
-      "kind": "calendar#event",
-      "etag": "\"2894981477270000\"",
-      "id": "a7gl6a0c4ducfa3va0gt1o0ipk",
-      "status": "confirmed",
-      "htmlLink": "https://www.google.com/calendar/event?eid=YTdnbDZhMGM0ZHVjZmEzdmEwZ3QxbzBpcGsgb2thODg0M3ZmMDNmNHRzaGpvbGN1OWJuaDRAZw",
-      "created": "2015-11-14T08:45:37.000Z",
-      "updated": "2015-11-14T08:45:38.635Z",
-      "summary": "LateTest",
-      "description": "fsafd",
-      "location": "6767 N Industrial Rd, Milwaukee, WI 53223, USA",
-      "creator": {
-        "email": "azizjaved0@gmail.com",
-        "displayName": "Aziz Javed"
-      },
-      "organizer": {
-        "email": "oka8843vf03f4tshjolcu9bnh4@group.calendar.google.com",
-        "displayName": "TestPublicCalendar",
-        "self": true
-      },
-      "start": {
-        "dateTime": "2015-12-08T03:30:00-06:00"
-      },
-      "end": {
-        "dateTime": "2015-12-08T08:00:00-06:00"
-      },
-      "iCalUID": "a7gl6a0c4ducfa3va0gt1o0ipk@google.com",
-      "sequence": 0,
-      "attachments": [
-        {
-          "fileUrl": "https://drive.google.com/file/d/0B-tMrXMNgr-hUkxsRlc2OVNOakk/view?usp=drive_web",
-          "title": "IMG_0048.JPG",
-          "iconLink": "https://ssl.gstatic.com/docs/doclist/images/icon_10_generic_list.png",
-          "fileId": "0B-tMrXMNgr-hUkxsRlc2OVNOakk"
-        }
-      ]
-    }
-  ]
-}
-},{}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -727,7 +592,138 @@ var Event = function Event(calendarApiEvent) {
 
 exports.default = Event;
 
-},{}],9:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
+(function (global){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _jQuery = (typeof window !== "undefined" ? window['jQuery'] : typeof global !== "undefined" ? global['jQuery'] : null);
+
+var _jQuery2 = _interopRequireDefault(_jQuery);
+
+var _EventModel = require('../models/EventModel');
+
+var _EventModel2 = _interopRequireDefault(_EventModel);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var key = 'AIzaSyCy-RXvh3d-1OvRfYy6_p8uyKxYeaF5w4A';
+
+var CalendarService = function () {
+  function CalendarService(calendarId, maxResults) {
+    _classCallCheck(this, CalendarService);
+
+    if (CalendarService.isNullOrWhitespaces(calendarId)) throw 'calendarId is null';
+    if (maxResults == null || maxResults <= 0) throw 'maxResults = ' + maxResults;
+
+    this.calendarId = calendarId;
+    this.maxResults = maxResults;
+    this.pageToken = null;
+    this.init(new Date(), null, null);
+  }
+
+  _createClass(CalendarService, [{
+    key: 'init',
+    value: function init(startTime, query, showRegularEvents) {
+      this.lastQuery = query;
+      this.lastShowRegularEvents = showRegularEvents;
+      this.lastStartTime = startTime;
+      this.eventsNotReturned = [];
+    }
+  }, {
+    key: 'getEvents',
+    value: function getEvents(_ref) {
+      var _this = this;
+
+      var startTime = _ref.startTime;
+      var query = _ref.query;
+      var showRegularEvents = _ref.showRegularEvents;
+
+      var deferredObject = _jQuery2.default.Deferred();
+      var eventsNotReturnedSize = this.eventsNotReturned.length;
+
+      if (this.hasQueryChanged(startTime, query, showRegularEvents)) this.init(startTime, query, showRegularEvents);
+
+      if (this.pageToken == null && eventsNotReturnedSize > 0 || eventsNotReturnedSize >= this.maxResults) {
+        deferredObject.resolve(this.eventsNotReturned.splice(0, this.maxResults), this.pageToken != null);
+        return deferredObject.promise();
+      }
+      this.loadMoreEvents(startTime, query, showRegularEvents).then(function (nextPageToken, events) {
+        var _eventsNotReturned;
+
+        _this.pageToken = nextPageToken;
+        (_eventsNotReturned = _this.eventsNotReturned).push.apply(_eventsNotReturned, _toConsumableArray(events));
+        deferredObject.resolve(_this.eventsNotReturned.splice(0, _this.maxResults), _this.pageToken != null);
+      });
+
+      return deferredObject;
+    }
+  }, {
+    key: 'loadMoreEvents',
+    value: function loadMoreEvents(dateLowerBound, query, showRegularEvents) {
+      var deferredObject = _jQuery2.default.Deferred();
+      var uri = 'https://www.googleapis.com/calendar/v3/calendars/' + this.calendarId + '/events?maxAttendees=1' + ('&timeMin=' + dateLowerBound.toISOString() + '&key=' + key + '&maxResults=' + this.maxResults * 3);
+
+      if (showRegularEvents == true) uri += '&orderBy=startTime&singleEvents=true';
+      if (this.pageToken != null) uri += '&pageToken=' + this.pageToken;
+      if (query != null) uri += '&q=' + query;
+
+      _jQuery2.default.ajax({
+        type: 'GET',
+        url: encodeURI(uri),
+        dataType: 'json',
+        success: function success(response) {
+          var models = response.items.filter(function (i) {
+            return i.status !== 'cancelled';
+          }).map(function (e) {
+            return new _EventModel2.default(e);
+          });
+
+          // if they want to see one-off events only, orderBy=startTime cannot be passed in the api call; have to sort it
+          // yourself. You may also see recurring events that start before dateLowerBound. Therefore, filter them out.
+          if (!showRegularEvents) models = models.filter(function (e) {
+            return e.endTime.getTime() >= dateLowerBound.getTime();
+          }).sort(function (a, b) {
+            return a.startTime.getTime() - b.startTime.getTime();
+          });
+
+          deferredObject.resolve(response.nextPageToken, models);
+        },
+        error: function error(_error) {
+          deferredObject.reject(_error);
+        }
+      });
+
+      return deferredObject.promise();
+    }
+  }, {
+    key: 'hasQueryChanged',
+    value: function hasQueryChanged(startTime, query, showRegularEvents) {
+      return !(startTime.getTime() === this.lastStartTime.getTime() && showRegularEvents === this.lastShowRegularEvents && (isNullOrWhitespaces(query) && isNullOrWhitespaces(this.lastQuery) || query === this.lastQuery));
+    }
+  }], [{
+    key: 'isNullOrWhitespaces',
+    value: function isNullOrWhitespaces(str) {
+      return str === null || str.match(/^ *$/) !== null;
+    }
+  }]);
+
+  return CalendarService;
+}();
+
+exports.default = CalendarService;
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{"../models/EventModel":7}],9:[function(require,module,exports){
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set

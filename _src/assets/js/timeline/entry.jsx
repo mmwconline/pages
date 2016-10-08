@@ -4,8 +4,9 @@ import App from './components/App.jsx'
 
 const calendarId = 'mmwconline.org_5klbp23b863vugjopsb617d6d0@group.calendar.google.com';
 const initShowRegularEvents = true;
-const initMaxResults = 10;
+const initMaxResults = 5;
 
 ReactDOM.render(
-  <App calendarId={calendarId} initShowRegularEvents={true} maxResults={initMaxResults}/>,
+  <App calendarId={calendarId} initShowRegularEvents={initShowRegularEvents} maxResults={initMaxResults}/>,
   document.getElementById('event-app'));
+

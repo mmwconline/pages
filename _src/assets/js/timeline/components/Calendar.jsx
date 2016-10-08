@@ -7,25 +7,14 @@ const Calendar = (props) => {
     <div className="timeline">
       <div className="timeline-hline"></div>
       { props.events.map(e => {
-        let { id, ...others } = new EventModel(e);
+        let { id, ...others } = e;
         return <Event key={id} {...others} />
       })}
     </div>
   );
 };
 
-function eventsPropValidation(props, propName) {
-  try {
-    props[propName].map(e => {
-      return new EventModel(e);
-    });
-    return null;
-  } catch(err) {
-    new Error(err);
-  }
-}
-
 Calendar.propTypes = {
-  events: eventsPropValidation
+  events: React.PropTypes.arrayOf(React.PropTypes.instanceOf(EventModel)).isRequired
 };
 export default Calendar;

@@ -11,6 +11,7 @@ export function getYTubeID(url) {
 }
 
 export default class Event {
+
   constructor(calendarApiEvent) {
     if (calendarApiEvent == null)
       throw 'item cannot be null';

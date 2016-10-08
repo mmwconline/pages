@@ -4,42 +4,39 @@ import Calendar from './Calendar.jsx'
 import LoadMoreButton from './LoadMoreButton.jsx'
 import CalendarService from '../services/CalendarService.js'
 
-import data from '../gcal_example.json'
-
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.service = new CalendarService(props.calendarId, props.maxResults);
     this.state = {
       calendarId: props.calendarId,
-      eventsRendered: [],
-      eventsNotRenderedYet: [],
-      pageToken: null,
+      events: [],
       maxResults: props.maxResults,
       startTime: new Date(),
       showRegularEvents: props.initShowRegularEvents,
-      query: null
+      query: null,
+      hasMore: false
     };
   }
 
   getEvents() {
-    CalendarService.getEvents({
-      calendarId: this.state.calendarId,
-      maxResults: this.state.maxResults,
-      dateLowerBound: this.state.startTime,
+    this.service.getEvents({
+      startTime: this.state.startTime,
       query: this.state.query,
       showRegularEvents: this.state.showRegularEvents,
-      pageToken: this.state.pageToken
     })
-      .done((nextPageToken, events) => {
-
+      .done((events, hasMore) => {
         this.setState({
-          pageToken: nextPageToken,
-          events:
+          events: events,
+          hasMore: hasMore
         });
       })
-      .fail();
+      .fail(e => console.log(e));
+  }
+
+  componentDidMount() {
+    this.getEvents();
   }
 
   render() {
@@ -47,7 +44,7 @@ class App extends React.Component {
       <div className="container">
         <div className="row">
           <div className="col-md-9 col-sm-9">
-            <Calendar events={ data.items }/>
+            <Calendar events={ this.state.events }/>
             <LoadMoreButton onLoadMore={() => alert('blah')}/>
           </div>
           <div className="col-md-3 col-sm-3">
