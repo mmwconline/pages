@@ -11,7 +11,6 @@ export default class CalendarService {
 
     this.calendarId = calendarId;
     this.maxResults = maxResults;
-    this.pageToken = null;
     this.init(new Date(), null, null);
   }
 
@@ -19,25 +18,32 @@ export default class CalendarService {
     this.lastQuery = query;
     this.lastShowRegularEvents = showRegularEvents;
     this.lastStartTime = startTime;
+
+    this.pageToken = null;
     this.eventsNotReturned = [];
+    this.eventsReturned = [];
   }
 
   getEvents({startTime, query, showRegularEvents}) {
     let deferredObject = $.Deferred();
-    let eventsNotReturnedSize = this.eventsNotReturned.length;
 
     if (this.hasQueryChanged(startTime, query, showRegularEvents))
       this.init(startTime, query, showRegularEvents);
 
+    let eventsNotReturnedSize = this.eventsNotReturned.length;
     if ((this.pageToken == null && eventsNotReturnedSize > 0) || eventsNotReturnedSize >= this.maxResults) {
-      deferredObject.resolve(this.eventsNotReturned.splice(0, this.maxResults), this.pageToken != null);
+
+      this.eventsReturned.push(...this.eventsNotReturned.splice(0, this.maxResults));
+      deferredObject.resolve(this.eventsReturned, this.pageToken != null);
       return deferredObject.promise();
     }
     this.loadMoreEvents(startTime, query, showRegularEvents)
       .then((nextPageToken, events) => {
+
         this.pageToken = nextPageToken;
         this.eventsNotReturned.push(...events);
-        deferredObject.resolve(this.eventsNotReturned.splice(0, this.maxResults), this.pageToken != null);
+        this.eventsReturned.push(...this.eventsNotReturned.splice(0, this.maxResults));
+        deferredObject.resolve(this.eventsReturned, this.pageToken != null);
       });
 
     return deferredObject;
@@ -84,7 +90,7 @@ export default class CalendarService {
   hasQueryChanged(startTime, query, showRegularEvents) {
     return !(startTime.getTime() === this.lastStartTime.getTime()
       && showRegularEvents === this.lastShowRegularEvents
-      && (isNullOrWhitespaces(query) && isNullOrWhitespaces(this.lastQuery) || query === this.lastQuery));
+      && (CalendarService.isNullOrWhitespaces(query) && CalendarService.isNullOrWhitespaces(this.lastQuery) || query === this.lastQuery));
   }
 
   static isNullOrWhitespaces(str) {

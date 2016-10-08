@@ -9,16 +9,18 @@ class App extends React.Component {
     super(props);
 
     this.service = new CalendarService(props.calendarId, props.maxResults);
+    this.calendarId = props.calendarId;
+    this.maxResults = props.maxResults;
+
     this.state = {
-      calendarId: props.calendarId,
       events: [],
-      maxResults: props.maxResults,
       startTime: new Date(),
       showRegularEvents: props.initShowRegularEvents,
       query: null,
       hasMore: false
     };
   }
+
 
   getEvents() {
     this.service.getEvents({
@@ -35,6 +37,13 @@ class App extends React.Component {
       .fail(e => console.log(e));
   }
 
+  onShowRegularEventsToggle(val) {
+    console.log(val);
+    this.setState({
+      showRegularEvents: val
+    }, this.getEvents);
+  }
+
   componentDidMount() {
     this.getEvents();
   }
@@ -45,10 +54,10 @@ class App extends React.Component {
         <div className="row">
           <div className="col-md-9 col-sm-9">
             <Calendar events={ this.state.events }/>
-            <LoadMoreButton onLoadMore={() => alert('blah')}/>
+            <LoadMoreButton hide={!this.state.hasMore} onLoadMore={() => this.getEvents()}/>
           </div>
           <div className="col-md-3 col-sm-3">
-            <Filters/>
+            <Filters onToggle={this.onShowRegularEventsToggle.bind(this)} initShowRegularEvents={this.state.showRegularEvents}/>
           </div>
         </div>
       </div>

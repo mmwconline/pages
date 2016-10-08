@@ -18,17 +18,26 @@ const SearchBar = () => {
   )
 };
 
-const Toggle = () => {
+const Toggle = (props) => {
   return(
     <div className="padding-6">
       <span className="pull-right event-toggle">
-        <ReactBootstrapToggle on={on} off={off} active={true} height="33px" className="pull-right"/>
+        <ReactBootstrapToggle on={on} off={off} active={props.initialToggle} height="33px" className="pull-right"
+                              onChange={props.onToggle}/>
       </span>
       <span className="event-toggle-title">REGULAR EVENTS</span>
     </div>
   )
 };
 
+Toggle.propTypes = {
+  initialToggle: React.PropTypes.bool,
+  onToggle: React.PropTypes.func.isRequired
+};
+
+Toggle.defaultProps = {
+  initialToggle: true
+};
 
 // const RegularEventsButton = () => {
 //   return (
@@ -63,16 +72,25 @@ class DatePicker extends React.Component {
   }
 }
 
-const Filters = () => {
+const Filters = (props) => {
   return (
     <div>
       <SearchBar/>
       <hr/>
       <DatePicker/>
       <hr />
-      <Toggle/>
+      <Toggle onToggle={props.onToggle} initialToggle={props.initShowRegularEvents}/>
     </div>
   )
+};
+
+Filters.propTypes = {
+  onToggle: React.PropTypes.func.isRequired,
+  initShowRegularEvents: React.PropTypes.bool
+};
+
+Filters.defaultProps = {
+  initShowRegularEvents: true
 };
 
 export default Filters;
