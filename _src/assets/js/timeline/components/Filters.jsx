@@ -2,10 +2,7 @@
 import $ from 'jQuery';
 import React from 'react';
 import ReactBootstrapToggle from 'react-bootstrap-toggle'
-
-let on = <span>Shown</span>;
-let off = <span>Hidden</span>;
-
+import classnames from 'classnames';
 
 class SearchBar extends React.Component {
 
@@ -31,20 +28,23 @@ SearchBar.propTypes = {
 };
 
 const Toggle = (props) => {
+  let classes = classnames('padding-6', props.className);
   return(
-    <div className="padding-6">
+    <div className={classes}>
       <span className="pull-right event-toggle">
-        <ReactBootstrapToggle on={on} off={off} active={props.initialToggle} height="33px" className="pull-right"
+        <ReactBootstrapToggle on="Shown" off="Hidden" active={props.initialToggle} height="33px" className="pull-right"
                               onChange={props.onToggle}/>
       </span>
-      <span className="event-toggle-title">REGULAR EVENTS</span>
+      <span className="event-toggle-title">{props.label}</span>
     </div>
   )
 };
 
 Toggle.propTypes = {
   initialToggle: React.PropTypes.bool,
-  onToggle: React.PropTypes.func.isRequired
+  onToggle: React.PropTypes.func.isRequired,
+  label: React.PropTypes.string.isRequired,
+  className: React.PropTypes.string
 };
 
 Toggle.defaultProps = {
@@ -96,20 +96,24 @@ const Filters = (props) => {
       <hr/>
       <DatePicker onDateChange={props.onStartDateChange}/>
       <hr />
-      <Toggle onToggle={props.onToggle} initialToggle={props.initShowRegularEvents}/>
+      <Toggle className="margin-bottom-10" onToggle={props.onRegularEventsToggle} initialToggle={props.initShowRegularEvents} label='REGULAR EVENTS'/>
+      <Toggle onToggle={props.onMediaToggle} initialToggle={props.initShowMedia} label='MEDIA AND FLYERS'/>
     </div>
   )
 };
 
 Filters.propTypes = {
-  onToggle: React.PropTypes.func.isRequired,
+  onRegularEventsToggle: React.PropTypes.func.isRequired,
   initShowRegularEvents: React.PropTypes.bool,
   onSearch: React.PropTypes.func.isRequired,
-  onStartDateChange: React.PropTypes.func.isRequired
+  onStartDateChange: React.PropTypes.func.isRequired,
+  onMediaToggle: React.PropTypes.func.isRequired,
+  initShowMedia: React.PropTypes.bool
 };
 
 Filters.defaultProps = {
-  initShowRegularEvents: true
+  initShowRegularEvents: true,
+  initShowMedia: true
 };
 
 export default Filters;

@@ -1,20 +1,22 @@
 import React from 'react';
 import moment from 'moment';
 import Remarkable from 'remarkable';
+import classnames from 'classnames';
 
 let md = new Remarkable();
 
-function getMedia(imgUrl, ytId) {
+function getMedia(imgUrl, ytId, showMedia) {
+  let classes = classnames('margin-bottom-20', {hide: !showMedia});
   //can either have an image or a video; not both. Image takes precedence
   if (imgUrl)
     return (
-      <figure className="margin-bottom-20">
+      <figure className={classes}>
         <img className="img-responsive" src={imgUrl} alt=""/>
       </figure>
     );
   else if (ytId)
     return (
-      <div className="margin-bottom-20">
+      <div className={classes}>
         <div className="embed-responsive embed-responsive-16by9">
           <iframe className="embed-responsive-item" src={`https://www.youtube.com/embed/${ytId}?wmode=transparent`} width="800" height="450"></iframe>
         </div>
@@ -85,7 +87,7 @@ const Event = (props) => {
         <div className="timeline-vline"></div>
       </div>
 
-      { getMedia(props.imgUrl, props.ytId) }
+      { getMedia(props.imgUrl, props.ytId, props.showMedia) }
 
       <h2>{ props.title } </h2>
 
@@ -124,7 +126,10 @@ Event.propTypes = {
   style: React.PropTypes.shape({
     maxHeight: React.PropTypes.number,
     opacity: React.PropTypes.number
-  }).isRequired
+  }).isRequired,
+  showMedia: React.PropTypes.bool
 };
-
+Event.defaultProps = {
+  showMedia: true
+};
 export default Event;

@@ -18,7 +18,8 @@ class App extends React.Component {
       startTime: new Date(),
       showRegularEvents: props.initShowRegularEvents,
       query: null,
-      hasMore: false
+      hasMore: false,
+      showMedia: props.initShowMedia
     };
   }
 
@@ -41,6 +42,12 @@ class App extends React.Component {
     this.setState({
       showRegularEvents: val
     }, this.getEvents);
+  }
+
+  onShowMediaToggle(val) {
+    this.setState({
+      showMedia: val
+    });
   }
 
   onSearch(query) {
@@ -66,15 +73,17 @@ class App extends React.Component {
           <div className="col-md-9 col-sm-9">
             <TransitionMotion defaultStyles={this.getDefaultStyles()} styles={this.getStyles()}
                               willLeave={this.willLeave} willEnter={this.willEnter}>
-              {styledEvents => <Calendar events={ styledEvents }/>}
+              {styledEvents => <Calendar events={ styledEvents } showMedia={this.state.showMedia}/>}
             </TransitionMotion>
             <LoadMoreButton hide={!this.state.hasMore} onLoadMore={() => this.getEvents()}/>
           </div>
           <div className="col-md-3 col-sm-3">
-            <Filters onToggle={this.onShowRegularEventsToggle.bind(this)}
+            <Filters onRegularEventsToggle={this.onShowRegularEventsToggle.bind(this)}
                      initShowRegularEvents={this.state.showRegularEvents}
                      onSearch={this.onSearch.bind(this)} 
-                     onStartDateChange={this.onStartDateChange.bind(this)}/>
+                     onStartDateChange={this.onStartDateChange.bind(this)}
+                     onMediaToggle={this.onShowMediaToggle.bind(this)}
+                     initShowMedia={this.state.showMedia}/>
           </div>
         </div>
       </div>
@@ -99,10 +108,11 @@ class App extends React.Component {
   getStyles() {
     return this.state.events.map(e => {
       let { id, ...others } = e;
+      console.log(e);
       return {
         key: id,
         style: {
-          maxHeight: spring(1000, presets.gentle),
+          maxHeight: spring(2000, presets.gentle),
           opacity: spring(1, presets.gentle)
         },
         data: {
@@ -130,7 +140,11 @@ class App extends React.Component {
 App.propTypes = {
   calendarId: React.PropTypes.string.isRequired,
   maxResults: React.PropTypes.number.isRequired,
-  initShowRegularEvents: React.PropTypes.bool.isRequired
+  initShowRegularEvents: React.PropTypes.bool,
+  initShowMedia: React.PropTypes.bool
 };
-
+App.defaultProps = {
+  initShowRegularEvents: true,
+  initShowMedia: true
+};
 export default App;
