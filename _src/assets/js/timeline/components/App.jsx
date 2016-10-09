@@ -3,6 +3,7 @@ import Filters from './Filters.jsx'
 import Calendar from './Calendar.jsx'
 import LoadMoreButton from './LoadMoreButton.jsx'
 import CalendarService from '../services/CalendarService.js'
+import {TransitionMotion, spring, presets} from 'react-motion';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,7 +22,6 @@ class App extends React.Component {
     };
   }
 
-
   getEvents() {
     this.service.getEvents({
       startTime: this.state.startTime,
@@ -38,9 +38,20 @@ class App extends React.Component {
   }
 
   onShowRegularEventsToggle(val) {
-    console.log(val);
     this.setState({
       showRegularEvents: val
+    }, this.getEvents);
+  }
+
+  onSearch(query) {
+    this.setState({
+      query: query
+    }, this.getEvents);
+  }
+
+  onStartDateChange({date}) {
+    this.setState({
+      startTime: date
     }, this.getEvents);
   }
 
@@ -53,15 +64,66 @@ class App extends React.Component {
       <div className="container">
         <div className="row">
           <div className="col-md-9 col-sm-9">
-            <Calendar events={ this.state.events }/>
+            <TransitionMotion defaultStyles={this.getDefaultStyles()} styles={this.getStyles()}
+                              willLeave={this.willLeave} willEnter={this.willEnter}>
+              {styledEvents => <Calendar events={ styledEvents }/>}
+            </TransitionMotion>
             <LoadMoreButton hide={!this.state.hasMore} onLoadMore={() => this.getEvents()}/>
           </div>
           <div className="col-md-3 col-sm-3">
-            <Filters onToggle={this.onShowRegularEventsToggle.bind(this)} initShowRegularEvents={this.state.showRegularEvents}/>
+            <Filters onToggle={this.onShowRegularEventsToggle.bind(this)}
+                     initShowRegularEvents={this.state.showRegularEvents}
+                     onSearch={this.onSearch.bind(this)} 
+                     onStartDateChange={this.onStartDateChange.bind(this)}/>
           </div>
         </div>
       </div>
     );
+  }
+  getDefaultStyles() {
+    return this.state.events.map(e => {
+      let { id, ...others } = e;
+      return {
+        key: id,
+        style: {
+          maxHeight: 0,
+          opacity: 1
+        },
+        data: {
+          ...others
+        }
+      };
+    });
+  }
+
+  getStyles() {
+    return this.state.events.map(e => {
+      let { id, ...others } = e;
+      return {
+        key: id,
+        style: {
+          maxHeight: spring(1000, presets.gentle),
+          opacity: spring(1, presets.gentle)
+        },
+        data: {
+          ...others
+        }
+      };
+    });
+  }
+
+  willEnter() {
+    return {
+      maxHeight: 0,
+      opacity: 1,
+    };
+  }
+
+  willLeave() {
+    return {
+      maxHeight: spring(0),
+      opacity: spring(0),
+    };
   }
 }
 

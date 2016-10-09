@@ -3,19 +3,31 @@ import $ from 'jQuery';
 import React from 'react';
 import ReactBootstrapToggle from 'react-bootstrap-toggle'
 
-
 let on = <span>Shown</span>;
 let off = <span>Hidden</span>;
 
-const SearchBar = () => {
-  return (
-    <div className="inline-search clearfix margin-bottom-30">
-      <input type="search" placeholder="Start Searching..." className="search-input"/>
-      <button type="submit">
-        <i className="fa fa-search"/>
-      </button>
-    </div>
-  )
+
+class SearchBar extends React.Component {
+
+  render() {
+    return (
+      <div className="inline-search clearfix margin-bottom-30">
+        <input type="search" placeholder="Start Searching..." className="search-input" ref={(r) => this.searchBox = r}/>
+        <button type="submit" onClick={this.handleSubmit.bind(this)}>
+          <i className="fa fa-search"/>
+        </button>
+      </div>
+    )
+  }
+
+  handleSubmit() {
+    console.log(this.searchBox.value);
+    this.props.onSearch(this.searchBox.value);
+  }
+}
+
+SearchBar.propTypes = {
+  onSearch: React.PropTypes.func.isRequired
 };
 
 const Toggle = (props) => {
@@ -49,8 +61,8 @@ Toggle.defaultProps = {
 // };
 
 class DatePicker extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.divId = 'datepicker';
   }
   render() {
@@ -67,17 +79,22 @@ class DatePicker extends React.Component {
   }
   componentDidMount() {
     $(`#${this.divId}`).datepicker({
-      todayHighlight: true
-    });
+      todayHighlight: true,
+      todayBtn: 'linked'
+    })
+      .on('changeDate', this.props.onDateChange);
   }
 }
 
+DatePicker.propTypes = {
+  onDateChange: React.PropTypes.func.isRequired
+};
 const Filters = (props) => {
   return (
     <div>
-      <SearchBar/>
+      <SearchBar onSearch={props.onSearch}/>
       <hr/>
-      <DatePicker/>
+      <DatePicker onDateChange={props.onStartDateChange}/>
       <hr />
       <Toggle onToggle={props.onToggle} initialToggle={props.initShowRegularEvents}/>
     </div>
@@ -86,7 +103,9 @@ const Filters = (props) => {
 
 Filters.propTypes = {
   onToggle: React.PropTypes.func.isRequired,
-  initShowRegularEvents: React.PropTypes.bool
+  initShowRegularEvents: React.PropTypes.bool,
+  onSearch: React.PropTypes.func.isRequired,
+  onStartDateChange: React.PropTypes.func.isRequired
 };
 
 Filters.defaultProps = {

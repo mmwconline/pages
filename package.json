@@ -28,6 +28,7 @@
     "react": "^15.3.2",
     "react-bootstrap-toggle": "^1.2.19",
     "react-dom": "^15.3.2",
+    "react-motion": "^0.4.5",
     "remarkable": "^1.7.1"
   },
   "devDependencies": {

@@ -78,7 +78,7 @@ const Event = (props) => {
   }
 
   return (
-    <div className="blog-post-item">
+    <div style={props.style} className="blog-post-item">
 
       <div className="timeline-entry">
         { startDayOfMonth }<span>{ startMonthStr} </span>
@@ -120,7 +120,11 @@ Event.propTypes = {
   isAllDayEvent: React.PropTypes.bool.isRequired,
   description: React.PropTypes.string,
   imgUrl: React.PropTypes.string,
-  ytId: React.PropTypes.string
+  ytId: React.PropTypes.string,
+  style: React.PropTypes.shape({
+    maxHeight: React.PropTypes.number,
+    opacity: React.PropTypes.number
+  }).isRequired
 };
 
 export default Event;
