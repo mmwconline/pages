@@ -23,3 +23,4 @@
 	$yearSpan.removeClass('collapsed');
 	$yearSpan.find('i').addClass('in');
 })(jQuery);
+

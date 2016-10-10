@@ -1,0 +1,12 @@
+{
+  "usesShared": "true",
+  "js": [
+    "_src/assets/plugins/bootstrap.datepicker/js/bootstrap-datepicker.min.js",
+    "_src/assets/js/browserify-bundles/timeline.js"
+  ],
+  "css": [
+    "node_modules/react-bootstrap-toggle/lib/bootstrap2-toggle.css",
+    "_src/assets/plugins/bootstrap.datepicker/css/bootstrap-datepicker3.min.css",
+    "_src/assets/css/pages/events.css"
+  ]
+}

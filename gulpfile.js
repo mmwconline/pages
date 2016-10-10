@@ -9,7 +9,7 @@ var gulp      = require('gulp'),
 		util      = require('gulp-util'),
 	//allows you to pipe json files, then transform em and put it somewhere
 	// best plugin ever!
-		json      = require('gulp-json-transform'),
+		jsonTransform = require('gulp-json-transform'),
 	// find name of file given its path and extension
 		path      = require('path'),
 	// need it for gulp-json-transform, which allows you to return a Promise that'll
@@ -24,8 +24,9 @@ var gulp      = require('gulp'),
 
 		// JS BUILD
 	// combine multiple js/css files into one, in the ordered they were added
-		concat    = require('gulp-concat'),
-		uglify    = require('gulp-uglify'), // minify js files
+		concat        = require('gulp-concat'),
+		uglify        = require('gulp-uglify'), // minify js files
+		newer         = require('gulp-newer'),
 
 		// HTML
 		htmlmin   = require('gulp-htmlmin'), // minify html files
@@ -34,7 +35,16 @@ var gulp      = require('gulp'),
 		// CSS
 		cssmin    = require('gulp-clean-css'), // minify css files
 
-		imagemin  = require('gulp-imagemin');  // optimize images
+		// IMAGES
+		imagemin  = require('gulp-imagemin'),  // optimize images
+
+		// REACT BROWSERIFY AND BABEL
+		browserify    = require('browserify'),
+		source        = require('vinyl-source-stream'),
+		errorify      = require('errorify'),
+		buffer        = require('vinyl-buffer'),
+		watchify      = require('watchify'),
+		babelify      = require('babelify');
 
 var config = {
 	src: {
@@ -52,13 +62,23 @@ var config = {
 			'_src/assets/css/color_scheme/red.css'
 		],
 		// only for linting, and to call pageAssetConfig task
-		js: [
+		eslint: [
+			'_src/**/*.js?', // so it matches .jsx files also
+			'!_src/assets/js/view/*.js',
+			'!_src/assets/js/scripts.js',
+			'!_src/assets/plugins/**/*.js',
+			'!_src/assets/js/browserify-bundles/**/*.js'
+		],
+		pagejs: [
 			'_src/**/*.js',
 			'!_src/assets/js/view/*.js',
 			'!_src/assets/js/scripts.js',
-			'!_src/assets/plugins/**/*.js'],
+			'!_src/assets/plugins/**/*.js',
+			'!_src/assets/js/timeline/*.js'
+		],
+		browserify: './_src/assets/js/timeline/entry.jsx',
 		// only used to trigger pageAssetConfig task
-		css: '_src/assets/css/**/*.css',
+		pagecss: '_src/assets/css/**/*.css',
 		html: [
 			'_src/**/*.html',
 			'!_src/assets/**/*.html'
@@ -88,27 +108,39 @@ var config = {
 		sharedcss: 'common.min.css'
 	}
 };
+gulp.task('default-with-watch', ['apply-dev-env', 'default', 'browserify-watchify', 'watch']);
+gulp.task('prod-watch', ['apply-prod-env', 'default', 'browserify-watchify', 'watch']);
 
 // runs these gulp tasks in the order they're listed, but in parallel, unless
 // one depends on another task
 gulp.task('default', [
-	'jshint',
+	'eslint',
+	'browserify',
 	'shared-js',
 	'shared-css',
+	// 'page-js', // will run from the browserify-watch task anyways
+	'page-css',
 	'page-asset-config',
 	'others',
 	'images',
 	'html',
-	'jekyll']);
+	'jekyll'
+]);
 
-gulp.task('default-with-watch', ['default', 'watch']);
+gulp.task('apply-prod-env', function() {
+	process.env.NODE_ENV = 'production';
+});
+gulp.task('apply-dev-env', function() {
+	process.env.NODE_ENV = 'development';
+});
 
 // page-asset-config is the meat of it. It makes the page.min.css and page.min.js
 // files, and the json files for each page
 // so jekyll knows where to get all the assets for each page.
 gulp.task('watch', function() {
-	gulp.watch(config.src.js, ['jshint', 'page-asset-config']);
-	gulp.watch(config.src.css, ['page-asset-config']);
+	gulp.watch(config.src.eslint, ['eslint']);
+	gulp.watch(config.src.pagejs, ['page-js']);
+	gulp.watch(config.src.pagecss, ['page-css']);
 	gulp.watch(config.src.pageAssetsConfig, ['page-asset-config', 'html']);
 	gulp.watch(config.src.sharedjs, ['shared-js']);
 	gulp.watch(config.src.sharedcss, ['shared-css']);
@@ -151,8 +183,20 @@ gulp.task('page-asset-config', function() {
 		// only purpose of plumber() is to not crash the task when json pipe crashes, which happens whenever a new json is
 		// added to src directory (an empty json file is an invalid json file)
 		.pipe(plumber())
-		.pipe(json(transformConfigAndCreatePageAssets))
+		.pipe(jsonTransform(transformPageAssetConfig))
 		.pipe(gulp.dest(config.dest.pageAssetsConfig));
+});
+gulp.task('page-js', function () {
+	return gulp
+		.src(config.src.pageAssetsConfig) // the config files are the files we have to update
+		.pipe(plumber())
+		.pipe(jsonTransform(createJSPageAssets));
+});
+gulp.task('page-css', function () {
+	return gulp
+		.src(config.src.pageAssetsConfig) // the config files are the files we have to update
+		.pipe(plumber())
+		.pipe(jsonTransform(createCSSPageAssets));
 });
 
 // just moves the unprocessed files so it can be consumed by jekyll
@@ -165,6 +209,8 @@ gulp.task('others', function() {
 gulp.task('images', function() {
 	return gulp
 		.src(config.src.images)
+		.pipe(newer(config.dest.images))
+		.pipe(debug())
 		.pipe(imagemin())
 		.pipe(gulp.dest(config.dest.images));
 });
@@ -191,62 +237,114 @@ gulp.task('html', function() {
 		.pipe(gulp.dest('.'))
 });
 
-// copied and pasted from somewhere. The callback lets gulp know that the task is done.
-gulp.task('jekyll', function (gulpCallBack) {
-	var spawn = require('child_process').spawn;
-	var jekyll = spawn('jekyll', ['build'], {stdio: 'inherit'});
+gulp.task('browserify-watchify', function() {
+	var args = watchify.args;
 
-	jekyll.on('exit', function(code) {
-		gulpCallBack(code === 0 ? null : 'ERROR: Jekyll process exited with code: '+code);
+	var bundler = browserify(config.src.browserify, args)
+		.plugin(watchify, { ignoreWatch: true})
+		.plugin(errorify)
+		.transform(babelify, { presets: ['es2015', 'react', 'stage-2']});
+
+	var stream = browserifyMinifyStream(bundler);
+
+	bundler.on('update', function() {
+		util.log("Starting '" + chalk.blue("browserify") + "'...");
+		return browserifyMinifyStream(bundler);
 	});
+
+	bundler.on('time', function(time) {
+		var timeStr = (time >= 1000) ? (Math.round( time * 100.0 / 1000) / 100) + ' s' : time + ' ms';
+		util.log("Finished '" + chalk.blue("browserify") + "' after " + chalk.magenta(timeStr));
+	});
+
+	return stream;
 });
+
+gulp.task('browserify', function() {
+
+	var bundler = browserify(config.src.browserify)
+		.plugin(errorify)
+		.transform(babelify, { presets: ['es2015', 'react', 'stage-2']});
+
+	return browserifyMinifyStream(bundler);
+});
+
 // returns a stream for js minification.
 function jsMinifyStream(srcGlob, filename, destDir) {
 	return gulp
 		.src(srcGlob)
+		.pipe(newer(destDir + filename))
 		.pipe(concat(filename))
-		.pipe(uglify())
+		.pipe(process.env.NODE_ENV == 'production' ? uglify() : util.noop())
 		.pipe(gulp.dest(destDir));
 }
 function cssMinifyStream(srcGlob, filename, destDir) {
 	return gulp
 		.src(srcGlob)
 		.pipe(concat(filename))
-		.pipe(cssmin())
+		.pipe(process.env.NODE_ENV == 'production' ? cssmin() : util.noop())
 		.pipe(gulp.dest(destDir));
 }
 
+	return bundler
+		.bundle()
+		.pipe(source(config.names.timeline))
+		.pipe(buffer())
+		.pipe(plumber())
+		.pipe(gulp.dest(config.dest.browserify));
+}
 
-function transformConfigAndCreatePageAssets(jsonConfig, fileInfo) {
-	jsonConfig.js = jsonConfig.js || [];
-	jsonConfig.css = jsonConfig.css || [];
+function transformPageAssetConfig(json, fileInfo) {
+	json.js = json.js || [];
+	json.css = json.css || [];
 
 	var filename = path.posix.basename(fileInfo.path, '.json'); // /dir/dir2/index.json would return index
 	var minJS = filename + '.min.js';
 	var minCSS = filename + '.min.css';
-	var newJsonFile = prepareJsonFile(jsonConfig);
+	var newJsonFile = prepareJsonFile(json);
 
-	jsonConfig.js = jsonConfig.js.filter(function(p) { return p.indexOf('http') !== 0; });
-	jsonConfig.css = jsonConfig.css.filter(function(p) { return p.indexOf('http') !== 0; });
+	json.js = json.js.filter(function(p) { return p.indexOf('http') !== 0; });
+	json.css = json.css.filter(function(p) { return p.indexOf('http') !== 0; });
+	if (json.js && json.js.length)
+		newJsonFile.js.push(config.dest.pagejs + minJS);
+	if (json.css && json.css.length)
+		newJsonFile.css.push(config.dest.pagecss + minCSS);
 
-	return new Promise(function(resolve, reject) {
-		var jsStream = jsMinifyStream(jsonConfig.js, minJS, config.dest.pagejs);
-		var cssStream = cssMinifyStream(jsonConfig.css, minCSS, config.dest.pagecss);
+	return newJsonFile;
+}
 
-		es.merge(jsStream, cssStream)
-			.on('end', function () { // will only run when both streams are done!
-				if (jsonConfig.js && jsonConfig.js.length)
-					newJsonFile.js.push(config.dest.pagejs + minJS);
-				if (jsonConfig.css && jsonConfig.css.length)
-					newJsonFile.css.push(config.dest.pagecss + minCSS);
-				resolve(newJsonFile);
+function createJSPageAssets(json, fileInfo) {
+	var filename = path.posix.basename(fileInfo.path, '.json'); // /dir/dir2/index.json would return index
+	var minJS = filename + '.min.js';
+
+	json.js = (json.js || []).filter(function(p) { return p.indexOf('http') !== 0; });
+
+	return new Promise(function (resolve, reject) {
+		jsMinifyStream(json.js, minJS, config.dest.pagejs)
+			.on('end', function () {
+				resolve({});
 			})
-			.on('error', function(error) {
+			.on('error', function (error) {
 				reject(error);
 			});
 	});
 }
+function createCSSPageAssets(json, fileInfo) {
+	var filename = path.posix.basename(fileInfo.path, '.json'); // /dir/dir2/index.json would return index
+	var minCSS = filename + '.min.css';
 
+	json.css = (json.css || []).filter(function(p) { return p.indexOf('http') !== 0; });
+
+	return new Promise(function (resolve, reject) {
+		cssMinifyStream(json.css, minCSS, config.dest.pagecss)
+			.on('end', function () {
+				resolve({});
+			})
+			.on('error', function (error) {
+				reject(error);
+			});
+	});
+}
 // puts the remote assets in jsLinks and cssLinks, respectively.
 function prepareJsonFile(data) {
 	var json = {
@@ -265,3 +363,13 @@ function prepareJsonFile(data) {
 
 	return json;
 }
+
+// copied and pasted from somewhere. The callback lets gulp know that the task is done.
+gulp.task('jekyll', function (gulpCallBack) {
+	var spawn = require('child_process').spawn;
+	var jekyll = spawn('jekyll', ['build'], {stdio: 'inherit'});
+
+	jekyll.on('exit', function(code) {
+		gulpCallBack(code === 0 ? null : 'ERROR: Jekyll process exited with code: '+code);
+	});
+});

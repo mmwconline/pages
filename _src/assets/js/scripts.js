@@ -102,19 +102,19 @@
 
 /** Preloader
  **************************************************************** **/
-	if(jQuery('#preloader').length > 0) {
-
-		jQuery(window).load(function() {
-			
-			jQuery('#preloader').fadeOut(1000, function() {
-				jQuery('#preloader').remove();
-			});
-
-			// setTimeout(function() {}, 1000); 
-		  
-		});
-
-	}
+	// if(jQuery('#preloader').length > 0) {
+  //
+	// 	jQuery(window).load(function() {
+	//
+	// 		jQuery('#preloader').fadeOut(1000, function() {
+	// 			jQuery('#preloader').remove();
+	// 		});
+  //
+	// 		// setTimeout(function() {}, 1000);
+	//
+	// 	});
+  //
+	// }
 
 
 
@@ -2439,45 +2439,45 @@
 		/** Date Picker
 			<input type="text" class="form-control datepicker" data-format="yyyy-mm-dd" data-lang="en" data-RTL="false">
 		 ******************* **/
-		var _container_1 = jQuery('.datepicker');
-		
-		if(_container_1.length > 0) {
-			loadScript(/*plugin_path*/ "" + 'bootstrap.datepicker/js/bootstrap-datepicker.min.js', function() {
-		
-				if(jQuery().datepicker) {
-
-					_container_1.each(function() {
-						var _t 		= jQuery(this),
-							_lang 	=	_t.attr('data-lang') || 'en';
-
-						if(_lang != 'en' && _lang != '') { // load language file
-							loadScript(/*plugin_path*/ "" + 'bootstrap.datepicker/locales/bootstrap-datepicker.'+_lang+'.min.js');
-						}
-
-						jQuery(this).datepicker({
-							format:			_t.attr('data-format') 			|| 'yyyy-mm-dd', 
-							language: 		_lang,
-							rtl: 			_t.attr('data-RTL') 			== "true"  ? true  : false,
-							changeMonth: 	_t.attr('data-changeMonth') 	== "false" ? false : true,
-							todayBtn: 		_t.attr('data-todayBtn') 		== "false" ? false : "linked",
-							calendarWeeks: 	_t.attr('data-calendarWeeks') 	== "false" ? false : true,
-							autoclose: 		_t.attr('data-autoclose') 		== "false" ? false : true,
-							todayHighlight: _t.attr('data-todayHighlight') 	== "false" ? false : true,
-
-							onRender: function(date) {
-								// return date.valueOf() < nowDate.valueOf() ? 'disabled' : '';
-							}
-						}).on('changeDate', function(ev) {
-
-							// AJAX POST - OPTIONAL
-
-						}).data('datepicker'); 
-					});
-					
-				}
-
-			});
-		}
+		// var _container_1 = jQuery('.datepicker');
+    //
+		// if(_container_1.length > 0) {
+		// 	loadScript(/*plugin_path*/ "" + 'bootstrap.datepicker/js/bootstrap-datepicker.min.js', function() {
+    //
+		// 		if(jQuery().datepicker) {
+    //
+		// 			_container_1.each(function() {
+		// 				var _t 		= jQuery(this),
+		// 					_lang 	=	_t.attr('data-lang') || 'en';
+    //
+		// 				if(_lang != 'en' && _lang != '') { // load language file
+		// 					loadScript(/*plugin_path*/ "" + 'bootstrap.datepicker/locales/bootstrap-datepicker.'+_lang+'.min.js');
+		// 				}
+    //
+		// 				jQuery(this).datepicker({
+		// 					format:			_t.attr('data-format') 			|| 'yyyy-mm-dd',
+		// 					language: 		_lang,
+		// 					rtl: 			_t.attr('data-RTL') 			== "true"  ? true  : false,
+		// 					changeMonth: 	_t.attr('data-changeMonth') 	== "false" ? false : true,
+		// 					todayBtn: 		_t.attr('data-todayBtn') 		== "false" ? false : "linked",
+		// 					calendarWeeks: 	_t.attr('data-calendarWeeks') 	== "false" ? false : true,
+		// 					autoclose: 		_t.attr('data-autoclose') 		== "false" ? false : true,
+		// 					todayHighlight: _t.attr('data-todayHighlight') 	== "false" ? false : true,
+    //
+		// 					onRender: function(date) {
+		// 						// return date.valueOf() < nowDate.valueOf() ? 'disabled' : '';
+		// 					}
+		// 				}).on('changeDate', function(ev) {
+    //
+		// 					// AJAX POST - OPTIONAL
+    //
+		// 				}).data('datepicker');
+		// 			});
+    //
+		// 		}
+    //
+		// 	});
+		// }
 
 
 
