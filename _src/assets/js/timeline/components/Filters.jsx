@@ -96,7 +96,8 @@ const Filters = (props) => {
       <hr/>
       <DatePicker onDateChange={props.onStartDateChange}/>
       <hr />
-      <Toggle className="margin-bottom-10" onToggle={props.onRegularEventsToggle} initialToggle={props.initShowRegularEvents} label='REGULAR EVENTS'/>
+      <Toggle className="margin-bottom-10" onToggle={props.onRegularEventsToggle}
+              initialToggle={props.initShowRegularEvents} label='REGULAR EVENTS'/>
       <Toggle onToggle={props.onMediaToggle} initialToggle={props.initShowMedia} label='MEDIA AND FLYERS'/>
     </div>
   )

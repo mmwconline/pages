@@ -27,8 +27,10 @@ export default class CalendarService {
   getEvents({startTime, query, showRegularEvents}) {
     let deferredObject = $.Deferred();
 
-    if (this.hasQueryChanged(startTime, query, showRegularEvents))
+    if (this.hasQueryChanged(startTime, query, showRegularEvents)) {
       this.init(startTime, query, showRegularEvents);
+      deferredObject.notify({hasQueryChanged: true});
+    }
 
     let eventsNotReturnedSize = this.eventsNotReturned.length;
     if ((this.pageToken == null && eventsNotReturnedSize > 0) || eventsNotReturnedSize >= this.maxResults) {
@@ -38,13 +40,13 @@ export default class CalendarService {
       return deferredObject.promise();
     }
     this.loadMoreEvents(startTime, query, showRegularEvents)
-      .then((nextPageToken, events) => {
-
+      .done((nextPageToken, events) => {
         this.pageToken = nextPageToken;
         this.eventsNotReturned.push(...events);
         this.eventsReturned.push(...this.eventsNotReturned.splice(0, this.maxResults));
         deferredObject.resolve(this.eventsReturned, this.pageToken != null);
-      });
+      })
+      .fail(e => deferredObject.reject(e));
 
     return deferredObject;
   }

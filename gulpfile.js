@@ -114,8 +114,8 @@ var config = {
 
 	}
 };
-gulp.task('default-with-watch', ['default', 'browserify-watchify', 'watch']);
-gulp.task('prod-watch', ['apply-prod-env', 'default-with-watch']);
+gulp.task('default-with-watch', ['apply-dev-env', 'default', 'browserify-watchify', 'watch']);
+gulp.task('prod-watch', ['apply-prod-env', 'default', 'browserify-watchify', 'watch']);
 
 // runs these gulp tasks in the order they're listed, but in parallel, unless
 // one depends on another task
@@ -135,6 +135,9 @@ gulp.task('default', [
 
 gulp.task('apply-prod-env', function() {
 	process.env.NODE_ENV = 'production';
+});
+gulp.task('apply-dev-env', function() {
+	process.env.NODE_ENV = 'development';
 });
 
 // page-asset-config is the meat of it. It makes the page.min.css and page.min.js
@@ -278,14 +281,14 @@ function jsMinifyStream(srcGlob, filename, destDir) {
 		.src(srcGlob)
 		.pipe(newer(destDir + filename))
 		.pipe(concat(filename))
-		.pipe(uglify())
+		.pipe(process.env.NODE_ENV == 'production' ? uglify() : util.noop())
 		.pipe(gulp.dest(destDir));
 }
 function cssMinifyStream(srcGlob, filename, destDir) {
 	return gulp
 		.src(srcGlob)
 		.pipe(concat(filename))
-		.pipe(cssmin())
+		.pipe(process.env.NODE_ENV == 'production' ? cssmin() : util.noop())
 		.pipe(gulp.dest(destDir));
 }
 function browserifyMinifyStream(bundler) {
@@ -295,7 +298,6 @@ function browserifyMinifyStream(bundler) {
 		.pipe(source(config.names.timeline))
 		.pipe(buffer())
 		.pipe(plumber())
-		// .pipe(uglify()) // already done in the jsMinifyStream
 		.pipe(gulp.dest(config.dest.browserify));
 }
 

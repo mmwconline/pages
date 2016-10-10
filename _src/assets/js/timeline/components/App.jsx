@@ -3,7 +3,7 @@ import Filters from './Filters.jsx'
 import Calendar from './Calendar.jsx'
 import LoadMoreButton from './LoadMoreButton.jsx'
 import CalendarService from '../services/CalendarService.js'
-import {TransitionMotion, spring, presets} from 'react-motion';
+import Preloader from './Preloader.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,7 +19,9 @@ class App extends React.Component {
       showRegularEvents: props.initShowRegularEvents,
       query: null,
       hasMore: false,
-      showMedia: props.initShowMedia
+      showMedia: props.initShowMedia,
+      isReloading: false,
+      hasError: false
     };
   }
 
@@ -29,13 +31,23 @@ class App extends React.Component {
       query: this.state.query,
       showRegularEvents: this.state.showRegularEvents,
     })
-      .done((events, hasMore) => {
+      .done((events, hasMore) => 
         this.setState({
           events: events,
-          hasMore: hasMore
-        });
-      })
-      .fail(e => console.log(e));
+          hasMore: hasMore,
+          isReloading: false,
+          hasError: false
+        }))
+      .progress(({hasQueryChanged}) => 
+        this.setState({
+          isReloading: hasQueryChanged
+        }))
+      .fail(() =>
+        this.setState({
+          isReloading: false,
+          hasError: true
+        }));
+
   }
 
   onShowRegularEventsToggle(val) {
@@ -67,14 +79,13 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
       <div className="container">
+
         <div className="row">
           <div className="col-md-9 col-sm-9">
-            <TransitionMotion defaultStyles={this.getDefaultStyles()} styles={this.getStyles()}
-                              willLeave={this.willLeave} willEnter={this.willEnter}>
-              {styledEvents => <Calendar events={ styledEvents } showMedia={this.state.showMedia}/>}
-            </TransitionMotion>
+            <Calendar events={ this.state.events } showMedia={this.state.showMedia} hasError={this.state.hasError}/>
             <LoadMoreButton hide={!this.state.hasMore} onLoadMore={() => this.getEvents()}/>
           </div>
           <div className="col-md-3 col-sm-3">
@@ -86,54 +97,9 @@ class App extends React.Component {
                      initShowMedia={this.state.showMedia}/>
           </div>
         </div>
+        <Preloader hide={!this.state.isReloading}/>
       </div>
     );
-  }
-  getDefaultStyles() {
-    return this.state.events.map(e => {
-      let { id, ...others } = e;
-      return {
-        key: id,
-        style: {
-          maxHeight: 0,
-          opacity: 1
-        },
-        data: {
-          ...others
-        }
-      };
-    });
-  }
-
-  getStyles() {
-    return this.state.events.map(e => {
-      let { id, ...others } = e;
-      console.log(e);
-      return {
-        key: id,
-        style: {
-          maxHeight: spring(2000, presets.gentle),
-          opacity: spring(1, presets.gentle)
-        },
-        data: {
-          ...others
-        }
-      };
-    });
-  }
-
-  willEnter() {
-    return {
-      maxHeight: 0,
-      opacity: 1,
-    };
-  }
-
-  willLeave() {
-    return {
-      maxHeight: spring(0),
-      opacity: spring(0),
-    };
   }
 }
 
@@ -143,8 +109,10 @@ App.propTypes = {
   initShowRegularEvents: React.PropTypes.bool,
   initShowMedia: React.PropTypes.bool
 };
+
 App.defaultProps = {
   initShowRegularEvents: true,
   initShowMedia: true
 };
+
 export default App;
