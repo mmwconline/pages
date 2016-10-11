@@ -43,6 +43,7 @@
     "errorify": "^0.3.1",
     "eslint-plugin-react": "^6.3.0",
     "event-stream": "^3.3.4",
+    "glob": "^7.1.1",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^2.0.12",
     "gulp-concat": "^2.6.0",

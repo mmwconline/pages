@@ -11,4 +11,3 @@ ReactDOM.render(
   <App calendarId={calendarId} initShowRegularEvents={initShowRegularEvents} maxResults={initMaxResults}
        initShowFlyers={initShowFlyers}/>,
   document.getElementById('event-app'));
-

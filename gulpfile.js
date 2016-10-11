@@ -45,7 +45,8 @@ var gulp          = require('gulp'),
 		errorify      = require('errorify'),
 		buffer        = require('vinyl-buffer'),
 		watchify      = require('watchify'),
-		babelify      = require('babelify');
+		babelify      = require('babelify'),
+		glob					= require('glob');
 
 var config = {
 	src: {
@@ -77,7 +78,7 @@ var config = {
 			'!_src/assets/plugins/**/*.js',
 			'!_src/assets/js/timeline/*.js'
 		],
-		browserify: './_src/assets/js/timeline/entry.jsx',
+		browserify: './_src/assets/js/timeline/entry-*.jsx',
 		// only used to trigger pageAssetConfig task
 		pagecss: '_src/assets/css/**/*.css',
 		html: [
@@ -107,8 +108,7 @@ var config = {
 	},
 	names: {
 		sharedjs: 'common.min.js',
-		sharedcss: 'common.min.css',
-		timeline: 'timeline.js'
+		sharedcss: 'common.min.css'
 	},
 	browserify: {
 
@@ -243,36 +243,54 @@ gulp.task('html', function() {
 		.pipe(gulp.dest('.'))
 });
 
-gulp.task('browserify-watchify', function() {
-	var args = watchify.args;
+gulp.task('browserify-watchify', function(done) {
+	glob(config.src.browserify, function (err, files) {
+		if (err) {
+			done(err);
+			return;
+		}
+		var args = watchify.args;
+		var tasks = files.map(function (entry) {
+			util.log(entry);
+			var bundler = browserify(entry, args)
+				.plugin(watchify, { ignoreWatch: true})
+				.plugin(errorify)
+				.transform(babelify, { presets: ['es2015', 'react', 'stage-2']});
 
-	var bundler = browserify(config.src.browserify, args)
-		.plugin(watchify, { ignoreWatch: true})
-		.plugin(errorify)
-		.transform(babelify, { presets: ['es2015', 'react', 'stage-2']});
+			var stream = browserifyMinifyStream(bundler, entry);
 
-	var stream = browserifyMinifyStream(bundler);
+			bundler.on('update', function() {
+				util.log("Starting '" + chalk.blue("browserify") + "'...");
+				return browserifyMinifyStream(bundler, entry);
+			});
 
-	bundler.on('update', function() {
-		util.log("Starting '" + chalk.blue("browserify") + "'...");
-		return browserifyMinifyStream(bundler);
+			bundler.on('time', function(time) {
+				var timeStr = (time >= 1000) ? (Math.round( time * 100.0 / 1000) / 100) + ' s' : time + ' ms';
+				util.log("Finished '" + chalk.blue("browserify") + "' for " + entry + " after " + chalk.magenta(timeStr));
+			});
+
+			return stream;
+		});
+		es.merge(tasks).on('end', done);
 	});
-
-	bundler.on('time', function(time) {
-		var timeStr = (time >= 1000) ? (Math.round( time * 100.0 / 1000) / 100) + ' s' : time + ' ms';
-		util.log("Finished '" + chalk.blue("browserify") + "' after " + chalk.magenta(timeStr));
-	});
-
-	return stream;
 });
 
-gulp.task('browserify', function() {
+gulp.task('browserify', function(done) {
+	glob(config.src.browserify, function (err, files) {
+		if (err) {
+			done(err);
+			return;
+		}
+		var tasks = files.map(function (entry) {
+			util.log(entry);
+			var bundler = browserify(entry)
+				.plugin(errorify)
+				.transform(babelify, { presets: ['es2015', 'react', 'stage-2']});
 
-	var bundler = browserify(config.src.browserify)
-		.plugin(errorify)
-		.transform(babelify, { presets: ['es2015', 'react', 'stage-2']});
-
-	return browserifyMinifyStream(bundler);
+			return browserifyMinifyStream(bundler, entry);
+		});
+		es.merge(tasks).on('end', done);
+	});
 });
 
 // returns a stream for js minification.
@@ -291,11 +309,11 @@ function cssMinifyStream(srcGlob, filename, destDir) {
 		.pipe(process.env.NODE_ENV == 'production' ? cssmin() : util.noop())
 		.pipe(gulp.dest(destDir));
 }
-function browserifyMinifyStream(bundler) {
-
+function browserifyMinifyStream(bundler, filePath) {
+	var filename = path.posix.basename(filePath, '.jsx'); // /dir/dir2/index.jsx would return index
 	return bundler
 		.bundle()
-		.pipe(source(config.names.timeline))
+		.pipe(source(filename + '.bundle.js'))
 		.pipe(buffer())
 		.pipe(plumber())
 		.pipe(gulp.dest(config.dest.browserify));
