@@ -1,8 +1,8 @@
 import React from 'react';
 import Event from './Event.jsx'
-import EventModel from '../models/EventModel.js'
+import EventModel from '../../models/EventModel.js'
 import {TransitionMotion, spring, presets} from 'react-motion';
-import ErrorMessage from './ErrorMessage.jsx'
+import ErrorMessage from '../ErrorMessage.jsx'
 
 class Calendar extends React.Component {
 
@@ -35,6 +35,8 @@ class Calendar extends React.Component {
           opacity: 1
         },
         data: {
+          getPrintFields: e.getPrintFields.bind(e),
+          getRawDescriptionMarkup: e.getRawDescriptionMarkup.bind(e),
           ...others
         }
       };
@@ -51,6 +53,8 @@ class Calendar extends React.Component {
           opacity: spring(1, presets.gentle)
         },
         data: {
+          getPrintFields: e.getPrintFields.bind(e),
+          getRawDescriptionMarkup: e.getRawDescriptionMarkup.bind(e),
           ...others
         }
       };

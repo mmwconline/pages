@@ -2,7 +2,7 @@
   "usesShared": "true",
   "js": [
     "_src/assets/plugins/bootstrap.datepicker/js/bootstrap-datepicker.min.js",
-    "_src/assets/js/browserify-bundles/entry-timeline.bundle.js"
+    "_src/assets/js/browserify-bundles/entry-events-page.bundle.js"
   ],
   "css": [
     "node_modules/react-bootstrap-toggle/lib/bootstrap2-toggle.css",

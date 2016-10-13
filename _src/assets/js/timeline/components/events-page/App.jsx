@@ -1,9 +1,9 @@
 import React from 'react';
 import Filters from './Filters.jsx'
 import Calendar from './Calendar.jsx'
-import LoadMoreButton from './LoadMoreButton.jsx'
-import CalendarService from '../services/CalendarService.js'
-import Preloader from './Preloader.jsx';
+import LoadMoreButton from '../LoadMoreButton.jsx'
+import CalendarService from '../../services/CalendarService.js'
+import Preloader from '../Preloader.jsx';
 
 class App extends React.Component {
   constructor(props) {
