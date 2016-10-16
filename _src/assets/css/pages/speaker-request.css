@@ -1,0 +1,9 @@
+.form-control[readonly] {
+  background-color: #fff;
+}
+.form-control:read-only {
+  background-color: #fff;
+}
+.form-control:-moz-read-only {
+  background-color: #fff;
+}

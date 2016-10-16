@@ -2,7 +2,11 @@
   "usesShared": "true",
   "js": [
     "http://maps.google.com/maps/api/js?key=AIzaSyCqCn84CgZN6o1Xc3P4dM657HIxkX3jzPY",
+    "_src/assets/plugins/toastr/toastr.js",
+    "_src/assets/plugins/form.validate/jquery.form.min.js",
+    "_src/assets/plugins/form.validate/jquery.validation.min.js",
     "_src/assets/plugins/gmaps.js",
-    "_src/assets/js/pages/contact.js"
+    "_src/assets/js/pages/contact.js",
+    "_src/assets/js/browserify-bundles/entry-contact.bundle.js"
   ]
 }

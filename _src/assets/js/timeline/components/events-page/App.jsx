@@ -47,7 +47,6 @@ class App extends React.Component {
           isReloading: false,
           hasError: true
         }));
-
   }
 
   onShowRegularEventsToggle(val) {

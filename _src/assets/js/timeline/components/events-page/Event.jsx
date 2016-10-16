@@ -7,7 +7,7 @@ function getMedia(imgUrl, ytId, showMedia) {
   if (imgUrl)
     return (
       <figure className={classes}>
-        <img className="img-responsive hidden-xs" src={imgUrl} alt=""/>
+        <img className="img-responsive" src={imgUrl} alt=""/>
       </figure>
     );
   else if (ytId)
@@ -90,7 +90,9 @@ Event.propTypes = {
     maxHeight: React.PropTypes.number,
     opacity: React.PropTypes.number
   }).isRequired,
-  showMedia: React.PropTypes.bool
+  showMedia: React.PropTypes.bool,
+  getPrintFields: React.PropTypes.func.isRequired,
+  getRawDescriptionMarkup: React.PropTypes.func.isRequired
 };
 Event.defaultProps = {
   showMedia: true

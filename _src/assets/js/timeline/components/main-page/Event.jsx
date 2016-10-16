@@ -24,8 +24,8 @@ const Event = (props) => {
   return (
 
     <div className="inews-item">
-      <a className="inews-thumbnail" href="#">
-        <img className="img-responsive" src={props.imgUrl ? props.imgUrl : props.defaultPicture } alt="image" />
+      <a className="inews-thumbnail " href="#">
+        <img className="img-responsive hidden-xs" src={props.imgUrl ? props.imgUrl : props.defaultPicture } alt="image" />
       </a>
 
       <div className="inews-item-content">
@@ -50,7 +50,7 @@ const Event = (props) => {
             { getLocation(props.location) }
 
           </ul>
-          <div dangerouslySetInnerHTML={props.getRawDescriptionMarkup()}></div>
+          <div style={{minHeight: '55px'}} dangerouslySetInnerHTML={props.getRawDescriptionMarkup()}></div>
         </div>
       </div>
     </div>
@@ -66,11 +66,9 @@ Event.propTypes = {
   description: React.PropTypes.string,
   imgUrl: React.PropTypes.string,
   ytId: React.PropTypes.string,
-  style: React.PropTypes.shape({
-    maxHeight: React.PropTypes.number,
-    opacity: React.PropTypes.number
-  }).isRequired,
-  showMedia: React.PropTypes.bool
+  getPrintFields: React.PropTypes.func.isRequired,
+  getRawDescriptionMarkup: React.PropTypes.func.isRequired,
+  defaultPicture: React.PropTypes.string.isRequired
 };
 Event.defaultProps = {
   showMedia: true

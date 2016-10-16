@@ -46,7 +46,7 @@ var gulp          = require('gulp'),
 		buffer        = require('vinyl-buffer'),
 		watchify      = require('watchify'),
 		babelify      = require('babelify'),
-		glob					= require('glob');
+		glob					= require('globby');
 
 var config = {
 	src: {
@@ -65,7 +65,7 @@ var config = {
 		],
 		// only for linting, and to call pageAssetConfig task
 		eslint: [
-			'_src/**/*.js?', // so it matches .jsx files also
+			'_src/**/*.{js,jsx}', // so it matches .jsx files also
 			'!_src/assets/js/view/*.js',
 			'!_src/assets/js/scripts.js',
 			'!_src/assets/plugins/**/*.js',
@@ -78,8 +78,10 @@ var config = {
 			'!_src/assets/plugins/**/*.js',
 			'!_src/assets/js/timeline/*.js'
 		],
-		browserify: './_src/assets/js/timeline/entry-*.jsx',
-		// only used to trigger pageAssetConfig task
+		browserify: [
+			'./_src/assets/js/**/entry*.{js,jsx}',
+			'!./_src/assets/js/browserify-bundles/*.js'
+		],
 		pagecss: '_src/assets/css/**/*.css',
 		html: [
 			'_src/**/*.html',
@@ -114,7 +116,7 @@ var config = {
 
 	}
 };
-gulp.task('default-with-watch', ['apply-dev-env', 'default', 'browserify-watchify', 'watch']);
+gulp.task('dev-watch', ['apply-dev-env', 'default', 'browserify-watchify', 'watch']);
 gulp.task('prod-watch', ['apply-prod-env', 'default', 'browserify-watchify', 'watch']);
 
 // runs these gulp tasks in the order they're listed, but in parallel, unless
@@ -147,7 +149,7 @@ gulp.task('watch', function() {
 	gulp.watch(config.src.eslint, ['eslint']);
 	gulp.watch(config.src.pagejs, ['page-js']);
 	gulp.watch(config.src.pagecss, ['page-css']);
-	gulp.watch(config.src.pageAssetsConfig, ['page-asset-config', 'html']);
+	gulp.watch(config.src.pageAssetsConfig, ['page-asset-config', 'html', 'page-js', 'page-css']);
 	gulp.watch(config.src.sharedjs, ['shared-js']);
 	gulp.watch(config.src.sharedcss, ['shared-css']);
 	gulp.watch(config.src.others, ['others']);
@@ -244,29 +246,26 @@ gulp.task('html', function() {
 });
 
 gulp.task('browserify-watchify', function(done) {
-	glob(config.src.browserify, function (err, files) {
-		if (err) {
-			done(err);
-			return;
-		}
+	glob(config.src.browserify).then(function (files) {
 		var args = watchify.args;
 		var tasks = files.map(function (entry) {
-			util.log(entry);
+			var filename = path.posix.basename(entry, path.extname(entry)); // /dir/dir2/index.jsx would return index
+
 			var bundler = browserify(entry, args)
-				.plugin(watchify, { ignoreWatch: true})
+				.plugin(watchify, { ignoreWatch: true })
 				.plugin(errorify)
 				.transform(babelify, { presets: ['es2015', 'react', 'stage-2']});
 
-			var stream = browserifyMinifyStream(bundler, entry);
+			var stream = browserifyMinifyStream(bundler, filename);
 
 			bundler.on('update', function() {
 				util.log("Starting '" + chalk.blue("browserify") + "'...");
-				return browserifyMinifyStream(bundler, entry);
+				return browserifyMinifyStream(bundler, filename);
 			});
 
 			bundler.on('time', function(time) {
 				var timeStr = (time >= 1000) ? (Math.round( time * 100.0 / 1000) / 100) + ' s' : time + ' ms';
-				util.log("Finished '" + chalk.blue("browserify") + "' for " + entry + " after " + chalk.magenta(timeStr));
+				util.log("Finished '" + chalk.blue("browserify") + "' for " + filename + " after " + chalk.magenta(timeStr));
 			});
 
 			return stream;
@@ -276,18 +275,16 @@ gulp.task('browserify-watchify', function(done) {
 });
 
 gulp.task('browserify', function(done) {
-	glob(config.src.browserify, function (err, files) {
-		if (err) {
-			done(err);
-			return;
-		}
+
+	glob(config.src.browserify).then(function (files) {
 		var tasks = files.map(function (entry) {
-			util.log(entry);
+			var filename = path.posix.basename(entry, path.extname(entry)); // /dir/dir2/index.jsx would return index
+			util.log("Starting '" + chalk.blue("browserify") + "' for " + filename);
 			var bundler = browserify(entry)
 				.plugin(errorify)
 				.transform(babelify, { presets: ['es2015', 'react', 'stage-2']});
 
-			return browserifyMinifyStream(bundler, entry);
+			return browserifyMinifyStream(bundler, filename);
 		});
 		es.merge(tasks).on('end', done);
 	});
@@ -309,8 +306,7 @@ function cssMinifyStream(srcGlob, filename, destDir) {
 		.pipe(process.env.NODE_ENV == 'production' ? cssmin() : util.noop())
 		.pipe(gulp.dest(destDir));
 }
-function browserifyMinifyStream(bundler, filePath) {
-	var filename = path.posix.basename(filePath, '.jsx'); // /dir/dir2/index.jsx would return index
+function browserifyMinifyStream(bundler, filename) {
 	return bundler
 		.bundle()
 		.pipe(source(filename + '.bundle.js'))
