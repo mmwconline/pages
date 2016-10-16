@@ -31,14 +31,20 @@ var FormSpree = function () {
     this.options = {
       dataType: 'json',
       success: function success() {
-        // $(form).find('input.form-control').val('');
-        // $(form).find('textarea.form-control').val('');
+        _this.$preloader.addClass('hide');
         _toastr2.default.success(_this.successMessage);
+      },
+      error: function error() {
+        _this.$preloader.addClass('hide');
+        _toastr2.default.error(_this.errorMessage);
       },
       clearForm: true
     };
     this.$form = (0, _jQuery2.default)('form.validate');
+    this.$preloader = this.$form.find('#preloader');
+
     this.successMessage = this.$form.attr('data-success') || 'Thanks! Your message has been successfully sent';
+    this.errorMessage = this.$form.attr('data-error') || 'There was an error. Please try again later';
   }
 
   _createClass(FormSpree, [{
@@ -53,6 +59,7 @@ var FormSpree = function () {
 
       this.$form.validate({
         submitHandler: function submitHandler(form) {
+          _this2.$preloader.removeClass('hide');
           (0, _jQuery2.default)(form).ajaxSubmit(_this2.options);
         }
       });

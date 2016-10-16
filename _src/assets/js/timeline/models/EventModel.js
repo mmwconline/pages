@@ -2,7 +2,7 @@ import moment from 'moment';
 import Remarkable from 'remarkable';
 
 const md = new Remarkable();
-const defaultPicture = '/assets/images/blog/welcome-thumbnail.jpg';
+const defaultPicture = '/assets/images/defaultEvent-thumbnail.jpg';
 
 //given https://www.youtube.com/watch?v=oyEuk8j8imI, it'll return oyEuk8j8imI
 export function getYTubeID(url) {

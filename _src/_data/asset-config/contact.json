@@ -8,5 +8,8 @@
     "_src/assets/plugins/gmaps.js",
     "_src/assets/js/pages/contact.js",
     "_src/assets/js/browserify-bundles/entry-contact.bundle.js"
+  ],
+  "css": [
+    "_src/assets/css/pages/forms.css"
   ]
 }

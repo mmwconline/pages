@@ -9,14 +9,20 @@ export default class FormSpree {
     this.options = {
       dataType: 'json',
       success: () => {
-        // $(form).find('input.form-control').val('');
-        // $(form).find('textarea.form-control').val('');
-        toastr.success(this.successMessage);
+        this.$preloader.addClass('hide');
+        toastr.success(this.successMessage)
+      },
+      error: () => {
+        this.$preloader.addClass('hide');
+        toastr.error(this.errorMessage)
       },
       clearForm: true
     };
     this.$form = $('form.validate');
+    this.$preloader = this.$form.find('#preloader');
+
     this.successMessage = this.$form.attr('data-success') || 'Thanks! Your message has been successfully sent';
+    this.errorMessage = this.$form.attr('data-error') || 'There was an error. Please try again later';
   }
 
   setOptions(newOptions) {
@@ -26,6 +32,7 @@ export default class FormSpree {
   configure() {
     this.$form.validate({
       submitHandler: (form) => {
+        this.$preloader.removeClass('hide');
         $(form).ajaxSubmit(this.options);
       }
     });

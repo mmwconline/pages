@@ -10,6 +10,6 @@
   ],
   "css": [
     "_src/assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css",
-    "_src/assets/css/pages/speaker-request.css"
+    "_src/assets/css/pages/forms.css"
   ]
 }

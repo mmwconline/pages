@@ -9,7 +9,9 @@ const options = formSpree.options;
 options.beforeSerialize = ($form, options) => {
   if (!contactFormUrl.isValidSelection())
     return false;
+
   options.url = contactFormUrl.getUrl();
+  console.log(options);
   return true;
 };
 formSpree.setOptions(options);
