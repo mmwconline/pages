@@ -51,23 +51,26 @@ scripts: scripts/contact.html
                 </div><!-- /Alert Mandatory -->
 
 
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form class="validate" action="https://formspree.io/azizjconsulting@gmail.com" method="post"
+                      enctype="multipart/form-data">
                     <fieldset>
-                        <input type="hidden" name="action" value="contact_send" />
+                        <input type="text" name="_gotcha" style="display:none" />
+                        <input type="hidden" name="_subject" value="Contact Form MMWC Website" />
+                        <input type="hidden" name="_cc" value="azizjaved0@gmail.com,aziz.javed0@gmail.com" />
 
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-4">
                                     <label for="contactName">Full Name *</label>
-                                    <input required type="text" value="" class="form-control" name="contactName" id="contactName">
+                                    <input required type="text" value="" class="form-control required" name="contactName" id="contactName">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="contactEmail">E-mail Address *</label>
-                                    <input required type="email" value="" class="form-control" name="contactEmail" id="contactEmail">
+                                    <input required type="email" value="" class="form-control required" name="contactEmail" id="contactEmail">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="contactPhone">Phone</label>
-                                    <input type="text" value="" class="form-control" name="contactPhone" id="contactPhone">
+                                    <input type="text" value="" class="form-control" name="phoneNumber" id="contactPhone">
                                 </div>
                             </div>
                         </div>
@@ -75,14 +78,15 @@ scripts: scripts/contact.html
                             <div class="form-group">
                                 <div class="col-md-8">
                                     <label for="contactSubject">Subject *</label>
-                                    <input required type="text" value="" class="form-control" name="contactSubject" id="contactSubject">
+                                    <input required type="text" value="" class="form-control required" name="subject" id="contactSubject">
                                 </div>
                                 <div class="col-md-4">
                                     <label for="contactDept">Department *</label>
-                                    <select required class="form-control pointer" name="contactDept" id="contactDept">
+                                        <select required class="form-control pointer required" name="department" id="contactDept">
                                         <option value="">--- Select ---</option>
-                                        <option value="MMWC Staff">MMWC Staff</option>
-                                        <option value="Librarian">Librarian</option>
+                                        {% for dept in site.data.contactDepartments %}
+                                        <option value="{{ dept.name }}" data-email="{{ dept.email }}">{{ dept.name }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                             </div>
@@ -99,7 +103,12 @@ scripts: scripts/contact.html
 
                     <div class="row">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> SEND MESSAGE</button>
+                            <div id="preloader" class="hide">
+                                <div class="inner">
+                                    <span class="loader"></span>
+                                </div>
+                            </div>
+                            <button id="formSubmit" type="submit" class="btn btn-primary"><i class="fa fa-check"></i> SEND MESSAGE</button>
                         </div>
                     </div>
                 </form>

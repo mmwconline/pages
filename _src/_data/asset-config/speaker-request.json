@@ -3,6 +3,13 @@
   "js": [
     "_src/assets/plugins/form.validate/jquery.form.min.js",
     "_src/assets/plugins/form.validate/jquery.validation.min.js",
-    "_src/assets/js/form-validate.js"
+    "_src/assets/plugins/bootstrap-datetimepicker/js/moment.min.js",
+    "_src/assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
+    "_src/assets/plugins/toastr/toastr.js",
+    "_src/assets/js/browserify-bundles/entry-speaker-request.bundle.js"
+  ],
+  "css": [
+    "_src/assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css",
+    "_src/assets/css/pages/forms.css"
   ]
 }

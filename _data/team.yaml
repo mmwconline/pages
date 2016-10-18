@@ -1,15 +1,157 @@
-- name: Othman M. Atta
-  excerpt: "The best among you is the one who doesn't harm others with his tongue and hands."
-  description: "blah"
-  groups:
-    - ism-center
-  positions:
-    - Executive Director
-  image: assets/images/team/othman.jpg
-  email: omatta@ismonline.org
-  workPhone: +1-414-282-1812,227
-  mobilePhone: +1-414-282-8486
+- name: Janan Najeeb
+  description: |
+    Founding member and the current President of the Milwaukee Muslim Women’s Coalition has been a spokeswoman for Milwaukee’s Muslim community to media outlets, government officials, interfaith leaders, academic institutions, hospitals, and a wide range of community groups.  A microbiologist by profession (UW-Milwaukee), Ms. Najeeb left her career because of the tremendous need to bridge the gap between the erroneous perception of Islam and Muslims in society and the actual beliefs and practices of the vast majority of the world’s Muslims.  Ms. Najeeb serves on many committees and community boards as well as being an adjunct professor at Cardinal Stritch University in Milwaukee, teaching the Religious Culture of Islam.  In addition, she directs the new Islamic Resource Center on the south side of Milwaukee.
+    Janan Najeeb is the recipient of numerous awards and recognitions including the International Institute of Wisconsin’s World Citizen Award, The Wisconsin Community Fund’s Grantee of the Year Award, CAIR’s (Council on American Islamic Relations) national award for activism, ACLU’s Special Recognition Award, as well as being named by Wisconsin Woman Magazine as a Leader Making a Difference.  Ms. Najeeb is married and has 5 children.
+  position: President
+  image: assets/images/team/janan.jpg
+  email: jnajeeb@mmwconline.org
+  workPhone:
+  mobilePhone:
+  fb:
+  twitter:
+  google:
+  linkedIn: https://www.linkedin.com/in/janan-najeeb-97bb0a8
+
+- name: Inshirah Farhoud
+  description: |
+    A pediatric nurse practitioner at children’s hospital of Wisconsin, BSN from Alverno College, MSN from Marquette University, and post master’s from UW Madison.  Ms. Farhoud has been an MMWC board member for 17 years.  In addition, she is an Islamic Society of Milwaukee (ISM) board member, DHHS minority health council member and she is a frequent guest speaker at churches, schools, hospitals, etc.  Ms. Farhoud is an advocate of accessible healthcare for everyone and volunteers at 2 different free clinics.
+  position: Vice President
+  image: assets/images/team/inshirah.jpg
+  email: inshirahf@gmail.com
+  workPhone:
+  mobilePhone:
+  fb:
+  twitter:
+  google:
+  linkedIn: https://www.linkedin.com/in/inshirah-farhoud-0a518347
+
+- name: Hanadi Bu Ali M.D.
+  description: |
+    She is a breast surgical oncologist who chairs the breast program leadership team at the Wheaton Franciscan Healthcare North market Campus.  She completed her medical school in Bahrain and did her initial training in surgery in Detroit Michigan and her surgical oncology training in Akron, Ohio.  She has been recognized as one of the 40 under 40 by the Business Journal and named one of America’s Top Surgeons by the Consumers’ Research Council of America for the year 2012, 2013 and 2014. She has been active in research and improvement of patient quality of care since she started in the field of healthcare.  She offers innovative surgical care adopting oncoplastic techniques.  She has been serving as an MMWC board member for several years, and leads the MMWC team for the Susan G. Komen Race for the Cure ©. Dr. Bu-Ali also serves as an associate professor of surgery at MCW.
+  position: Board Member
+  image: assets/images/team/hanadi.jpg
+  email: inshirahf@gmail.com
+  workPhone:
+  mobilePhone:
+  fb:
+  twitter:
+  google:
+  linkedIn: https://www.linkedin.com/in/hanadi-bu-ali-md-facs-b4911928
+
+- name: Dr. Sahar Katib Kayata M.D.
+  description: |
+    She received her medical education at the Faculte de Medicine in Paris, France. She then completed her residency at Rainbow Babies & Children’s University Hospital in Pediatrics. She currently works with Newborn Care Physicians and is a board certified Neonatal & Perinatal Physician. She has been involved with the MMWC for nearly 15 years, she has been a board member for several years.
+  position: Board Member
+  image: assets/images/team/sahar.jpg
+  email: inshirahf@gmail.com
+  workPhone: +1-414-447-2663
+  mobilePhone:
   fb:
   twitter:
   google:
   linkedIn:
+
+- name: Dr. Randa Suleiman
+  description: |
+    She currently works as an assistant professor at Alverno College Teacher Preparation Program. She worked previously at Cardinal Stritch University for four years in teacher preparation as well as in K-12 education for fifteen years in private, public school districts in USA and Internationally. She graduated from Cardinal Stritch University in May 2010 with a PhD in Leadership for the Advancement of Learning and Service in Higher Education. Randa earned National Board certification in early adolescent science in 2008. She is currently working on developing STEM certification program. Areas of interest are middle school education, teacher preparation, and science education.
+  position: Board Member
+  image: assets/images/team/hathaway.jpg
+  email:
+  workPhone:
+  mobilePhone:
+  fb: https://www.facebook.com/randa.suleiman.7
+  twitter:
+  google:
+  linkedIn: https://www.linkedin.com/in/randa-suleiman-29561031
+
+- name: Zehra Tahir
+  description: |
+    She received her bachelor’s degree from the University of Bombay, India with specialization in Textiles and Clothing. The early years of her career were spent as a successful business woman and fashion designer, followed by several years in the food service industry as a sales account manager.
+    Zehra Tahir has been active in the educational programs in the Milwaukee community for the past several years. She joined Salam School in the fall of 2005 in order to work in the field for which she had the greatest passion: education. Zehra is a member of the Advisory Committee of the Wisconsin Schools of Character, and is a strong advocate of shaping lives through character, and integrating character education into schools. She has also been a board member of the Islamic Society of Milwaukee and the ISM Education Council. She has been an MMWC board member for several years.
+  position: Board Member
+  image: assets/images/team/zehra.jpg
+  email: zehratahir@gmail.com
+  workPhone:
+  mobilePhone:
+  fb:
+  twitter:
+  google:
+  linkedIn: https://www.linkedin.com/in/zehra-tahir-4153ba31
+
+- name: Ream Bahhur
+  description: |
+    Donec id elit non mi porta gravida at eget metus id dolor.
+  position: Board Member
+  image: assets/images/team/ream.jpg
+  email: rbahhur@salamschool.com
+  workPhone:
+  mobilePhone:
+  fb: https://www.facebook.com/ream.bahhur
+  twitter:
+  google:
+  linkedIn:
+
+- name: Bara Omari
+  description: |
+    Donec id elit non mi porta gravida at eget metus id dolor.
+  position: Board Member
+  image: assets/images/team/bara.jpg
+  email: bsomari@gmail.com
+  workPhone:
+  mobilePhone:
+  fb: https://www.facebook.com/bara.omari.98
+  twitter:
+  google:
+  linkedIn: https://www.linkedin.com/in/bara-omari-4b737351
+
+- name: Eman Atshan
+  description: |
+    The intuitive mind is a sacred gift and the rational mind is a faithful servant. We have created a society that honors the servant and has forgotten the gift.
+  position: Staff Member
+  image: assets/images/team/eman.jpg
+  email: eman@mmwconline.org
+  workPhone:
+  mobilePhone:
+  fb: https://www.facebook.com/eman.atshan.3
+  twitter:
+  google:
+  linkedIn: https://www.linkedin.com/in/eman-atshan-b9b555b4
+
+- name: Elise Bellin
+  description: |
+    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus.
+  position: Librarian
+  image: assets/images/team/elise.jpg
+  email:
+  workPhone:
+  mobilePhone:
+  fb: https://www.facebook.com/elise.bellin
+  twitter:
+  google:
+  linkedIn: https://www.linkedin.com/in/elisebellin
+
+- name: Amany Fares
+  description: |
+    Donec id elit non mi porta gravida at eget metus id dolor.
+  position: Staff Member
+  image: assets/images/team/amany.jpg
+  email:
+  workPhone:
+  mobilePhone:
+  fb:
+  twitter:
+  google:
+  linkedIn:
+
+- name: Sundus Jaber
+  description: |
+    Donec id elit non mi porta gravida at eget metus id dolor.
+  position: Staff Member
+  image: assets/images/team/sundus.jpg
+  email:
+  workPhone:
+  mobilePhone:
+  fb: https://www.facebook.com/sundus.jaber
+  twitter:
+  google:
+  linkedIn: https://www.linkedin.com/in/elisebellin

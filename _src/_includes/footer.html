@@ -7,8 +7,6 @@
                 <!-- Footer Logo -->
                 <img class="footer-logo" src="{{ page.baseurl }}assets/images/logo-footer.png" alt="" />
 
-                <!-- Short Description -->
-                <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
 
                 <!-- Contact Address -->
                 <address>
@@ -55,16 +53,23 @@
                 <h4 class="letter-spacing-1">KEEP IN TOUCH</h4>
                 <p>Subscribe to Our Newsletter to get Important News & Offers</p>
 
-                <form action="php/newsletter.php" role="form" method="post">
+                <form id="subscribeForm" role="form" method="post" name="mc-embedded-subscribe-form"
+                      action="http://mmwconline.us3.list-manage.com/subscribe/post?u=63d144864f5fd557a761d89cb&amp;id=792c8836f1">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your Email" required="required">
+                        <input type="email" id="subscriberEmail" name="EMAIL" class="form-control"
+                               placeholder="Enter your Email" required="required">
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                            <input type="text" name="b_63d144864f5fd557a761d89cb_792c8836f1" tabindex="-1" value="">
+                        </div>
                         <span class="input-group-btn">
-							<button class="btn btn-primary" type="submit">Subscribe</button>
+							<button class="btn btn-primary" type="submit" name="subscribe" id="subscribeButton">
+                                Subscribe
+                            </button>
 						</span>
+
                     </div>
                 </form>
-                <!-- /Newsletter Form -->
 
                 <!-- Social Icons -->
                 <div class="margin-top-20">

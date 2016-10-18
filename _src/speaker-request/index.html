@@ -89,11 +89,12 @@ excerpt: >
                 </div>
 
 
-                <form class="validate" id="careers_apply" action="php/contact.php" method="post" enctype="multipart/form-data" data-success="Sent! Thank you!" data-toastr-position="top-right">
+                <form id="careers_apply" class="validate" action="https://formspree.io/azizjconsulting@gmail.com" method="post"
+                      enctype="multipart/form-data">
                     <fieldset>
-                        <!-- required [php action request] -->
-                        <input type="hidden" name="action" value="contact_send" />
-
+                        <input type="text" name="_gotcha" style="display:none" />
+                        <input type="hidden" name="_subject" value="Speaker Request MMWC Website" />
+                        <input type="hidden" name="_cc" value="azizjaved0@gmail.com,aziz.javed0@gmail.com" />
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-6">
@@ -139,11 +140,12 @@ excerpt: >
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-6">
                                     <label>Event Date & Time *</label>
-                                    <input type="text" name="contact[phone]" value="" class="form-control required">
+                                    <input type="text" name="eventStartDateTime" value="" class="form-control required"
+                                           readonly id="eventStartDateTime">
                                 </div>
                                 <div class="col-md-6 col-sm-6">
                                     <label>Event Duration *</label>
-                                    <input type="email" name="contact[email]" value="" class="form-control required">
+                                    <input type="text" name="eventDuration" value="" class="form-control required">
                                 </div>
                             </div>
                         </div>
@@ -173,7 +175,12 @@ excerpt: >
 
                     <div class="row">
                         <div class="col-md-12">
-                            <button type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30">
+                            <div id="preloader" class="hide">
+                                <div class="inner">
+                                    <span class="loader"></span>
+                                </div>
+                            </div>
+                            <button id="formSubmit" type="submit" class="btn btn-3d btn-teal btn-xlg btn-block margin-top-30">
                                 SEND REQUEST
                                 <span class="block font-lato">We'll get back to you within 48 hours</span>
                             </button>
