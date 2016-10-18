@@ -21,334 +21,53 @@ excerpt: >
             The MMWC is overseen by four Board of Directors, along with a Persident and Vice-President. Day-to-day
             activities are carried out by a handful of resolute staff members that MMWC would not sustain without.
         </p>
-
+        <!--<a href="#">Read more</a>-->
         <div class="row">
-
+            {% for member in site.data.team %}
             <div class="col-sm-6 col-md-3">
                 <div class="thumbnail">
                     <a class="image-hover lightbox" href="#" data-plugin-options='{"type":"image"}'>
-                        <img class="img-responsive" src="{{ page.baseurl }}assets/images/team/najeeb.jpg" alt="" />
+                        <img class="img-responsive" src="{{ page.baseurl }}{{ member.image }}" alt="" />
                     </a>
                     <div class="caption">
-                        <h4 class="nomargin">Janan Najeeb</h4>
-                        <small class="margin-bottom-20 block">President</small>
+                        <h4 class="nomargin">{{ member.name }}</h4>
+                        <small class="margin-bottom-20 block">{{ member.position }}</small>
 
-                        <p>
-                            Founding member and the current President of the Milwaukee Muslim Women’s Coalition has been
-                            a spokeswoman for ... <a href="#">Read more</a>
-                        </p>
-                        <a href="#" class="social-icon social-icon-sm social-facebook">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-twitter">
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-google">
-                            <i class="fa fa-google-plus"></i>
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-linkedin">
-                            <i class="fa fa-linkedin"></i>
-                            <i class="fa fa-linkedin"></i>
-                        </a>
+                        <p>{{ member.description | strip_newlines | truncate:110 }}</p>
+                        {% if member.email %}
+                        <a href="mailto:{{ member.email }}" class="social-icon social-icon-sm social-email3"><i class="icon-email3"></i><i class="icon-email3"></i></a>
+                        {% endif %}
+                        {% if member.workPhone %}
+                        <a href="tel:{{ member.workPhone }}" class="social-icon social-icon-sm social-call"><i class="icon-call"></i><i class="icon-call"></i></a>
+                        {% endif %}
+                        {% if member.mobilePhone %}
+                        <a href="tel:{{ member.mobilePhone }}" class="social-icon social-icon-sm social-call"><i class="icon-call"></i><i class="icon-call"></i></a>
+                        {% endif %}
+                        {% if member.fb %}
+                        <a href="{{ member.fb }}" class="social-icon social-icon-sm social-facebook"><i class="fa fa-facebook"></i><i class="fa fa-facebook"></i></a>
+                        {% endif %}
+                        {% if member.linkedIn %}
+                        <a href="{{ member.linkedIn }}" class="social-icon social-icon-sm social-linkedin"><i class="fa fa-linkedin"></i><i class="fa fa-linkedin"></i></a>
+                        {% endif %}
+                        {% if member.twitter %}
+                        <a href="{{ member.twitter }}" class="social-icon social-icon-sm social-twitter"><i class="fa fa-twitter"></i><i class="fa fa-twitter"></i></a>
+                        {% endif %}
+                        {% if member.google %}
+                        <a href="{{ member.google }}" class="social-icon social-icon-sm social-google"><i class="fa fa-google-plus"></i><i class="fa fa-google-plus"></i></a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <a class="image-hover lightbox" href="#" data-plugin-options='{"type":"image"}'>
-                        <img class="img-responsive" src="{{ page.baseurl }}assets/images/team/farhoud.jpg" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h4 class="nomargin">Inshirah Farhoud</h4>
-                        <small class="margin-bottom-20 block">Vice President</small>
+                {% assign moduledIndexForMd = forloop.index | modulo: 4 %}
+                {% if forloop.index != forloop.length and moduledIndexForMd == 0 %}
+            <div class="clearfix visible-lg visible-md"></div>
+                {% endif %}
 
-                        <p>
-                            A pediatric nurse practitioner at children’s hospital of Wisconsin, BSN from Alverno
-                            College, MSN from Marquette ... <a href="#">Read more</a>
-                        </p>
-                        <a href="#" class="social-icon social-icon-sm social-facebook">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-twitter">
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-google">
-                            <i class="fa fa-google-plus"></i>
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-linkedin">
-                            <i class="fa fa-linkedin"></i>
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <a class="image-hover lightbox" href="#" data-plugin-options='{"type":"image"}'>
-                        <img class="img-responsive" src="{{ page.baseurl }}assets/images/team/ledecky.jpg" alt="" />
-                    </a>
-                    <div class="caption">
-                        <h4 class="nomargin">Hanadi Bu Ali M.D.</h4>
-                        <small class="margin-bottom-20 block">Board Member</small>
-
-                        <p>
-                            A native of Bahrain.  She is a breast surgical oncologist who chairs the breast program
-                            leadership team at the Wheaton ... <a href="#">Read more</a>
-                        </p>
-                        <a href="#" class="social-icon social-icon-sm social-facebook">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-twitter">
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-google">
-                            <i class="fa fa-google-plus"></i>
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-linkedin">
-                            <i class="fa fa-linkedin"></i>
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img class="img-responsive" src="{{ page.baseurl }}assets/images/team/jolie.jpg" alt="" />
-                    <div class="caption">
-                        <h4 class="nomargin">Dr. Sahar Katib Kayata M.D.</h4>
-                        <small class="margin-bottom-20 block">Board Member</small>
-
-                        <p>
-                            She received her medical education at the Faculte de Medicine in Paris, France. She then
-                            completed her residency at ... <a href="#">Read more</a>
-                        </p>
-                        <a href="#" class="social-icon social-icon-sm social-facebook">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-twitter">
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-google">
-                            <i class="fa fa-google-plus"></i>
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-linkedin">
-                            <i class="fa fa-linkedin"></i>
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img class="img-responsive" src="{{ page.baseurl }}assets/images/team/hathaway.jpg" alt="" />
-                    <div class="caption">
-                        <h4 class="nomargin">Dr. Randa Suleiman</h4>
-                        <small class="margin-bottom-20 block">Board Member</small>
-
-                        <p>
-                            She currently works as an assistant professor at Cardinal Stritch University Teacher
-                            Preparation Program. She ... <a href="#">Read more</a>
-                        </p>
-                        <a href="#" class="social-icon social-icon-sm social-facebook">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-twitter">
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-google">
-                            <i class="fa fa-google-plus"></i>
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-linkedin">
-                            <i class="fa fa-linkedin"></i>
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img class="img-responsive" src="{{ page.baseurl }}assets/images/team/zehra.jpg" alt="" />
-                    <div class="caption">
-                        <h4 class="nomargin">Ms. Zehra Tahir</h4>
-                        <small class="margin-bottom-20 block">Board Member</small>
-
-                        <p>
-                            She received her bachelor’s degree from the University of Bombay, India with specialization
-                            in Textiles and Clothing. The ... <a href="#">Read more</a>
-                        </p>
-                        <a href="#" class="social-icon social-icon-sm social-facebook">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-twitter">
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-google">
-                            <i class="fa fa-google-plus"></i>
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-linkedin">
-                            <i class="fa fa-linkedin"></i>
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img class="img-responsive" src="{{ page.baseurl }}assets/images/team/obama.jpg" alt="" />
-                    <div class="caption">
-                        <h4 class="nomargin">Eman Atshan</h4>
-                        <small class="margin-bottom-20 block">Center & Program Manager</small>
-
-                        <p>Donec id elit non mi porta gravida at eget metus id dolor.</p>
-                        <a href="#" class="social-icon social-icon-sm social-facebook">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-twitter">
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-google">
-                            <i class="fa fa-google-plus"></i>
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-linkedin">
-                            <i class="fa fa-linkedin"></i>
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img class="img-responsive" src="{{ page.baseurl }}assets/images/team/winfrey.jpg" alt="" />
-                    <div class="caption">
-                        <h4 class="nomargin">Elise Bellin</h4>
-                        <small class="margin-bottom-20 block">Librarian</small>
-
-                        <p>Donec id elit non mi porta gravida at eget metus id dolor.</p>
-                        <a href="#" class="social-icon social-icon-sm social-facebook">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-twitter">
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-google">
-                            <i class="fa fa-google-plus"></i>
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-linkedin">
-                            <i class="fa fa-linkedin"></i>
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img class="img-responsive" src="{{ page.baseurl }}assets/images/team/malala.jpg" alt="" />
-                    <div class="caption">
-                        <h4 class="nomargin">Hinna Musavvir</h4>
-                        <small class="margin-bottom-20 block">Secretary</small>
-
-                        <p>Donec id elit non mi porta gravida at eget metus id dolor.</p>
-                        <a href="#" class="social-icon social-icon-sm social-facebook">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-twitter">
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-google">
-                            <i class="fa fa-google-plus"></i>
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-linkedin">
-                            <i class="fa fa-linkedin"></i>
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img class="img-responsive" src="{{ page.baseurl }}assets/images/team/rowling.jpg" alt="" />
-                    <div class="caption">
-                        <h4 class="nomargin">Ayah Ali</h4>
-                        <small class="margin-bottom-20 block">Secretary</small>
-
-                        <p>Donec id elit non mi porta gravida at eget metus id dolor.</p>
-                        <a href="#" class="social-icon social-icon-sm social-facebook">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-twitter">
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-google">
-                            <i class="fa fa-google-plus"></i>
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-linkedin">
-                            <i class="fa fa-linkedin"></i>
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="thumbnail">
-                    <img class="img-responsive" src="{{ page.baseurl }}assets/images/team/watson.jpg" alt="" />
-                    <div class="caption">
-                        <h4 class="nomargin">Sundus Jaber</h4>
-                        <small class="margin-bottom-20 block">Secretary</small>
-
-                        <p>Donec id elit non mi porta gravida at eget metus id dolor.</p>
-                        <a href="#" class="social-icon social-icon-sm social-facebook">
-                            <i class="fa fa-facebook"></i>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-twitter">
-                            <i class="fa fa-twitter"></i>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-google">
-                            <i class="fa fa-google-plus"></i>
-                            <i class="fa fa-google-plus"></i>
-                        </a>
-                        <a href="#" class="social-icon social-icon-sm social-linkedin">
-                            <i class="fa fa-linkedin"></i>
-                            <i class="fa fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+                {% assign moduledIndexForSm = forloop.index | modulo: 2 %}
+                {% if forloop.index != forloop.length and moduledIndexForSm == 0 %}
+            <div class="clearfix visible-sm visible-xs"></div>
+                {% endif %}
+            {% endfor %}
         </div>
 
     </div>
