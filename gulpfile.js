@@ -1,51 +1,52 @@
 "use strict";
 
-var gulp      = require('gulp'),
-		jshint    = require('gulp-jshint'),
-	// outputs the file it is processing if you add .pipe(debug())
-		debug     = require('gulp-debug'),
+var gulp          = require('gulp'),
+	eslint        = require('gulp-eslint'),
+	chalk         = require('chalk'),
+// outputs the file it is processing if you add .pipe(debug())
+	debug         = require('gulp-debug'),
 	// allows you to do util.log(msg), do .pipe(someCondition ? somePlugin : util.noop()),
 	// replaceExtension, etc.
-		util      = require('gulp-util'),
+	util          = require('gulp-util'),
 	//allows you to pipe json files, then transform em and put it somewhere
 	// best plugin ever!
-		jsonTransform = require('gulp-json-transform'),
+	jsonTransform = require('gulp-json-transform'),
 	// find name of file given its path and extension
-		path      = require('path'),
+	path          = require('path'),
 	// need it for gulp-json-transform, which allows you to return a Promise that'll
 	// return the transformed json
-		Promise   = require('promise'),
+	Promise       = require('promise'),
 	// very powerful. Allows you to transform streams, MERGE streams, which is what
 	// we care about
-		es        = require('event-stream'),
+	es            = require('event-stream'),
 	// when a stream errors out, the task no longer works. this solves this problem.
 	// See Error Management in OneNote
-		plumber   = require('gulp-plumber'),
+	plumber       = require('gulp-plumber'),
 
-		// JS BUILD
+	// JS BUILD
 	// combine multiple js/css files into one, in the ordered they were added
-		concat        = require('gulp-concat'),
-		uglify        = require('gulp-uglify'), // minify js files
-		newer         = require('gulp-newer'),
+	concat        = require('gulp-concat'),
+	uglify        = require('gulp-uglify'), // minify js files
+	newer         = require('gulp-newer'),
 
-		// HTML
-		htmlmin   = require('gulp-htmlmin'), // minify html files
-		injectStr = require('gulp-inject-string'), // add strings anywhere you want, based on conditions, etc.
+	// HTML
+	htmlmin       = require('gulp-htmlmin'), // minify html files
+	injectStr     = require('gulp-inject-string'), // add strings anywhere you want, based on conditions, etc.
 
-		// CSS
-		cssmin    = require('gulp-clean-css'), // minify css files
+	// CSS
+	cssmin        = require('gulp-clean-css'), // minify css files
 
-		// IMAGES
-		imagemin  = require('gulp-imagemin'),  // optimize images
+	// IMAGES
+	imagemin  = require('gulp-imagemin'),  // optimize images
 
-		// REACT BROWSERIFY AND BABEL
-		browserify    = require('browserify'),
-		source        = require('vinyl-source-stream'),
-		errorify      = require('errorify'),
-		buffer        = require('vinyl-buffer'),
-		watchify      = require('watchify'),
-		babelify      = require('babelify'),
-		glob					= require('globby');
+	// REACT BROWSERIFY AND BABEL
+	browserify    = require('browserify'),
+	source        = require('vinyl-source-stream'),
+	errorify      = require('errorify'),
+	buffer        = require('vinyl-buffer'),
+	watchify      = require('watchify'),
+	babelify      = require('babelify'),
+	glob					= require('globby');
 
 var config = {
 	src: {
@@ -53,7 +54,7 @@ var config = {
 			'_src/assets/plugins/jquery/jquery-2.2.3.min.js',
 			'_src/assets/plugins/bootstrap/js/bootstrap.min.js',
 			'_src/assets/js/scripts.js',
-      '_src/assets/js/browserify-bundles/entry-subscribe.bundle.js'
+			'_src/assets/js/browserify-bundles/entry-subscribe.bundle.js'
 		],
 		sharedcss: [
 			'_src/assets/plugins/bootstrap/css/bootstrap.min.css',
@@ -105,7 +106,8 @@ var config = {
 		pagejs: 'assets/js/pages/',
 		pagecss: 'assets/css/pages/',
 		others: '.',
-		images: 'assets/images/'
+		images: 'assets/images/',
+		browserify: '_src/assets/js/browserify-bundles/'
 	},
 	names: {
 		sharedjs: 'common.min.js',
@@ -157,11 +159,11 @@ gulp.task('watch', function() {
 	gulp.watch(config.src.html, ['html']);
 });
 
-gulp.task('jshint', function () {
+gulp.task('eslint', function () {
 	return gulp
-		.src(config.src.js)
-		.pipe(jshint())
-		.pipe(jshint.reporter('jshint-stylish')); // for styling the output
+		.src(config.src.eslint)
+		.pipe(eslint())
+		.pipe(eslint.format());
 });
 
 gulp.task('shared-css', function() {
