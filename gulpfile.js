@@ -295,7 +295,7 @@ gulp.task('browserify', function(done) {
 function jsMinifyStream(srcGlob, filename, destDir) {
 	return gulp
 		.src(srcGlob)
-		.pipe(newer(destDir + filename))
+		.pipe(process.env.NODE_ENV == 'production' ? util.noop() : newer(destDir + filename))
 		.pipe(concat(filename))
 		.pipe(process.env.NODE_ENV == 'production' ? uglify() : util.noop())
 		.pipe(gulp.dest(destDir));
