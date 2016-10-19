@@ -1,1 +1,28 @@
-#preloader,.inner{position:absolute;top:0;bottom:0;right:0;left:0}.form-control[readonly]{background-color:#fff}.form-control:read-only{background-color:#fff}.form-control:-moz-read-only{background-color:#fff}#preloader{z-index:100;background:#fff}.inner{width:54px;height:54px;margin:0 auto}
+.form-control[readonly] {
+  background-color: #fff;
+}
+.form-control:read-only {
+  background-color: #fff;
+}
+.form-control:-moz-read-only {
+  background-color: #fff;
+}
+
+#preloader {
+  position: absolute;
+  z-index: 100;
+  top: 0; bottom: 0;
+  right: 0; left: 0;
+
+  background: #fff;
+}
+
+.inner {
+  position: absolute;
+  top: 0; bottom: 0;
+  right: 0; left: 0;
+
+  width: 54px;
+  height: 54px;
+  margin: 0 auto;
+}

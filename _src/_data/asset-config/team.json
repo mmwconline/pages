@@ -2,6 +2,9 @@
   "usesShared": "true",
   "js": [
     "_src/assets/plugins/magnific-popup/jquery.magnific-popup.min.js"
+  ],
+  "css": [
+    "_src/assets/css/pages/team.css"
   ]
 }
 

@@ -33,7 +33,32 @@ excerpt: >
                         <h4 class="nomargin">{{ member.name }}</h4>
                         <small class="margin-bottom-20 block">{{ member.position }}</small>
 
-                        <p>{{ member.description | strip_newlines | truncate:110 }}</p>
+                        <p>
+                            {% assign descSize = member.description | size %}
+                            {% if descSize > 130 %}
+                            {{ member.description | strip_newlines | truncate:110 }}
+                            <a data-toggle="modal" data-target="#team-member-{{ forloop.index }}">Read more</a>
+                            {% else %}
+                            {{ member.description | strip_newlines }}
+                            {% endif %}
+                            {% assign closeOpenParagraphs = '</p><p>' %}
+                        </p>
+                        <div id="team-member-{{ forloop.index }}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title">{{ member.name }} <span class="size-11">/ {{ member.position }}</span></h4>
+                                    </div>
+
+                                    <div class="modal-body" style="min-height: 300px">
+                                        <img src="{{ page.baseurl }}{{ member.image }}" style="float: right; width: 200px; margin-bottom: 10px; margin-left: 10px"/>
+                                        <p>{{ member.description | newline_to_br }}</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {% if member.email %}
                         <a href="mailto:{{ member.email }}" class="social-icon social-icon-sm social-email3"><i class="icon-email3"></i><i class="icon-email3"></i></a>
                         {% endif %}
