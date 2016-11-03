@@ -203,15 +203,11 @@ function getLocation(locationStr) {
   if (locationStr) return _react2.default.createElement(
     "li",
     null,
+    _react2.default.createElement("i", { className: "fa fa-map-marker" }),
     _react2.default.createElement(
-      "a",
-      { href: "#" },
-      _react2.default.createElement("i", { className: "fa fa-map-marker" }),
-      _react2.default.createElement(
-        "span",
-        { className: "font-lato" },
-        locationStr
-      )
+      "span",
+      { className: "font-lato" },
+      locationStr
     )
   );
 }
@@ -260,12 +256,8 @@ var Event = function Event(props) {
         { className: "inews-content-inner" },
         _react2.default.createElement(
           "h3",
-          { className: "size-20" },
-          _react2.default.createElement(
-            "a",
-            { href: "#" },
-            props.title
-          )
+          { className: "size-20 styleColor" },
+          props.title
         ),
         _react2.default.createElement(
           "ul",
@@ -273,15 +265,11 @@ var Event = function Event(props) {
           _react2.default.createElement(
             "li",
             null,
+            _react2.default.createElement("i", { className: "fa fa-hourglass-start" }),
             _react2.default.createElement(
-              "a",
-              { href: "" },
-              _react2.default.createElement("i", { className: "fa fa-hourglass-start" }),
-              _react2.default.createElement(
-                "span",
-                { className: "font-lato" },
-                interval
-              )
+              "span",
+              { className: "font-lato" },
+              interval
             )
           ),
           getLocation(props.location)
