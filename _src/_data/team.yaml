@@ -17,7 +17,7 @@
     A pediatric nurse practitioner at children’s hospital of Wisconsin, BSN from Alverno College, MSN from Marquette University, and post master’s from UW Madison.  Ms. Farhoud has been an MMWC board member for 17 years.  In addition, she is an Islamic Society of Milwaukee (ISM) board member, DHHS minority health council member and she is a frequent guest speaker at churches, schools, hospitals, etc.  Ms. Farhoud is an advocate of accessible healthcare for everyone and volunteers at 2 different free clinics.
   position: Vice President
   image: assets/images/team/inshirah.jpg
-  email: inshirahf@gmail.com
+  email:
   workPhone:
   mobilePhone:
   fb:
@@ -27,10 +27,10 @@
 
 - name: Hanadi Bu Ali M.D.
   description: |
-    She is a breast surgical oncologist who chairs the breast program leadership team at the Wheaton Franciscan Healthcare North market Campus.  She completed her medical school in Bahrain and did her initial training in surgery in Detroit Michigan and her surgical oncology training in Akron, Ohio.  She has been recognized as one of the 40 under 40 by the Business Journal and named one of America’s Top Surgeons by the Consumers’ Research Council of America for the year 2012, 2013 and 2014. She has been active in research and improvement of patient quality of care since she started in the field of healthcare.  She offers innovative surgical care adopting oncoplastic techniques.  She has been serving as an MMWC board member for several years, and leads the MMWC team for the Susan G. Komen Race for the Cure ©. Dr. Bu-Ali also serves as an associate professor of surgery at MCW.
+    She is a native of Bahrain. She is a breast surgical oncologist. She completed her medical school in Bahrain and did her initial training in surgery in Detroit Michigan and her surgical oncology training in Akron, Ohio. She has been recognized as one of the 40 under 40 by the Business Journal and named one of America’s Top Surgeons by the Consumers’ Research Council of America for the year 2012 through 2016. She has been active in research and improvement of patient quality of care since she started in the field of healthcare. She offers innovative surgical care adopting oncoplastic techniques. She has been serving as an MMWC board member for several years, and has lead the MMWC team for the Susan G. Komen Race for the Cure ©. Dr. Bu-Ali also served as a faculty member of Northeast Ohio Medical University and the Medical College of Wisconsin.
   position: Board Member
   image: assets/images/team/hanadi.jpg
-  email: inshirahf@gmail.com
+  email:
   workPhone:
   mobilePhone:
   fb:
@@ -40,10 +40,10 @@
 
 - name: Dr. Sahar Katib Kayata M.D.
   description: |
-    She received her medical education at the Faculte de Medicine in Paris, France. She then completed her residency at Rainbow Babies & Children’s University Hospital in Pediatrics. She currently works with Newborn Care Physicians and is a board certified Neonatal & Perinatal Physician. She has been involved with the MMWC for nearly 15 years, she has been a board member for several years.
+    She was born in Aleppo, Syria. She received her medical degree from The Sorbonne University at the Faculte de Medicine in Paris, France. She completed her Pediatrics Residency at Case Western Reserve University, Rainbow Babies & Children’s Hospital in Cleveland, Ohio. She then did her Neonatology Fellowship at the University of Wisconsin, Medical College of WI. She currently works with Newborn Care Physicians and is a board certified Neonatal & Perinatal Physician. She has been involved with the MMWC for nearly 15 years and has been a board member for several years.
   position: Board Member
   image: assets/images/team/sahar.jpg
-  email: inshirahf@gmail.com
+  email:
   workPhone: +1-414-447-2663
   mobilePhone:
   fb:
@@ -70,7 +70,7 @@
     Zehra Tahir has been active in the educational programs in the Milwaukee community for the past several years. She joined Salam School in the fall of 2005 in order to work in the field for which she had the greatest passion: education. Zehra is a member of the Advisory Committee of the Wisconsin Schools of Character, and is a strong advocate of shaping lives through character, and integrating character education into schools. She has also been a board member of the Islamic Society of Milwaukee and the ISM Education Council. She has been an MMWC board member for several years.
   position: Board Member
   image: assets/images/team/zehra.jpg
-  email: zehratahir@gmail.com
+  email:
   workPhone:
   mobilePhone:
   fb:
@@ -80,10 +80,10 @@
 
 - name: Ream Bahhur
   description: |
-    Donec id elit non mi porta gravida at eget metus id dolor.
+    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus id dolor.
   position: Board Member
   image: assets/images/team/ream.jpg
-  email: rbahhur@salamschool.com
+  email:
   workPhone:
   mobilePhone:
   fb: https://www.facebook.com/ream.bahhur
@@ -93,10 +93,10 @@
 
 - name: Bara Omari
   description: |
-    Donec id elit non mi porta gravida at eget metus id dolor.
+    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus id dolor.
   position: Board Member
   image: assets/images/team/bara.jpg
-  email: bsomari@gmail.com
+  email:
   workPhone:
   mobilePhone:
   fb: https://www.facebook.com/bara.omari.98
@@ -119,7 +119,7 @@
 
 - name: Elise Bellin
   description: |
-    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus.
+    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus. Donec id elit non mi porta
   position: Librarian
   image: assets/images/team/elise.jpg
   email:
@@ -132,10 +132,10 @@
 
 - name: Amany Fares
   description: |
-    Donec id elit non mi porta gravida at eget metus id dolor.
+    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta
   position: Staff Member
   image: assets/images/team/amany.jpg
-  email:
+  email: staff@mmwconline.org
   workPhone:
   mobilePhone:
   fb:
@@ -145,7 +145,7 @@
 
 - name: Sundus Jaber
   description: |
-    Donec id elit non mi porta gravida at eget metus id dolor.
+    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus id dolor.
   position: Staff Member
   image: assets/images/team/sundus.jpg
   email:
@@ -155,3 +155,16 @@
   twitter:
   google:
   linkedIn: https://www.linkedin.com/in/elisebellin
+
+- name: Ayah Ali
+  description: |
+    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus id dolor.
+  position: Staff Member
+  image: assets/images/team/ayah.jpg
+  email:
+  workPhone:
+  mobilePhone:
+  fb: https://www.facebook.com/ayah.m.ali
+  twitter: https://twitter.com/aayah1994
+  google:
+  linkedIn: https://www.linkedin.com/in/ayah-ali-10926bb1
