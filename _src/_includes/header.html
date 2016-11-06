@@ -1,9 +1,9 @@
-<div id="header" class="{% if include.isError %}header-sm dark{% else %}sticky{% endif %} clearfix {% if page.hasFullDarkRevSlider %}transparent noborder{% endif %}">
+<div id="header" class="{% if include.isError %}header-sm dark{% else %}sticky{% endif %} clearfix {% if page.hasFullDarkRevSlider %}transparent{% endif %}">
 
     <!-- TOP NAV -->
     <header id="topNav">
         <!--full-container class for full page rev slider with dark bg-->
-        <div class="{% if page.hasFullDarkRevSlider %}full-container{% else %}container{% endif %}">
+        <div class="container">
 
             {% include headers/buttons.html %}
 
@@ -16,7 +16,7 @@
                 <img src="{{ page.baseurl }}assets/images/logo.png" alt="" />
                 {% endif %}
             </a>
-            <div class="navbar-collapse pull-right nav-main-collapse collapse {% if page.hasFullDarkRevSlider or include.isError %}submenu-dark{% endif %}">
+            <div class="navbar-collapse pull-right nav-main-collapse collapse {% if include.isError %}submenu-dark{% endif %}">
                 {% include headers/nav.html %}
             </div>
 

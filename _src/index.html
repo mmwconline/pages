@@ -3,41 +3,16 @@ hasFullDarkRevSlider: true
 baseurl: ./
 ---
 <!-- REVOLUTION SLIDER -->
-<section id="slider" class="fullwidthbanner-container roundedcorners">
-    <div class="fullscreenbanner" data-navigationStyle="preview4">
+<section id="slider" class="slider fullwidthbanner-container roundedcorners">
+    <div class="fullscreenbanner">
         <ul class="hide">
             <!-- SLIDE -->
-            <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off" data-title="Slide title 2" data-thumb="assets/images/demo/video/neuron_thumb.jpg">
+            <li data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off"
+                data-title="Slide title 1" data-thumb="assets/images/cover.jpg">
 
-                <img src="assets/images/1x1.png" data-lazyload="assets/images/demo/video/neuron.jpg" alt="video" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat">
+                <img src="assets/images/1x1.png" data-lazyload="assets/images/cover.jpg" alt="" data-bgfit="cover" data-bgposition="center top" data-bgrepeat="no-repeat" />
 
-
-                <div class="tp-caption tp-fade fadeout fullscreenvideo"
-                     data-x="0"
-                     data-y="0"
-                     data-speed="1000"
-                     data-start="1100"
-                     data-easing="Power4.easeOut"
-                     data-elementdelay="0.01"
-                     data-endelementdelay="0.1"
-                     data-endspeed="1500"
-                     data-endeasing="Power4.easeIn"
-                     data-autoplay="true"
-                     data-autoplayonlyfirsttime="false"
-                     data-nextslideatend="true"
-                     data-volume="mute"
-                     data-forceCover="1"
-                     data-aspectratio="16:9"
-                     data-forcerewind="on" style="z-index: 2;">
-
-                    <div class="overlay dark-4"><!-- dark overlay [1 to 9 opacity] --></div>
-
-                    <video class="fullvideo" preload="none" poster="assets/images/demo/video/neuron.jpg">
-                        <source src="assets/images/demo/video/neuron.webm" type="video/webm" />
-                        <source src="assets/images/demo/video/neuron.mp4" type="video/mp4" />
-                    </video>
-
-                </div>
+                <div class="overlay dark-5"><!-- dark overlay [1 to 9 opacity] --></div>
 
                 <div class="tp-caption customin ltl tp-resizeme text_white"
                      data-x="center"
@@ -100,10 +75,38 @@ baseurl: ./
                      data-endelementdelay="0.1"
                      data-endspeed="1000"
                      data-endeasing="Power4.easeIn" style="z-index: 3;">
-                    <a href="{{ page.baseurl }}donate/" class="btn btn-default btn-lg">
-                        <span>Donate Now</span>
-                    </a>
+                    <!--btn btn-3d btn-xlg btn-red-->
+                    <form method="post" action="#" class="row margin-top-80 landing-form" style="width: 630px">
+
+                        <div class="col-sm-7">
+                            <input type="email" class="form-control input-lg" value="" placeholder="Email" style="width: 300px; margin-right: 10px" />
+                        </div>
+
+                        <div class="col-sm-5">
+                            <button class="btn btn-3d btn-block btn-red"><i class="glyphicon glyphicon-th-large"></i>SUBSCRIBE</button>
+                        </div>
+                    </form>
+                    <!--<a href="{{ page.baseurl }}donate/" class="btn btn-3d btn-xlg btn-red">-->
+                        <!--DONATE TO MMWC-->
+                        <!--<span class="block font-lato">Click here to find out why</span>-->
+                    <!--</a>-->
                 </div>
+
+                <!--<div class="tp-caption customin ltl tp-resizeme"-->
+                     <!--data-x="center"-->
+                     <!--data-y="bottom"-->
+                     <!--data-customin="x:0;y:150;z:0;rotationZ:0;scaleX:1;scaleY:1;skewX:0;skewY:0;opacity:0;transformPerspective:200;transformOrigin:50% 0%;"-->
+                     <!--data-speed="800"-->
+                     <!--data-start="1550"-->
+                     <!--data-easing="easeOutQuad"-->
+                     <!--data-splitin="none"-->
+                     <!--data-splitout="none"-->
+                     <!--data-elementdelay="0.01"-->
+                     <!--data-endelementdelay="0.1"-->
+                     <!--data-endspeed="1000"-->
+                     <!--data-endeasing="Power4.easeIn" style="z-index: 3;">-->
+
+                <!--</div>-->
             </li>
         </ul>
     </div>
