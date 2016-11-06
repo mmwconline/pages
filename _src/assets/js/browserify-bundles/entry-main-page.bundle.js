@@ -151,7 +151,7 @@ var App = function (_React$Component) {
           _react2.default.createElement(
             'h2',
             null,
-            'Upcoming Events ',
+            'Special Events ',
             _react2.default.createElement(
               'span',
               { className: 'size-18' },

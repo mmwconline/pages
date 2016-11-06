@@ -8,11 +8,11 @@ var _jQuery2 = _interopRequireDefault(_jQuery);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _jQuery2.default)('#subscribeForm').submit(function (e) {
+(0, _jQuery2.default)('.subscribeForm').submit(function (e) {
   e.preventDefault();
 
-  var $subscribeButton = (0, _jQuery2.default)('#subscribeButton'),
-      $subscribeEmail = (0, _jQuery2.default)('#subscriberEmail');
+  var $subscribeButton = (0, _jQuery2.default)(this).find('.subscribeButton'),
+      $subscribeEmail = (0, _jQuery2.default)(this).find('.subscriberEmail');
 
   //only gets disabled after a successful message sent
   if ($subscribeEmail.is(':disabled')) return false;
@@ -32,7 +32,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
     },
     success: function success(data) {
       if (data.result === "success") {
-        $subscribeButton.removeClass('btn-primary').html('Subscribed!').addClass('btn-success');
+        $subscribeButton.removeClass('btn-red').removeClass('btn-primary').html('Subscribed!').addClass('btn-success');
         disableEmailField($subscribeEmail);
       } else if (data.msg.indexOf("0 - ") > -1) {
         $subscribeEmail.addClass('error');
@@ -42,7 +42,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 });
 
 function handleError($subscribeButton, $subscribeEmail) {
-  $subscribeButton.removeClass('btn-primary').html('Try Again Later').addClass('btn-danger');
+  $subscribeButton.removeClass('btn-primary').removeClass('btn-red').html('Try Again Later').addClass('btn-danger');
   disableEmailField($subscribeEmail);
 }
 

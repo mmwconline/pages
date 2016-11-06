@@ -43,7 +43,7 @@ class App extends React.Component {
     return (
       <div className="container">
         <div className="row">
-          <h2>Upcoming Events <span className="size-18">/ see you there!</span></h2>
+          <h2>Special Events <span className="size-18">/ see you there!</span></h2>
           <ErrorMessage noEvents={this.state.events.length === 0} error={this.state.hasError}/>
           {this.state.events.map((e) => {
             let {id, ...others} = e;

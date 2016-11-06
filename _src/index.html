@@ -59,7 +59,7 @@ baseurl: ./
                      data-endelementdelay="0.1"
                      data-endspeed="1000"
                      data-endeasing="Power4.easeIn" style="z-index: 3; width: 750px; max-width: 750px; white-space: normal; text-align:center;">
-                    Tremendous work in education, outreach, and advocating for social justice has made us the most recognizable Muslim Women’s organization in Wisconsin.
+                    Tremendous work in education, outreach, and advocating for social justice has made us the most recognizable outreach organization in Wisconsin.
                 </div>
 
                 <div class="tp-caption customin ltl tp-resizeme"
@@ -76,14 +76,20 @@ baseurl: ./
                      data-endspeed="1000"
                      data-endeasing="Power4.easeIn" style="z-index: 3;">
                     <!--btn btn-3d btn-xlg btn-red-->
-                    <form method="post" action="#" class="row margin-top-80 landing-form" style="width: 630px">
+                    <form method="post" class="row margin-top-80 landing-form subscribeForm" style="width: 630px"
+                          action="http://mmwconline.us3.list-manage.com/subscribe/post?u=63d144864f5fd557a761d89cb&amp;id=792c8836f1">
 
                         <div class="col-sm-7">
-                            <input type="email" class="form-control input-lg" value="" placeholder="Email" style="width: 300px; margin-right: 10px" />
+                            <input type="email" class="form-control input-lg subscriberEmail" value="" name="EMAIL"
+                                   placeholder="Enter your Email" required="required" />
                         </div>
-
+                        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                            <input type="text" name="b_63d144864f5fd557a761d89cb_792c8836f1" tabindex="-1" value=""/>
+                        </div>
                         <div class="col-sm-5">
-                            <button class="btn btn-3d btn-block btn-red"><i class="fa fa-envelope"></i>SUBSCRIBE</button>
+                            <button class="btn btn-3d btn-block btn-red subscribeButton" type="submit" name="subscribe">
+                                <i class="fa fa-envelope"></i>SUBSCRIBE
+                            </button>
                         </div>
                     </form>
                     <!--<a href="{{ page.baseurl }}donate/" class="btn btn-3d btn-xlg btn-red">-->

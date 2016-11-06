@@ -1,10 +1,10 @@
 import $ from 'jQuery';
 
-$('#subscribeForm').submit(function(e) {
+$('.subscribeForm').submit(function(e) {
   e.preventDefault();
 
-  let $subscribeButton = $('#subscribeButton'),
-      $subscribeEmail = $('#subscriberEmail');
+  let $subscribeButton = $(this).find('.subscribeButton'),
+      $subscribeEmail = $(this).find('.subscriberEmail');
 
   //only gets disabled after a successful message sent
   if ($subscribeEmail.is(':disabled'))
@@ -24,7 +24,7 @@ $('#subscribeForm').submit(function(e) {
     error: () => handleError($subscribeButton, $subscribeEmail),
     success: (data) => {
       if (data.result === "success") {
-        $subscribeButton.removeClass('btn-primary').html('Subscribed!').addClass('btn-success');
+        $subscribeButton.removeClass('btn-red').removeClass('btn-primary').html('Subscribed!').addClass('btn-success');
         disableEmailField($subscribeEmail);
       }
       else if (data.msg.indexOf("0 - ") > -1) {
@@ -39,7 +39,7 @@ $('#subscribeForm').submit(function(e) {
 });
 
 function handleError($subscribeButton, $subscribeEmail) {
-  $subscribeButton.removeClass('btn-primary').html('Try Again Later').addClass('btn-danger');
+  $subscribeButton.removeClass('btn-primary').removeClass('btn-red').html('Try Again Later').addClass('btn-danger');
   disableEmailField($subscribeEmail);
 }
 
