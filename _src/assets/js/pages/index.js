@@ -1,4 +1,4 @@
-(function($) {
+(function($, viewport) {
   function _masonryGallery() {
     var $masonryGallery = jQuery(".masonry-gallery");
     if($masonryGallery.length > 0) {
@@ -121,5 +121,17 @@
         _masonryGallery();
       });
     _lightbox();
+    var revHeader = $('.rev-slider-zoom-header');
+    var revPara = $('.rev-slider-zoom-p');
+    //increase size on mobile and tablets
+    if (viewport.is("<=sm")) {
+      revHeader.css('font-size', '11px');
+    }
+    if (viewport.is("xs")) {
+      revHeader.css('font-size', '26px');
+      revPara.css('font-size', '12px');
+      revPara.css('line-height', '12px');
+
+    }
   });
-})(jQuery);
+})(jQuery, ResponsiveBootstrapToolkit);

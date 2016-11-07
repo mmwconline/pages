@@ -80,7 +80,7 @@
 
 - name: Ream Bahhur
   description: |
-    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus id dolor.
+    If you are not willing to learn, no one can help you. If you are determined to learn, no one can stop you.
   position: Board Member
   image: assets/images/team/ream.jpg
   email:
@@ -93,7 +93,8 @@
 
 - name: Bara Omari
   description: |
-    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus id dolor.
+    Many of life's failures are people who did not realize how close they were to success when they gave up..
+
   position: Board Member
   image: assets/images/team/bara.jpg
   email:
@@ -119,7 +120,7 @@
 
 - name: Elise Bellin
   description: |
-    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus. Donec id elit non mi porta
+    "To play a wrong note is insigifnicant; to play without passion is inexcusable," (Ludwig van beethoven)
   position: Librarian
   image: assets/images/team/elise.jpg
   email:
@@ -132,7 +133,7 @@
 
 - name: Amany Fares
   description: |
-    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta
+    "A man who views the world at 50 the same as he did at 20 has wasted 30 years of his life," (Muhammad Ali)
   position: Staff Member
   image: assets/images/team/amany.jpg
   email: staff@mmwconline.org
@@ -145,7 +146,7 @@
 
 - name: Sundus Jaber
   description: |
-    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus id dolor.
+    It may be that you dislike a thing and it is actually good for you. It may be that you love a thing and it is actually bad for you. Allah knows while you do not know.
   position: Staff Member
   image: assets/images/team/sundus.jpg
   email:
@@ -158,7 +159,7 @@
 
 - name: Ayah Ali
   description: |
-    Donec id elit non mi porta gravida at eget metus id dolor. Donec id elit non mi porta gravida at eget metus id dolor.
+    Experience is not what happens to you; it's what you do with what happens to you.
   position: Staff Member
   image: assets/images/team/ayah.jpg
   email:

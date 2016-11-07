@@ -1,7 +1,7 @@
 import React from 'react';
 import CalendarService from '../../services/CalendarService.js'
 import Event from './Event.jsx'
-import ErrorMessage from '../ErrorMessage.jsx'
+import classnames from 'classnames'
 
 class App extends React.Component {
   constructor(props) {
@@ -40,11 +40,12 @@ class App extends React.Component {
   }
 
   render() {
+    var cn = classnames('padding-xs',{ hide: this.state.events.length === 0 });
     return (
+    <section id="event-app" className={cn} style={{paddingBottom: '50px'}}>
       <div className="container">
         <div className="row">
           <h2>Special Events <span className="size-18">/ see you there!</span></h2>
-          <ErrorMessage noEvents={this.state.events.length === 0} error={this.state.hasError}/>
           {this.state.events.map((e) => {
             let {id, ...others} = e;
             return <Event key={id} {...others} getPrintFields={e.getPrintFields}
@@ -52,6 +53,7 @@ class App extends React.Component {
           })}
         </div>
       </div>
+    </section>
     );
   }
 }

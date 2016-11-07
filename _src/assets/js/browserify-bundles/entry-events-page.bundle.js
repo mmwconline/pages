@@ -977,6 +977,10 @@ var _EventModel = require('../models/EventModel');
 
 var _EventModel2 = _interopRequireDefault(_EventModel);
 
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -1049,12 +1053,15 @@ var CalendarService = function () {
     key: 'loadMoreEvents',
     value: function loadMoreEvents(dateLowerBound, query, showRegularEvents) {
       var deferredObject = _jQuery2.default.Deferred();
-      var uri = 'https://www.googleapis.com/calendar/v3/calendars/' + this.calendarId + '/events?maxAttendees=1' + ('&timeMin=' + dateLowerBound.toISOString() + '&key=' + key + '&maxResults=' + this.maxResults * 3);
+      var uri = 'https://www.googleapis.com/calendar/v3/calendars/' + this.calendarId + '/events?maxAttendees=1' + ('&timeMin=' + dateLowerBound.toISOString() + '&key=' + key);
+
+      // const maxResults = this.maxResults < 5 ? 25 : this.maxResults * 3;
 
       if (showRegularEvents == true) uri += '&orderBy=startTime&singleEvents=true';
       if (this.pageToken != null) uri += '&pageToken=' + this.pageToken;
       if (query != null) uri += '&q=' + query;
 
+      if (!(showRegularEvents == false && (0, _moment2.default)(dateLowerBound).isSameOrAfter((0, _moment2.default)(), 'day'))) uri += '&maxResults=' + this.maxResults * 3;
       _jQuery2.default.ajax({
         type: 'GET',
         url: encodeURI(uri),
@@ -1101,7 +1108,7 @@ var CalendarService = function () {
 exports.default = CalendarService;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../models/EventModel":9}],11:[function(require,module,exports){
+},{"../models/EventModel":9,"moment":38}],11:[function(require,module,exports){
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set

@@ -1,5 +1,6 @@
 import $ from 'jQuery';
 import EventModel from '../models/EventModel';
+import moment from 'moment'
 
 const key = 'AIzaSyCy-RXvh3d-1OvRfYy6_p8uyKxYeaF5w4A';
 
@@ -54,7 +55,9 @@ export default class CalendarService {
   loadMoreEvents(dateLowerBound, query, showRegularEvents) {
     let deferredObject = $.Deferred();
     let uri = `https://www.googleapis.com/calendar/v3/calendars/${this.calendarId}/events?maxAttendees=1` +
-      `&timeMin=${dateLowerBound.toISOString()}&key=${key}&maxResults=${this.maxResults * 3}`;
+      `&timeMin=${dateLowerBound.toISOString()}&key=${key}`;
+
+    // const maxResults = this.maxResults < 5 ? 25 : this.maxResults * 3;
 
     if (showRegularEvents == true)
       uri += '&orderBy=startTime&singleEvents=true';
@@ -63,6 +66,8 @@ export default class CalendarService {
     if (query != null)
       uri += '&q=' + query;
 
+    if (!(showRegularEvents == false && moment(dateLowerBound).isSameOrAfter(moment(), 'day')))
+      uri += `&maxResults=${this.maxResults * 3}`;
     $.ajax({
       type: 'GET',
       url: encodeURI(uri),
