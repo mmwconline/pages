@@ -6,7 +6,7 @@ var map2 = new GMaps({
 	lat: mmwcLat,
 	lng: mmwcLng,
 	scrollwheel: false,
-	zoom: 6
+	zoom: 10
 });
 (function() {
 	"use strict";

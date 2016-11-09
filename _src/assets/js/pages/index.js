@@ -134,4 +134,6 @@
 
     }
   });
+  /* eslint-disable */
 })(jQuery, ResponsiveBootstrapToolkit);
+/* eslint-enable */

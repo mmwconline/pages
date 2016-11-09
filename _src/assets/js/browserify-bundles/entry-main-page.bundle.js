@@ -160,6 +160,7 @@ function getLocation(locationStr) {
 var Event = function Event(props) {
   var _props$getPrintFields = props.getPrintFields();
 
+  var startDateStr = _props$getPrintFields.startDateStr;
   var startMonthStr = _props$getPrintFields.startMonthStr;
   var startDayOfMonth = _props$getPrintFields.startDayOfMonth;
   var startYear = _props$getPrintFields.startYear;
@@ -170,8 +171,8 @@ var Event = function Event(props) {
     "div",
     { className: "inews-item" },
     _react2.default.createElement(
-      "a",
-      { className: "inews-thumbnail ", href: "#" },
+      "div",
+      { className: "inews-thumbnail" },
       _react2.default.createElement("img", { className: "img-responsive hidden-xs", src: props.imgUrl ? props.imgUrl : props.defaultPicture, alt: "image" })
     ),
     _react2.default.createElement(
@@ -207,6 +208,16 @@ var Event = function Event(props) {
         _react2.default.createElement(
           "ul",
           { className: "blog-post-info list-inline noborder margin-bottom-20 nopadding" },
+          _react2.default.createElement(
+            "li",
+            null,
+            _react2.default.createElement("i", { className: "fa fa-calendar" }),
+            _react2.default.createElement(
+              "span",
+              { className: "font-lato" },
+              startDateStr
+            )
+          ),
           _react2.default.createElement(
             "li",
             null,

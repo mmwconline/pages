@@ -13,7 +13,8 @@ function getLocation(locationStr) {
 const Event = (props) => {
 
   let
-    { startMonthStr,
+    { startDateStr,
+      startMonthStr,
       startDayOfMonth,
       startYear,
       interval
@@ -22,9 +23,9 @@ const Event = (props) => {
   return (
 
     <div className="inews-item">
-      <a className="inews-thumbnail " href="#">
+      <div className="inews-thumbnail">
         <img className="img-responsive hidden-xs" src={props.imgUrl ? props.imgUrl : props.defaultPicture } alt="image" />
-      </a>
+      </div>
 
       <div className="inews-item-content">
 
@@ -38,6 +39,10 @@ const Event = (props) => {
 
           <h3 className="size-20 styleColor">{ props.title }</h3>
           <ul className="blog-post-info list-inline noborder margin-bottom-20 nopadding">
+            <li>
+              <i className="fa fa-calendar"/>
+              <span className="font-lato">{ startDateStr }</span>
+            </li>
             <li>
               <i className="fa fa-hourglass-start"/>
               <span className="font-lato">{ interval }</span>

@@ -25,10 +25,8 @@ function getLocation(locationStr) {
   if (locationStr)
     return (
       <li>
-        <a href="#">
-          <i className="fa fa-map-marker"/>
-          <span className="font-lato">{ locationStr }</span>
-        </a>
+        <i className="fa fa-map-marker"/>
+        <span className="font-lato">{ locationStr }</span>
       </li>
     );
 }
@@ -56,16 +54,12 @@ const Event = (props) => {
 
       <ul className="blog-post-info list-inline">
         <li>
-          <a href="#">
-            <i className="fa fa-calendar"/>
-            <span className="font-lato">{ startDateStr }</span>
-          </a>
+          <i className="fa fa-calendar"/>
+          <span className="font-lato">{ startDateStr }</span>
         </li>
         <li>
-          <a href="#">
-            <i className="fa fa-hourglass-start"/>
-            <span className="font-lato">{ interval }</span>
-          </a>
+          <i className="fa fa-hourglass-start"/>
+          <span className="font-lato">{ interval }</span>
         </li>
 
         { getLocation(props.location) }
