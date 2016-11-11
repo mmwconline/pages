@@ -6823,10 +6823,6 @@ section.dark .callout-transparent p {
 		text-align:left;
 	}
 	.callout-box.callout-default .btn,
-	.callout .btn {
-		display:block;
-		margin-top:30px !important;
-	}
 	
 	.callout.alert,
 	.callout-box.callout-default {

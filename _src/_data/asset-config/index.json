@@ -15,6 +15,7 @@
   "css": [
     "_src/assets/plugins/slider.revolution/css/extralayers.css",
     "_src/assets/plugins/slider.revolution/css/settings.css",
-    "_src/assets/css/pages/blog.css"
+    "_src/assets/css/pages/blog.css",
+    "_src/assets/css/pages/index.css"
   ]
 }

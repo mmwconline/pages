@@ -93,7 +93,7 @@ function Init(is_ajax) {
 	_widget_facebook();
 	_widget_dribbble();
 	_widget_media();
-
+	_custom();
 	/** Bootstrap Tooltip **/
 	jQuery("a[data-toggle=tooltip], button[data-toggle=tooltip], span[data-toggle=tooltip]").tooltip();
 }
@@ -256,6 +256,7 @@ function _topNav() {
 		}
 
 	}
+
 
 
 	// Mobile Submenu
@@ -3561,7 +3562,17 @@ function disable_overlay() {
 	});
 })(jQuery);
 
+function _custom() {
+	jQuery("a.scrollToAnchor").bind("click", function(e) {
+		var scrollToID = jQuery(this).attr('href');
+		var scrollToOffset = parseInt(jQuery(this).data('offset')) || 0;
 
+		e.preventDefault();
+		jQuery('html,body').animate({
+			scrollTop: jQuery(scrollToID).offset().top - 100 + scrollToOffset
+		}, 1000, 'easeInOutExpo');
+	});
+}
 
 /** Appear
  https://github.com/bas2k/jquery.appear/

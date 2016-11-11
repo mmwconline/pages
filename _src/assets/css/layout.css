@@ -7061,6 +7061,10 @@ ul.search-history {
 	background: linear-gradient(to bottom, #555555 0%,#313131 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#313131',GradientType=0 );
 }
+
+#subscribeCallout {
+	background: #A94545;
+}
 #footer>.container {
 	padding-top:60px;
 	margin-bottom:60px;
@@ -7278,7 +7282,8 @@ ul.search-history {
 		line-height:30px;
 	}		
 	#footer address .footer-sprite.email {
-		background-position:0 -247px;
+		background-position:0 -240px;
+		/*line-height:40px;*/
 	}
 
 
