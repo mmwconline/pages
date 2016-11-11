@@ -54,7 +54,8 @@ var config = {
 			'_src/assets/plugins/jquery/jquery-2.2.3.min.js',
 			'_src/assets/plugins/bootstrap/js/bootstrap.min.js',
 			'_src/assets/js/scripts.js',
-			'_src/assets/js/browserify-bundles/entry-subscribe.bundle.js'
+			'_src/assets/js/browserify-bundles/entry-subscribe.bundle.js',
+			'_src/assets/js/ganalytics.js'
 		],
 		sharedcss: [
 			'_src/assets/plugins/bootstrap/css/bootstrap.min.css',
