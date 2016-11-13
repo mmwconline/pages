@@ -1,6 +1,7 @@
 ---
 layout: error
 baseurl: /
+assetConfig: only-shared-assets
 ---
 <section id="slider" class="fullheight dark">
 
@@ -20,8 +21,8 @@ baseurl: /
                     <div class="text-center col-md-4 col-xs-12 col-md-offset-4">
                         <!-- INLINE SEARCH -->
                         <div class="inline-search clearfix inline-search-404">
-                            <form action="" method="get" class="widget_search">
-                                <input type="search" placeholder="Search..." id="s" name="s" class="serch-input">
+                            <form action="{{ page.basurl }}search.html" method="get" class="widget_search">
+                                <input type="search" placeholder="Search..." id="q" name="q" class="search-input">
                                 <button type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>
