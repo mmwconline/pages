@@ -63,7 +63,8 @@ var App = function (_React$Component) {
       this.service.getEvents({
         startTime: new Date(),
         query: null,
-        showRegularEvents: this.showRegularEvents
+        showRegularEvents: this.showRegularEvents,
+        stickyOnly: true
       }).done(function (events) {
         return _this2.setState({
           events: events,
@@ -345,8 +346,12 @@ var Event = function () {
     if (calendarApiEvent.description != null) {
       this.description = calendarApiEvent.description.split('\n');
       if (this.description.length > 0) {
+
         this.ytId = getYTubeID(this.description[0]) || null;
         if (this.ytId != null) this.description.shift();
+
+        this.shouldHideForStickyOnlyView = this.description[0] === "hide" || false;
+        if (this.shouldHideForStickyOnlyView) this.description.shift();
         this.description = this.description.join('\n');
       } else this.description = calendarApiEvent.description;
     }
@@ -451,10 +456,11 @@ var CalendarService = function () {
 
   _createClass(CalendarService, [{
     key: 'init',
-    value: function init(startTime, query, showRegularEvents) {
+    value: function init(startTime, query, showRegularEvents, stickyOnly) {
       this.lastQuery = query;
       this.lastShowRegularEvents = showRegularEvents;
       this.lastStartTime = startTime;
+      this.stickyOnly = stickyOnly;
 
       this.pageToken = null;
       this.eventsNotReturned = [];
@@ -468,11 +474,12 @@ var CalendarService = function () {
       var startTime = _ref.startTime;
       var query = _ref.query;
       var showRegularEvents = _ref.showRegularEvents;
+      var stickyOnly = _ref.stickyOnly;
 
       var deferredObject = _jQuery2.default.Deferred();
 
-      if (this.hasQueryChanged(startTime, query, showRegularEvents)) {
-        this.init(startTime, query, showRegularEvents);
+      if (this.hasQueryChanged(startTime, query, showRegularEvents, stickyOnly)) {
+        this.init(startTime, query, showRegularEvents, stickyOnly);
         deferredObject.notify({ hasQueryChanged: true });
       }
 
@@ -484,7 +491,7 @@ var CalendarService = function () {
         deferredObject.resolve(this.eventsReturned, this.pageToken != null);
         return deferredObject.promise();
       }
-      this.loadMoreEvents(startTime, query, showRegularEvents).done(function (nextPageToken, events) {
+      this.loadMoreEvents(startTime, query, showRegularEvents, stickyOnly).done(function (nextPageToken, events) {
         var _eventsNotReturned, _eventsReturned2;
 
         _this.pageToken = nextPageToken;
@@ -499,7 +506,7 @@ var CalendarService = function () {
     }
   }, {
     key: 'loadMoreEvents',
-    value: function loadMoreEvents(dateLowerBound, query, showRegularEvents) {
+    value: function loadMoreEvents(dateLowerBound, query, showRegularEvents, stickyOnly) {
       var deferredObject = _jQuery2.default.Deferred();
       var uri = 'https://www.googleapis.com/calendar/v3/calendars/' + this.calendarId + '/events?maxAttendees=1' + ('&timeMin=' + dateLowerBound.toISOString() + '&key=' + key);
 
@@ -529,6 +536,9 @@ var CalendarService = function () {
             return a.startTime.getTime() - b.startTime.getTime();
           });
 
+          if (stickyOnly) models = models.filter(function (e) {
+            return !e.shouldHideForStickyOnlyView;
+          });
           deferredObject.resolve(response.nextPageToken, models);
         },
         error: function error(_error) {
@@ -540,8 +550,8 @@ var CalendarService = function () {
     }
   }, {
     key: 'hasQueryChanged',
-    value: function hasQueryChanged(startTime, query, showRegularEvents) {
-      return !(startTime.getTime() === this.lastStartTime.getTime() && showRegularEvents === this.lastShowRegularEvents && (CalendarService.isNullOrWhitespaces(query) && CalendarService.isNullOrWhitespaces(this.lastQuery) || query === this.lastQuery));
+    value: function hasQueryChanged(startTime, query, showRegularEvents, stickyOnly) {
+      return !(startTime.getTime() === this.lastStartTime.getTime() && stickyOnly === this.stickyOnly && showRegularEvents === this.lastShowRegularEvents && (CalendarService.isNullOrWhitespaces(query) && CalendarService.isNullOrWhitespaces(this.lastQuery) || query === this.lastQuery));
     }
   }], [{
     key: 'isNullOrWhitespaces',

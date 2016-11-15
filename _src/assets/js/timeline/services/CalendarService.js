@@ -15,21 +15,23 @@ export default class CalendarService {
     this.init(new Date(), null, null);
   }
 
-  init(startTime, query, showRegularEvents) {
+  init(startTime, query, showRegularEvents, stickyOnly) {
     this.lastQuery = query;
     this.lastShowRegularEvents = showRegularEvents;
     this.lastStartTime = startTime;
+    this.stickyOnly = stickyOnly;
 
     this.pageToken = null;
     this.eventsNotReturned = [];
     this.eventsReturned = [];
+
   }
 
-  getEvents({startTime, query, showRegularEvents}) {
+  getEvents({startTime, query, showRegularEvents, stickyOnly}) {
     let deferredObject = $.Deferred();
 
-    if (this.hasQueryChanged(startTime, query, showRegularEvents)) {
-      this.init(startTime, query, showRegularEvents);
+    if (this.hasQueryChanged(startTime, query, showRegularEvents, stickyOnly)) {
+      this.init(startTime, query, showRegularEvents, stickyOnly);
       deferredObject.notify({hasQueryChanged: true});
     }
 
@@ -40,7 +42,7 @@ export default class CalendarService {
       deferredObject.resolve(this.eventsReturned, this.pageToken != null);
       return deferredObject.promise();
     }
-    this.loadMoreEvents(startTime, query, showRegularEvents)
+    this.loadMoreEvents(startTime, query, showRegularEvents, stickyOnly)
       .done((nextPageToken, events) => {
         this.pageToken = nextPageToken;
         this.eventsNotReturned.push(...events);
@@ -52,7 +54,7 @@ export default class CalendarService {
     return deferredObject;
   }
 
-  loadMoreEvents(dateLowerBound, query, showRegularEvents) {
+  loadMoreEvents(dateLowerBound, query, showRegularEvents, stickyOnly) {
     let deferredObject = $.Deferred();
     let uri = `https://www.googleapis.com/calendar/v3/calendars/${this.calendarId}/events?maxAttendees=1` +
       `&timeMin=${dateLowerBound.toISOString()}&key=${key}`;
@@ -84,6 +86,8 @@ export default class CalendarService {
             .filter(e => e.endTime.getTime() >= dateLowerBound.getTime())
             .sort((a,b) => a.startTime.getTime() - b.startTime.getTime());
 
+        if (stickyOnly)
+          models = models.filter(e => !e.shouldHideForStickyOnlyView);
         deferredObject.resolve(response.nextPageToken, models);
       },
       error: (error) => {
@@ -94,8 +98,9 @@ export default class CalendarService {
     return deferredObject.promise();
   }
 
-  hasQueryChanged(startTime, query, showRegularEvents) {
+  hasQueryChanged(startTime, query, showRegularEvents, stickyOnly) {
     return !(startTime.getTime() === this.lastStartTime.getTime()
+      && stickyOnly === this.stickyOnly
       && showRegularEvents === this.lastShowRegularEvents
       && (CalendarService.isNullOrWhitespaces(query) && CalendarService.isNullOrWhitespaces(this.lastQuery) || query === this.lastQuery));
   }

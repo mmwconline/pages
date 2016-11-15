@@ -22,7 +22,8 @@ class App extends React.Component {
     this.service.getEvents({
       startTime: new Date(),
       query: null,
-      showRegularEvents: this.showRegularEvents
+      showRegularEvents: this.showRegularEvents,
+      stickyOnly: true
     })
       .done((events) =>
         this.setState({

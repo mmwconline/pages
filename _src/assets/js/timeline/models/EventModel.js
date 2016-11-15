@@ -46,8 +46,13 @@ export default class Event {
     if (calendarApiEvent.description != null) {
       this.description = calendarApiEvent.description.split('\n');
       if (this.description.length > 0) {
+
         this.ytId = getYTubeID(this.description[0]) || null;
         if (this.ytId != null)
+          this.description.shift();
+
+        this.shouldHideForStickyOnlyView = (this.description[0] === "hide") || false;
+        if (this.shouldHideForStickyOnlyView)
           this.description.shift();
         this.description = this.description.join('\n')
       }
