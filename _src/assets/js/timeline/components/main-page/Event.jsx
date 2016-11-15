@@ -24,7 +24,7 @@ const Event = (props) => {
 
     <div className="inews-item">
       <div className="inews-thumbnail">
-        <img className="img-responsive hidden-xs" src={props.imgUrl ? props.imgUrl : props.defaultPicture } alt="image" />
+        <img className="img-responsive" src={props.imgUrl ? props.imgUrl : props.defaultPicture } alt="image" />
       </div>
 
       <div className="inews-item-content">

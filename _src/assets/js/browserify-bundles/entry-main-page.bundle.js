@@ -173,7 +173,7 @@ var Event = function Event(props) {
     _react2.default.createElement(
       "div",
       { className: "inews-thumbnail" },
-      _react2.default.createElement("img", { className: "img-responsive hidden-xs", src: props.imgUrl ? props.imgUrl : props.defaultPicture, alt: "image" })
+      _react2.default.createElement("img", { className: "img-responsive", src: props.imgUrl ? props.imgUrl : props.defaultPicture, alt: "image" })
     ),
     _react2.default.createElement(
       "div",
