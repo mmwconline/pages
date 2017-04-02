@@ -112,6 +112,21 @@ var App = function (_React$Component) {
               return _react2.default.createElement(_Event2.default, _extends({ key: id }, others, { getPrintFields: e.getPrintFields,
                 getRawDescriptionMarkup: e.getRawDescriptionMarkup }));
             })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col-sm-offset-3 col-md-offset-4 col-sm-6 col-md-8 col-sm-offset-3' },
+              _react2.default.createElement(
+                'button',
+                { type: 'button', className: 'btn btn-primary btn-lg btn-block margin-top-40', onClick: function onClick() {
+                    return window.location.pathname = '/events/';
+                  } },
+                'See More Events'
+              )
+            )
           )
         )
       );
@@ -157,7 +172,26 @@ function getLocation(locationStr) {
     )
   );
 }
-
+function getMedia(imgUrl, ytId, defaultImage) {
+  //can either have an image or a video; not both. Image takes precedence
+  if (imgUrl) return _react2.default.createElement(
+    "div",
+    { className: "inews-thumbnail" },
+    _react2.default.createElement("img", { className: "img-responsive", src: imgUrl, alt: "image" })
+  );else if (ytId) return _react2.default.createElement(
+    "div",
+    { className: "inews-thumbnail" },
+    _react2.default.createElement(
+      "div",
+      { className: "embed-responsive embed-responsive-16by9" },
+      _react2.default.createElement("iframe", { className: "embed-responsive-item", src: "https://www.youtube.com/embed/" + ytId + "?wmode=transparent", width: "350", height: "200" })
+    )
+  );else return _react2.default.createElement(
+    "div",
+    { className: "inews-thumbnail" },
+    _react2.default.createElement("img", { className: "img-responsive", src: defaultImage, alt: "image" })
+  );
+}
 var Event = function Event(props) {
   var _props$getPrintFields = props.getPrintFields();
 
@@ -171,11 +205,7 @@ var Event = function Event(props) {
   return _react2.default.createElement(
     "div",
     { className: "inews-item" },
-    _react2.default.createElement(
-      "div",
-      { className: "inews-thumbnail" },
-      _react2.default.createElement("img", { className: "img-responsive", src: props.imgUrl ? props.imgUrl : props.defaultPicture, alt: "image" })
-    ),
+    getMedia(props.imgUrl, props.ytId, props.defaultPicture),
     _react2.default.createElement(
       "div",
       { className: "inews-item-content" },
@@ -497,7 +527,7 @@ var CalendarService = function () {
         _this.pageToken = nextPageToken;
         (_eventsNotReturned = _this.eventsNotReturned).push.apply(_eventsNotReturned, _toConsumableArray(events));
         (_eventsReturned2 = _this.eventsReturned).push.apply(_eventsReturned2, _toConsumableArray(_this.eventsNotReturned.splice(0, _this.maxResults)));
-        deferredObject.resolve(_this.eventsReturned, _this.pageToken != null);
+        deferredObject.resolve(_this.eventsReturned, _this.pageToken != null || _this.eventsNotReturned.length > 0);
       }).fail(function (e) {
         return deferredObject.reject(e);
       });
@@ -539,6 +569,7 @@ var CalendarService = function () {
           if (stickyOnly) models = models.filter(function (e) {
             return !e.shouldHideForStickyOnlyView;
           });
+
           deferredObject.resolve(response.nextPageToken, models);
         },
         error: function error(_error) {

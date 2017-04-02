@@ -53,6 +53,13 @@ class App extends React.Component {
                           getRawDescriptionMarkup={e.getRawDescriptionMarkup} />
           })}
         </div>
+        <div className="row">
+          <div className="col-sm-offset-3 col-md-offset-4 col-sm-6 col-md-8 col-sm-offset-3">
+            <button type="button" className="btn btn-primary btn-lg btn-block margin-top-40" onClick={() => window.location.pathname = '/events/'}>
+              See More Events
+            </button>
+          </div>
+        </div>
       </div>
     </section>
     );

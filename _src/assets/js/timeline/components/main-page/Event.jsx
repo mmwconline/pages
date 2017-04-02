@@ -9,7 +9,30 @@ function getLocation(locationStr) {
       </li>
     );
 }
+function getMedia(imgUrl, ytId, defaultImage) {
+  //can either have an image or a video; not both. Image takes precedence
+  if (imgUrl)
+    return (
+      <div className="inews-thumbnail">
+        <img className="img-responsive" src={imgUrl} alt="image" />
+      </div>
+    );
+  else if (ytId)
+    return (
+      <div className="inews-thumbnail">
+        <div className="embed-responsive embed-responsive-16by9">
+          <iframe className="embed-responsive-item" src={`https://www.youtube.com/embed/${ytId}?wmode=transparent`} width="350" height="200"></iframe>
+        </div>
+      </div>
+    );
+  else
+    return (
+      <div className="inews-thumbnail">
+        <img className="img-responsive" src={defaultImage} alt="image" />
+      </div>
+    )
 
+}
 const Event = (props) => {
 
   let
@@ -23,9 +46,7 @@ const Event = (props) => {
   return (
 
     <div className="inews-item">
-      <div className="inews-thumbnail">
-        <img className="img-responsive" src={props.imgUrl ? props.imgUrl : props.defaultPicture } alt="image" />
-      </div>
+      { getMedia(props.imgUrl, props.ytId, props.defaultPicture) }
 
       <div className="inews-item-content">
 

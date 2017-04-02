@@ -1036,7 +1036,7 @@ var CalendarService = function () {
         _this.pageToken = nextPageToken;
         (_eventsNotReturned = _this.eventsNotReturned).push.apply(_eventsNotReturned, _toConsumableArray(events));
         (_eventsReturned2 = _this.eventsReturned).push.apply(_eventsReturned2, _toConsumableArray(_this.eventsNotReturned.splice(0, _this.maxResults)));
-        deferredObject.resolve(_this.eventsReturned, _this.pageToken != null);
+        deferredObject.resolve(_this.eventsReturned, _this.pageToken != null || _this.eventsNotReturned.length > 0);
       }).fail(function (e) {
         return deferredObject.reject(e);
       });
@@ -1078,6 +1078,7 @@ var CalendarService = function () {
           if (stickyOnly) models = models.filter(function (e) {
             return !e.shouldHideForStickyOnlyView;
           });
+
           deferredObject.resolve(response.nextPageToken, models);
         },
         error: function error(_error) {

@@ -47,7 +47,7 @@ export default class CalendarService {
         this.pageToken = nextPageToken;
         this.eventsNotReturned.push(...events);
         this.eventsReturned.push(...this.eventsNotReturned.splice(0, this.maxResults));
-        deferredObject.resolve(this.eventsReturned, this.pageToken != null);
+        deferredObject.resolve(this.eventsReturned, this.pageToken != null || this.eventsNotReturned.length > 0);
       })
       .fail(e => deferredObject.reject(e));
 
@@ -88,6 +88,7 @@ export default class CalendarService {
 
         if (stickyOnly)
           models = models.filter(e => !e.shouldHideForStickyOnlyView);
+
         deferredObject.resolve(response.nextPageToken, models);
       },
       error: (error) => {
