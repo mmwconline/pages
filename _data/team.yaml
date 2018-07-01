@@ -150,33 +150,6 @@
   twitter:
   google:
   linkedIn:
-- name: Bara Omari
-  description: >-
-    Many of life's failures are people who did not realize how close they were
-    to success when they gave up..
-  position: Board Member
-  image: assets/images/team/bara.jpg
-  email:
-  workPhone:
-  mobilePhone:
-  fb: 'https://www.facebook.com/bara.omari.98'
-  twitter:
-  google:
-  linkedIn: 'https://www.linkedin.com/in/bara-omari-4b737351'
-- name: Eman Atshan
-  description: >-
-    The intuitive mind is a sacred gift and the rational mind is a faithful
-    servant. We have created a society that honors the servant and has forgotten
-    the gift.
-  position: Staff Member
-  image: assets/images/team/eman.jpg
-  email: eman@mmwconline.org
-  workPhone:
-  mobilePhone:
-  fb: 'https://www.facebook.com/eman.atshan.3'
-  twitter:
-  google:
-  linkedIn: 'https://www.linkedin.com/in/eman-atshan-b9b555b4'
 - name: Elise Bellin
   description: >-
     "To play a wrong note is insigifnicant; to play without passion is
@@ -190,43 +163,3 @@
   twitter:
   google:
   linkedIn: 'https://www.linkedin.com/in/elisebellin'
-- name: Amany Masoud
-  description: >-
-    "A man who views the world at 50 the same as he did at 20 has wasted 30
-    years of his life," (Muhammad Ali)
-  position: Staff Member
-  image: assets/images/team/amany.jpg
-  email: staff@mmwconline.org
-  workPhone:
-  mobilePhone:
-  fb: 'https://www.facebook.com/amanii.faris'
-  twitter:
-  google:
-  linkedIn:
-- name: Sundus Jaber
-  description: >-
-    It may be that you dislike a thing and it is actually good for you. It may
-    be that you love a thing and it is actually bad for you. Allah knows while
-    you do not know.
-  position: Staff Member
-  image: assets/images/team/sundus.jpg
-  email:
-  workPhone:
-  mobilePhone:
-  fb: 'https://www.facebook.com/sundus.jaber'
-  twitter:
-  google:
-  linkedIn: 'https://www.linkedin.com/in/elisebellin'
-- name: Ayah Ali
-  description: >-
-    Experience is not what happens to you; it's what you do with what happens to
-    you.
-  position: Staff Member
-  image: assets/images/team/ayah.jpg
-  email:
-  workPhone:
-  mobilePhone:
-  fb: 'https://www.facebook.com/ayah.m.ali'
-  twitter: 'https://twitter.com/aayah1994'
-  google:
-  linkedIn: 'https://www.linkedin.com/in/ayah-ali-10926bb1'
