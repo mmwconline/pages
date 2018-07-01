@@ -2,7 +2,7 @@
 blogTitle: The Muslim Ban
 blogCategory: Outreach
 postedBy: Amanda Ali
-img: assets/images/blog/qajanan.jpg
+img: assets/images/blog/flag_day_big.jpg
 tags:
   - IRC
   - Trump
