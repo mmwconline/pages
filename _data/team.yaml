@@ -1,8 +1,28 @@
-- name: Janan Najeeb
-  description: |
-    Founding member and the current President of the Milwaukee Muslim Women’s Coalition, Ms. Najeeb has been a spokeswoman for Milwaukee’s Muslim community to media outlets, government officials, interfaith leaders, academic institutions, hospitals, and a wide range of community groups.  A microbiologist by profession (UW-Milwaukee), Ms. Najeeb left her career because of the tremendous need to bridge the gap between the erroneous perception of Islam and Muslims in society and the actual beliefs and practices of the vast majority of the world’s Muslims.  Ms. Najeeb serves on many committees and community boards as well as having been an adjunct professor at Cardinal Stritch University in Milwaukee, having taught the Religious Culture of Islam. In addition, she directs the new Islamic Resource Center on the south side of Milwaukee.
-    In 2015, Ms. Najeeb founded the Milwaukee Muslim Film Festival and in 2016 she became the first Muslim in Wisconsin to open the floor of the State Legislator with a prayer.
-    Janan Najeeb is the recipient of numerous awards and recognitions including the International Institute of Wisconsin’s World Citizen Award, The Wisconsin Community Fund’s Grantee of the Year Award, CAIR’s (Council on American Islamic Relations) national award for activism, ACLU’s Special Recognition Award, as well as being named by Wisconsin Woman Magazine as a Leader Making a Difference.  Ms. Najeeb is married and has 5 children.
+- name: Janan Najeeba
+  description: >-
+    Founding member and the current President of the Milwaukee Muslim Women’s
+    Coalition, Ms. Najeeb has been a spokeswoman for Milwaukee’s Muslim
+    community to media outlets, government officials, interfaith leaders,
+    academic institutions, hospitals, and a wide range of community groups.  A
+    microbiologist by profession (UW-Milwaukee), Ms. Najeeb left her career
+    because of the tremendous need to bridge the gap between the erroneous
+    perception of Islam and Muslims in society and the actual beliefs and
+    practices of the vast majority of the world’s Muslims.  Ms. Najeeb serves on
+    many committees and community boards as well as having been an adjunct
+    professor at Cardinal Stritch University in Milwaukee, having taught the
+    Religious Culture of Islam. In addition, she directs the new Islamic
+    Resource Center on the south side of Milwaukee.
+
+    In 2015, Ms. Najeeb founded the Milwaukee Muslim Film Festival and in 2016
+    she became the first Muslim in Wisconsin to open the floor of the State
+    Legislator with a prayer.
+
+    Janan Najeeb is the recipient of numerous awards and recognitions including
+    the International Institute of Wisconsin’s World Citizen Award, The
+    Wisconsin Community Fund’s Grantee of the Year Award, CAIR’s (Council on
+    American Islamic Relations) national award for activism, ACLU’s Special
+    Recognition Award, as well as being named by Wisconsin Woman Magazine as a
+    Leader Making a Difference.  Ms. Najeeb is married and has 5 children.
   position: President
   image: assets/images/team/janan.jpg
   email: jnajeeb@mmwconline.org
@@ -11,11 +31,16 @@
   fb:
   twitter:
   google:
-  linkedIn: https://www.linkedin.com/in/janan-najeeb-97bb0a8
-
+  linkedIn: 'https://www.linkedin.com/in/janan-najeeb-97bb0a8'
 - name: Inshirah Farhoud
-  description: |
-    A pediatric nurse practitioner at children’s hospital of Wisconsin, BSN from Alverno College, MSN from Marquette University, and post master’s from UW Madison.  Ms. Farhoud has been an MMWC board member for 17 years.  In addition, she is an Islamic Society of Milwaukee (ISM) board member, DHHS minority health council member and she is a frequent guest speaker at churches, schools, hospitals, etc.  Ms. Farhoud is an advocate of accessible healthcare for everyone and volunteers at 2 different free clinics.
+  description: >-
+    A pediatric nurse practitioner at children’s hospital of Wisconsin, BSN from
+    Alverno College, MSN from Marquette University, and post master’s from UW
+    Madison.  Ms. Farhoud has been an MMWC board member for 17 years.  In
+    addition, she is an Islamic Society of Milwaukee (ISM) board member, DHHS
+    minority health council member and she is a frequent guest speaker at
+    churches, schools, hospitals, etc.  Ms. Farhoud is an advocate of accessible
+    healthcare for everyone and volunteers at 2 different free clinics.
   position: Vice President
   image: assets/images/team/inshirah.jpg
   email:
@@ -24,11 +49,21 @@
   fb:
   twitter:
   google:
-  linkedIn: https://www.linkedin.com/in/inshirah-farhoud-0a518347
-
+  linkedIn: 'https://www.linkedin.com/in/inshirah-farhoud-0a518347'
 - name: Hanadi Bu Ali M.D.
-  description: |
-    She is a native of Bahrain. She is a breast surgical oncologist. She completed her medical school in Bahrain and did her initial training in surgery in Detroit Michigan and her surgical oncology training in Akron, Ohio. She has been recognized as one of the 40 under 40 by the Business Journal and named one of America’s Top Surgeons by the Consumers’ Research Council of America for the year 2012 through 2016. She has been active in research and improvement of patient quality of care since she started in the field of healthcare. She offers innovative surgical care adopting oncoplastic techniques. She has been serving as an MMWC board member for several years, and has lead the MMWC team for the Susan G. Komen Race for the Cure ©. Dr. Bu-Ali also served as a faculty member of Northeast Ohio Medical University and the Medical College of Wisconsin.
+  description: >-
+    She is a native of Bahrain. She is a breast surgical oncologist. She
+    completed her medical school in Bahrain and did her initial training in
+    surgery in Detroit Michigan and her surgical oncology training in Akron,
+    Ohio. She has been recognized as one of the 40 under 40 by the Business
+    Journal and named one of America’s Top Surgeons by the Consumers’ Research
+    Council of America for the year 2012 through 2016. She has been active in
+    research and improvement of patient quality of care since she started in the
+    field of healthcare. She offers innovative surgical care adopting
+    oncoplastic techniques. She has been serving as an MMWC board member for
+    several years, and has lead the MMWC team for the Susan G. Komen Race for
+    the Cure ©. Dr. Bu-Ali also served as a faculty member of Northeast Ohio
+    Medical University and the Medical College of Wisconsin.
   position: Board Member
   image: assets/images/team/hanadi.jpg
   email:
@@ -37,11 +72,17 @@
   fb:
   twitter:
   google:
-  linkedIn: https://www.linkedin.com/in/hanadi-bu-ali-md-facs-b4911928
-
+  linkedIn: 'https://www.linkedin.com/in/hanadi-bu-ali-md-facs-b4911928'
 - name: Dr. Sahar Katib Kayata M.D.
-  description: |
-    She was born in Aleppo, Syria. She received her medical degree from The Sorbonne University at the Faculte de Medicine in Paris, France. She completed her Pediatrics Residency at Case Western Reserve University, Rainbow Babies & Children’s Hospital in Cleveland, Ohio. She then did her Neonatology Fellowship at the University of Wisconsin, Medical College of WI. She currently works with Newborn Care Physicians and is a board certified Neonatal & Perinatal Physician. She has been involved with the MMWC for nearly 15 years and has been a board member for several years.
+  description: >-
+    She was born in Aleppo, Syria. She received her medical degree from The
+    Sorbonne University at the Faculte de Medicine in Paris, France. She
+    completed her Pediatrics Residency at Case Western Reserve University,
+    Rainbow Babies & Children’s Hospital in Cleveland, Ohio. She then did her
+    Neonatology Fellowship at the University of Wisconsin, Medical College of
+    WI. She currently works with Newborn Care Physicians and is a board
+    certified Neonatal & Perinatal Physician. She has been involved with the
+    MMWC for nearly 15 years and has been a board member for several years.
   position: Board Member
   image: assets/images/team/sahar.jpg
   email:
@@ -51,24 +92,42 @@
   twitter:
   google:
   linkedIn:
-
 - name: Dr. Randa Suleiman
-  description: |
-    She currently works as an assistant professor at Alverno College Teacher Preparation Program. She worked previously at Cardinal Stritch University for four years in teacher preparation as well as in K-12 education for fifteen years in private, public school districts in USA and Internationally. She graduated from Cardinal Stritch University in May 2010 with a PhD in Leadership for the Advancement of Learning and Service in Higher Education. Randa earned National Board certification in early adolescent science in 2008. She is currently working on developing STEM certification program. Areas of interest are middle school education, teacher preparation, and science education.
+  description: >-
+    She currently works as an assistant professor at Alverno College Teacher
+    Preparation Program. She worked previously at Cardinal Stritch University
+    for four years in teacher preparation as well as in K-12 education for
+    fifteen years in private, public school districts in USA and
+    Internationally. She graduated from Cardinal Stritch University in May 2010
+    with a PhD in Leadership for the Advancement of Learning and Service in
+    Higher Education. Randa earned National Board certification in early
+    adolescent science in 2008. She is currently working on developing STEM
+    certification program. Areas of interest are middle school education,
+    teacher preparation, and science education.
   position: Board Member
   image: assets/images/team/randa.jpg
   email:
   workPhone:
   mobilePhone:
-  fb: https://www.facebook.com/randa.suleiman.7
+  fb: 'https://www.facebook.com/randa.suleiman.7'
   twitter:
   google:
-  linkedIn: https://www.linkedin.com/in/randa-suleiman-29561031
-
+  linkedIn: 'https://www.linkedin.com/in/randa-suleiman-29561031'
 - name: Zehra Tahir
-  description: |
-    She received her bachelor’s degree from the University of Bombay, India with specialization in Textiles and Clothing. The early years of her career were spent as a successful business woman and fashion designer, followed by several years in the food service industry as a sales account manager.
-    Zehra Tahir has been active in the educational programs in the Milwaukee community for the past several years. She joined Salam School in the fall of 2005 in order to work in the field for which she had the greatest passion: education. Zehra is a member of the Advisory Committee of the Wisconsin Schools of Character, and is a strong advocate of shaping lives through character, and integrating character education into schools. She has also been a board member of the Islamic Society of Milwaukee and the ISM Education Council. She has been an MMWC board member for several years.
+  description: >-
+    She received her bachelor’s degree from the University of Bombay, India with
+    specialization in Textiles and Clothing. The early years of her career were
+    spent as a successful business woman and fashion designer, followed by
+    several years in the food service industry as a sales account manager.
+
+    Zehra Tahir has been active in the educational programs in the Milwaukee
+    community for the past several years. She joined Salam School in the fall of
+    2005 in order to work in the field for which she had the greatest passion:
+    education. Zehra is a member of the Advisory Committee of the Wisconsin
+    Schools of Character, and is a strong advocate of shaping lives through
+    character, and integrating character education into schools. She has also
+    been a board member of the Islamic Society of Milwaukee and the ISM
+    Education Council. She has been an MMWC board member for several years.
   position: Board Member
   image: assets/images/team/zehra.jpg
   email:
@@ -77,96 +136,97 @@
   fb:
   twitter:
   google:
-  linkedIn: https://www.linkedin.com/in/zehra-tahir-4153ba31
-
+  linkedIn: 'https://www.linkedin.com/in/zehra-tahir-4153ba31'
 - name: Ream Bahhur
-  description: |
-    If you are not willing to learn, no one can help you. If you are determined to learn, no one can stop you.
+  description: >-
+    If you are not willing to learn, no one can help you. If you are determined
+    to learn, no one can stop you.
   position: Board Member
   image: assets/images/team/ream.jpg
   email:
   workPhone:
   mobilePhone:
-  fb: https://www.facebook.com/ream.bahhur
+  fb: 'https://www.facebook.com/ream.bahhur'
   twitter:
   google:
   linkedIn:
-
 - name: Bara Omari
-  description: |
-    Many of life's failures are people who did not realize how close they were to success when they gave up..
-
+  description: >-
+    Many of life's failures are people who did not realize how close they were
+    to success when they gave up..
   position: Board Member
   image: assets/images/team/bara.jpg
   email:
   workPhone:
   mobilePhone:
-  fb: https://www.facebook.com/bara.omari.98
+  fb: 'https://www.facebook.com/bara.omari.98'
   twitter:
   google:
-  linkedIn: https://www.linkedin.com/in/bara-omari-4b737351
-
+  linkedIn: 'https://www.linkedin.com/in/bara-omari-4b737351'
 - name: Eman Atshan
-  description: |
-    The intuitive mind is a sacred gift and the rational mind is a faithful servant. We have created a society that honors the servant and has forgotten the gift.
+  description: >-
+    The intuitive mind is a sacred gift and the rational mind is a faithful
+    servant. We have created a society that honors the servant and has forgotten
+    the gift.
   position: Staff Member
   image: assets/images/team/eman.jpg
   email: eman@mmwconline.org
   workPhone:
   mobilePhone:
-  fb: https://www.facebook.com/eman.atshan.3
+  fb: 'https://www.facebook.com/eman.atshan.3'
   twitter:
   google:
-  linkedIn: https://www.linkedin.com/in/eman-atshan-b9b555b4
-
+  linkedIn: 'https://www.linkedin.com/in/eman-atshan-b9b555b4'
 - name: Elise Bellin
-  description: |
-    "To play a wrong note is insigifnicant; to play without passion is inexcusable," (Ludwig van beethoven)
+  description: >-
+    "To play a wrong note is insigifnicant; to play without passion is
+    inexcusable," (Ludwig van beethoven)
   position: Librarian
   image: assets/images/team/elise.jpg
   email:
   workPhone:
   mobilePhone:
-  fb: https://www.facebook.com/elise.bellin
+  fb: 'https://www.facebook.com/elise.bellin'
   twitter:
   google:
-  linkedIn: https://www.linkedin.com/in/elisebellin
-
+  linkedIn: 'https://www.linkedin.com/in/elisebellin'
 - name: Amany Masoud
-  description: |
-    "A man who views the world at 50 the same as he did at 20 has wasted 30 years of his life," (Muhammad Ali)
+  description: >-
+    "A man who views the world at 50 the same as he did at 20 has wasted 30
+    years of his life," (Muhammad Ali)
   position: Staff Member
   image: assets/images/team/amany.jpg
   email: staff@mmwconline.org
   workPhone:
   mobilePhone:
-  fb: https://www.facebook.com/amanii.faris
+  fb: 'https://www.facebook.com/amanii.faris'
   twitter:
   google:
   linkedIn:
-
 - name: Sundus Jaber
-  description: |
-    It may be that you dislike a thing and it is actually good for you. It may be that you love a thing and it is actually bad for you. Allah knows while you do not know.
+  description: >-
+    It may be that you dislike a thing and it is actually good for you. It may
+    be that you love a thing and it is actually bad for you. Allah knows while
+    you do not know.
   position: Staff Member
   image: assets/images/team/sundus.jpg
   email:
   workPhone:
   mobilePhone:
-  fb: https://www.facebook.com/sundus.jaber
+  fb: 'https://www.facebook.com/sundus.jaber'
   twitter:
   google:
-  linkedIn: https://www.linkedin.com/in/elisebellin
-
+  linkedIn: 'https://www.linkedin.com/in/elisebellin'
 - name: Ayah Ali
-  description: |
-    Experience is not what happens to you; it's what you do with what happens to you.
+  description: >-
+    Experience is not what happens to you; it's what you do with what happens to
+    you.
   position: Staff Member
   image: assets/images/team/ayah.jpg
   email:
   workPhone:
   mobilePhone:
-  fb: https://www.facebook.com/ayah.m.ali
-  twitter: https://twitter.com/aayah1994
+  fb: 'https://www.facebook.com/ayah.m.ali'
+  twitter: 'https://twitter.com/aayah1994'
   google:
-  linkedIn: https://www.linkedin.com/in/ayah-ali-10926bb1
+  linkedIn: 'https://www.linkedin.com/in/ayah-ali-10926bb1'
