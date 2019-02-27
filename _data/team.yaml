@@ -137,17 +137,6 @@
   twitter:
   google:
   linkedIn:
-- name: Elise Bellin
-  description: '"Creativity is intelligence having fun." - Albert Einstein'
-  position: Librarian
-  image: assets/images/team/elise.jpg
-  email:
-  workPhone:
-  mobilePhone:
-  fb: 'https://www.facebook.com/elise.bellin'
-  twitter:
-  google:
-  linkedIn: 'https://www.linkedin.com/in/elisebellin'
 - name: Ghada Shakir
   description: >-
     Ghada Shakir, born in Iraq and raised between Iraq and the United Kingdom is
@@ -177,6 +166,17 @@
   twitter:
   google:
   linkedIn:
+- name: Elise Bellin
+  description: '"Creativity is intelligence having fun." - Albert Einstein'
+  position: Librarian
+  image: assets/images/team/elise.jpg
+  email:
+  workPhone:
+  mobilePhone:
+  fb: 'https://www.facebook.com/elise.bellin'
+  twitter:
+  google:
+  linkedIn: 'https://www.linkedin.com/in/elisebellin'
 - name: Amanda Ali
   description: >-
     Program Manager of Milwaukee Muslim Women's Coalition, Amanda Ali has been
