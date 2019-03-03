@@ -2,7 +2,7 @@ import $ from 'jQuery';
 import EventModel from '../models/EventModel';
 import moment from 'moment'
 
-const key = 'AIzaSyCy-RXvh3d-1OvRfYy6_p8uyKxYeaF5w4A';
+const key = 'AIzaSyCA2qhwMxuc4rsXQr4Ucb4qTRIdN0ERxa0';
 
 export default class CalendarService {
 
