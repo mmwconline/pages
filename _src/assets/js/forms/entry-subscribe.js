@@ -17,7 +17,7 @@ $('.subscribeForm').submit(function(e) {
   console.log(`${$this.attr('action')}&c=?`);
   $.ajax({
     type: 'GET',
-    url: `http://mmwconline.us3.list-manage.com/subscribe/post-json?u=63d144864f5fd557a761d89cb&id=792c8836f1&c=?`,
+    url: `https://mmwconline.us3.list-manage.com/subscribe/post-json?u=63d144864f5fd557a761d89cb&id=792c8836f1&c=?`,
     data: $this.serialize(),
     dataType: 'json',
     contentType: 'application/json; charset=utf-8',
